@@ -30,6 +30,15 @@ class NewVisitorTest(unittest.TestCase):
         self.assertIn('Кайт-клуб \"Вверх\"', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Кайт-клуб \"Вверх\"', header_text)
+
+        # теперь, когда мы зашли на главную страницу kiteup.ru, мы хотим
+        # увидеть список новостей в таблице
+        table = self.browser.find_element_by_id('id_news_table')
+        rows = self.browser.find_elements_by_css_selector('tr')
+        self.assertTrue(
+            any(row.text=='Новость 1' for row in rows),
+            "Новость так и не появилась в таблице с новостями"
+        )
         # тест, который никогда не срабатывает
         self.fail('Закончить тест')
 
