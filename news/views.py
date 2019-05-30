@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
-def index():
+def index(request):
     """домашняя сраница"""
-    pass
+    return HttpResponse('<html><title>Кайт-клуб \"Вверх\"</title></html>')
