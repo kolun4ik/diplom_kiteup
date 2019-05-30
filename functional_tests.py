@@ -1,5 +1,7 @@
+import time
 import unittest
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 class NewVisitorTest(unittest.TestCase):
@@ -14,7 +16,7 @@ class NewVisitorTest(unittest.TestCase):
         # Если все так как мы хотим, закрываем броузер
         self.browser.quit()
 
-    def test_can_start_a_home_page(self):
+    def test_can_start_a_index_page(self):
         """тест: идем на главную страницу kiteup.ru"""
         # Построим крутое функциональное приложение kiteup, перенесем старые фишечки
         # и внедрим новые. Надо очень постараться сделать все в срок, ведь это моя
@@ -26,6 +28,8 @@ class NewVisitorTest(unittest.TestCase):
         # Заголовок и шапка страницы говорят нам, что мы на
         # сайте kiteup.ru - 'Кайт-клуб "Вверх"'
         self.assertIn('Кайт-клуб \"Вверх\"', self.browser.title)
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Кайт-клуб \"Вверх\"', header_text)
         # тест, который никогда не срабатывает
         self.fail('Закончить тест')
 
