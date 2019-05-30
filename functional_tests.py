@@ -16,6 +16,12 @@ class NewVisitorTest(unittest.TestCase):
         # Если все так как мы хотим, закрываем броузер
         self.browser.quit()
 
+    def check_for_row_in_news_table(self, row_text):
+        """подтверждение строки в таблице с новостями"""
+        table = self.browser.find_element_by_id('id_news_table')
+        rows = self.browser.find_elements_by_css_selector('tr')
+        self.assertIn(row_text, [row.text for row in rows])
+
     def test_can_start_a_index_page(self):
         """тест: идем на главную страницу kiteup.ru"""
         # Построим крутое функциональное приложение kiteup, перенесем старые фишечки
@@ -33,12 +39,11 @@ class NewVisitorTest(unittest.TestCase):
 
         # теперь, когда мы зашли на главную страницу kiteup.ru, мы хотим
         # увидеть список новостей в таблице
-        table = self.browser.find_element_by_id('id_news_table')
-        rows = self.browser.find_elements_by_css_selector('tr')
-        time.sleep(3)
 
-        self.assertIn('Новость 1', [row.text for row in rows])
-        self.assertIn('Новость 2', [row.text for row in rows])
+        self.check_for_row_in_news_table('Новость 1')
+        time.sleep(3)
+        self.check_for_row_in_news_table('Новость 2')
+
         # тест, который никогда не срабатывает
         self.fail('Закончить тест')
 
