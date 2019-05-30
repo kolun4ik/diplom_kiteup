@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     """домашняя сраница"""
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'new_news_text': 'Новость 1'})

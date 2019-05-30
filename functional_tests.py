@@ -35,10 +35,10 @@ class NewVisitorTest(unittest.TestCase):
         # увидеть список новостей в таблице
         table = self.browser.find_element_by_id('id_news_table')
         rows = self.browser.find_elements_by_css_selector('tr')
-        self.assertTrue(
-            any(row.text=='Новость 1' for row in rows),
-            "Новость так и не появилась в таблице с новостями"
-        )
+        time.sleep(3)
+
+        self.assertIn('Новость 1', [row.text for row in rows])
+        self.assertIn('Новость 2', [row.text for row in rows])
         # тест, который никогда не срабатывает
         self.fail('Закончить тест')
 
