@@ -1,10 +1,10 @@
 import time
-import unittest
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     """тест нового пользователя"""
 
     def setUp(self):
@@ -29,7 +29,7 @@ class NewVisitorTest(unittest.TestCase):
         # дипломная работа на проекте otus.ru.
 
         # Приступаем к работе и окрываем домашнюю страничку
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self.live_server_url)
 
         # Заголовок и шапка страницы говорят нам, что мы на
         # сайте kiteup.ru - 'Кайт-клуб "Вверх"'
@@ -39,6 +39,8 @@ class NewVisitorTest(unittest.TestCase):
 
         # теперь, когда мы зашли на главную страницу kiteup.ru, мы хотим
         # увидеть список новостей в таблице
+        # перешли на LiveServerTestCase, который создает свою БД и
+        # удаляет ее после отработки тестов. Новости снова не выдны
 
         self.check_for_row_in_news_table('Новость 1')
         time.sleep(3)
@@ -50,6 +52,3 @@ class NewVisitorTest(unittest.TestCase):
         # На главной странице мы видим список новостей сайта
 
         # Каждая новость имеет заголовок, дату создания, кол-во просмотров и коментарии
-
-if __name__ == "__main__":
-    unittest.main(warnings='ignore')
