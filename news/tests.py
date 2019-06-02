@@ -36,7 +36,6 @@ class ItemModelTest(TestCase):
 
     def test_can_save_a_item_news(self):
         """тест: можно сохранить новость в БД"""
-        # в БД еще нет новостей
         self.assertEqual(ItemNews.objects.count(),0)
         # создали новость "Новость 1"
         ItemNews.objects.create(text='Новость 1')
@@ -53,16 +52,19 @@ class NewsViewTest(TestCase):
     """тест представления новостей, раздел сайта 'Новости':
     kiteup.ru/club-news/"""
     def test_uses_news_template(self):
-        """тест: используется шаблон новостей"""
-        response = self.client.get('/club-news/')
-        self.assertTemplateUsed(response, 'club_news.html')
+        """тест: раздел Новости (kiteup.ru/club-news/1)использует
+        шаблон news.html"""
+        news = ItemNews.objects.create(text='Новость 1')
+        response = self.client.get(f'/club-news/{news.id}')
+        self.assertTemplateUsed(response, 'news.html')
 
-    def test_display_all_news_items(self):
-        """тест: отображать список (таблицу) всех новостей сайта"""
-        ItemNews.objects.create(text='Новость 1')
-        ItemNews.objects.create(text='Новость 2')
-
-        response = self.client.get('/club-news/')
+    def test_display_only_item_news(self):
+        """тест: отображать определенную новость по id"""
+        # создаем 2 разные новости
+        correct_news = ItemNews.objects.create(text='Новость 1')
+        news2 = ItemNews.objects.create(text='Новость 2')
+        # делаем запрос на отображение корректной новости
+        response = self.client.get(f'/club-news/{correct_news.id}')
 
         self.assertContains(response, 'Новость 1')
-        self.assertContains(response, 'Новость 1')
+        self.assertNotContains(response, 'Новость 2')

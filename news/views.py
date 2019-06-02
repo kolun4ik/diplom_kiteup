@@ -9,7 +9,16 @@ def index(request):
     return render(request, 'index.html', {'items': items_news})
 
 
-def view_all_news(request):
-    """представление всех новостей сайта kiteup.ru/club_news/"""
-    items_news = ItemNews.objects.all()
-    return render(request, 'club_news.html', {'items': items_news})
+# def view_all_news(request):
+#     """представление всех новостей сайта kiteup.ru/club_news/"""
+#     items_news = ItemNews.objects.all()
+#     return render(request, 'club_news.html', {'items': items_news})
+
+def view_news(request, id_item):
+    """представление отдельной новости"""
+    if id_item == '':
+        items = ItemNews.objects.all()
+        return render(request, 'club_news.html', {'items': items})
+    else:
+        item = ItemNews.objects.get(id=id_item)
+        return  render(request, 'news.html', {'item': item})

@@ -5,5 +5,5 @@ from news import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('club-news/', views.view_all_news, name='view_all_news'),
+    re_path('^club-news/(.*)$', views.view_news, name='view_news'),
 ]

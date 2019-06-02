@@ -5,12 +5,10 @@
 </head>
 <body>
     <h1>Кайт-клуб "Вверх"</h1>
-    <table id="id_news_table">
+    <ul id="id_news_list">
         {% for item in items %}
-        <tr>
-            <td id="id_item_news">{{ item.text}}</td>
-        </tr>
+        <li id="id_item_news"><a href="/club-news/{{ item.id }}">{{ item.text}}</a></li>
         {% endfor %}
-    </table>
+    </ul>
 </body>
 </html>
