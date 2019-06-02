@@ -70,8 +70,18 @@ class NewVisitorTest(LiveServerTestCase):
         response = self.browser.get(link)
         # self.assertContains(response, 'Page not found')
 
+    def test_layout_and_styling(self):
+        """тест макета и стилевого оформления"""
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1920,1080)
+        # мы видим что заголовок сайта и список новостей аккуратно отцентрированны
+        title = self.browser.find_element_by_id('id_item_news')
 
-
+        self.assertAlmostEqual(
+            title.location['x'] + title.size['width'] / 2,
+            960,
+            delta=20
+        )
         # Каждый анонс имеет заголовок, дату создания, уникальную ссылку на полную новость, кол-во просмотров и коментарии
 
         # тест, который никогда не срабатывает
