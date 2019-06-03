@@ -14,7 +14,7 @@ def index(request):
 #     items_news = ItemNews.objects.all()
 #     return render(request, 'club_news.html', {'items': items_news})
 
-def view_news(request, id_item):
+def news_view(request, id_item):
     """представление отдельной новости"""
     if id_item == '':
         items = ItemNews.objects.all()

@@ -1,12 +1,12 @@
 import time
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
 from news.models import ItemNews
 
 MAX_WAIT = 5
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     """тест нового пользователя"""
 
     def setUp(self):
@@ -38,9 +38,9 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.get(self.live_server_url)
         # Заголовок и шапка страницы говорят нам, что мы на
         # сайте kiteup.ru - 'Кайт-клуб "Вверх"'
-        self.assertIn('Кайт-клуб \"Вверх\"', self.browser.title)
+        self.assertIn('Кайт клуб \"Вверх\"', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('Кайт-клуб \"Вверх\"', header_text)
+        self.assertIn('Кайт клуб \"Вверх\"', header_text)
         # теперь, когда мы зашли на главную страницу kiteup.ru, мы хотим
         # видеть список новостей
         self.wait_for_row_in_news_table('Новость 1')
