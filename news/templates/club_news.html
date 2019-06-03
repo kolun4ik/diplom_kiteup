@@ -1,14 +1,12 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Кайт-клуб "Вверх"</title>
-</head>
-<body>
-    <h1>Кайт-клуб "Вверх"</h1>
-    <ul id="id_news_list">
+{% extends 'base.html' %}
+{% block news %}
+    <h2><a href="#">Новости</a></h2>
+    <ul class="list-style pl-0" id="id_news_list">
         {% for item in items %}
-        <li id="id_item_news"><a href="/club-news/{{ item.id }}">{{ item.text}}</a></li>
+        <li id="id_item_news">
+            <i class="fa fa-anchor grey" aria-hidden="true"></i><a href="/club-news/{{ item.id }}">{{ item.text}}</a>
+        </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+    <a href="club-news">Все новости</a>
+{% endblock %}
