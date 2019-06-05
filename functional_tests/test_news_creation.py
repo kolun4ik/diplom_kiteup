@@ -1,41 +1,10 @@
-import time
-import os
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium import webdriver
-from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.common.keys import Keys
-from news.models import ItemNews
+from .base import FunctionalTest
 
-MAX_WAIT = 5
-class NewVisitorTest(StaticLiveServerTestCase):
-    """тест нового пользователя"""
 
-    def setUp(self):
-        """Установка"""
-        self.browser = webdriver.Firefox()
-        staging_server = os.environ.get('STAGING_SERVER')
-        if staging_server:
-            self.live_server_url = 'http://' + staging_server
-        ItemNews.objects.create(text='Новость 1')
-        ItemNews.objects.create(text='Новость 2')
 
-    def tearDown(self):
-        """Демонтаж"""
-        self.browser.quit()
 
-    def wait_for_row_in_news_table(self, item_text):
-        """Ожидание новости в таблице с новостями"""
-        start_time = time.time()
-        while True:
-            try:
-                list = self.browser.find_element_by_id('id_news_list')
-                items = self.browser.find_elements_by_css_selector('li')
-                self.assertIn(item_text, [item.text for item in items])
-                return
-            except (AssertionError, WebDriverException) as e:
-                if time.time() - start_time > MAX_WAIT:
-                    raise e
-                time.sleep(0.5)
+class NewVisitorTest(FunctionalTest):
+    """тест новый посетитель"""
 
     def test_can_start_a_index_page(self):
         """тест: отобразить главную страницу kiteup.ru"""
@@ -74,18 +43,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         response = self.browser.get(link)
         # self.assertContains(response, 'Page not found')
 
-    def test_layout_and_styling(self):
-        """тест макета и стилевого оформления"""
-        self.browser.get(self.live_server_url)
-        self.browser.set_window_size(1920,1080)
-        # мы видим что заголовок сайта и список новостей аккуратно отцентрированны
-        title = self.browser.find_element_by_id('id_item_news')
 
-        self.assertAlmostEqual(
-            title.location['x'] + title.size['width'] / 2,
-            960,
-            delta=20
-        )
         # Каждый анонс имеет заголовок, дату создания, уникальную ссылку на полную новость, кол-во просмотров и коментарии
 
         # тест, который никогда не срабатывает
