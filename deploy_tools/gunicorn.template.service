@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn server for SITENAME
+
+[Service]
+User=deploy
+Group=nginx
+Restart=on-failure
+WorkingDirectory=/home/deploy/sites/SITENAME/source
+ExecStart=/home/deploy/sites/SITENAME/virtualenv/bin/gunicorn --bind unix:/tmp/SITENAME.sock kiteup.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
