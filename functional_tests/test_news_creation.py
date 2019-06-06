@@ -48,8 +48,8 @@ class NewVisitorTest(FunctionalTest):
         self.browser.get(self.live_server_url)
         link = self.browser.find_element_by_link_text('Новость 1').get_attribute('href')
         self.browser.get(link)
-        header_3 = self.browser.find_element_by_tag_name('h3')
-        self.assertTrue(header_3)
+        header_h3 = self.browser.find_element_by_tag_name('h3')
+        self.assertTrue(header_h3)
 
 
     # дату создания, уникальную ссылку на полную новость, кол-во просмотров и коментарии
