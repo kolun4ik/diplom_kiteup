@@ -1,8 +1,6 @@
 from .base import FunctionalTest
 
 
-
-
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
 

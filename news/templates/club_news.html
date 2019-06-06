@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block news %}
-    <h2><a href="#">Новости</a></h2>
+    <h2>Новости</h2>
     <ul class="list-style pl-0" id="id_news_list">
         {% for item in items %}
         <li id="id_item_news">
-            <i class="fa fa-anchor grey" aria-hidden="true"></i><a href="/club-news/{{ item.id }}">{{ item.text}}</a>
+            <i class="fa fa-anchor grey" aria-hidden="true"></i><a href="{% url 'news_view' item.id }%">{{ item.text}}</a>
         </li>
         {% endfor %}
     </ul>
-    <a href="club-news">Все новости</a>
+    <p>Page: <a href="">[1,2,3 ...] >> </a></p>
 {% endblock %}
