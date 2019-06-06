@@ -83,17 +83,7 @@
                 </div>
               </div>
             </nav>
-                 <!-- img/slider slider -->
-            <div id="img/slider-slider">
-               <div id="image-slider" class="owl-carousel owl-theme">
-                 <div class="item">
-                   <img src="/static/bootstrap/img/slider/large-slider1.jpg" alt="">
-                 </div>
-                 <div class="item">
-                   <img src="/static/bootstrap/img/slider/large-slider2.jpg" alt="">
-                 </div>
-               </div>
-           </div>
+            {% block slider %}{% endblock %}
           </div>
         </div>
         <div class="row">
@@ -158,7 +148,7 @@
               <div class="col-md-6  col-sm-6">
                 <ul class="nav nav-inline  justify-content-end ">
                   <li class="nav-item">
-                    <a class="nav-link active" href="#">Главная</a>
+                    <a class="nav-link active" href="{% url 'index' %}">Главная</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Карта сайта</a>
