@@ -6,7 +6,14 @@ User=deploy
 Group=nginx
 Restart=on-failure
 WorkingDirectory=/home/deploy/sites/SITENAME/source
-ExecStart=/home/deploy/sites/SITENAME/virtualenv/bin/gunicorn --bind unix:/tmp/SITENAME.sock kiteup.wsgi:application
+ExecStart=/home/deploy/sites/SITENAME/virtualenv/bin/gunicorn \
+    --bind unix:/tmp/SITENAME.sock \
+    --capture-output \
+    --access-logfile ../access.log \
+    --error-logfile ../error.log \
+    kiteup.wsgi:application
+
+
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true

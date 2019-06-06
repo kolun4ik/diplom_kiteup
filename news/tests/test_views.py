@@ -3,13 +3,6 @@ from news.models import ItemNews
 
 
 # Create your tests here.
-class IndexPageTest(TestCase):
-    """тест домашней страницы kiteup.ru"""
-    def test_uses_index_template(self):
-        """тест: для главной страницы используется шаблон index.html"""
-        response = self.client.get('/')
-        self.assertTemplateUsed(response, 'index.html')
-
 
 class NewsViewTest(TestCase):
     """тест представления новостей, раздел сайта 'Новости':
