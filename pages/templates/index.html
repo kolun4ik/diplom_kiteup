@@ -20,7 +20,7 @@
 <ul class="list-style pl-0" id="id_news_list">
 {% for item in items %}
 <li id="id_item_news">
-  <i class="fa fa-anchor grey" aria-hidden="true"></i><a href="{% url 'news_view' item.id %}">{{ item.text}}</a>
+  <i class="fa fa-anchor grey" aria-hidden="true"></i><a href="{% url 'news_view' item.id %}">{{ item.title_news}}</a>
 </li>
 {% endfor %}
 </ul>

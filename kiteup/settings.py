@@ -30,7 +30,7 @@ DEBUG = True
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'news.apps.NewsConfig',
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

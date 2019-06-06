@@ -9,11 +9,11 @@ class ItemModelTest(TestCase):
         таблицы новостей"""
         # код описанный ниже, скорее всего интеграциооный тест, а не модульный
         first_itemnews = ItemNews()
-        first_itemnews.text = 'Новость 1'
+        first_itemnews.title_news = 'Новость 1'
         first_itemnews.save()
 
         second_itemnews = ItemNews()
-        second_itemnews.text = 'Новость 2'
+        second_itemnews.title_news = 'Новость 2'
         second_itemnews.save()
 
         saved_itemnews = ItemNews.objects.all()
@@ -22,14 +22,14 @@ class ItemModelTest(TestCase):
         first_saved_itemnews = saved_itemnews[0]
         second_saved_itemnews = saved_itemnews[1]
 
-        self.assertEqual(first_saved_itemnews.text, 'Новость 1')
-        self.assertEqual(second_saved_itemnews.text, 'Новость 2')
+        self.assertEqual(first_saved_itemnews.title_news, 'Новость 1')
+        self.assertEqual(second_saved_itemnews.title_news, 'Новость 2')
 
     def test_can_save_a_item_news(self):
         """тест: можно сохранить новость в БД"""
         self.assertEqual(ItemNews.objects.count(),0)
         # создали новость "Новость 1"
-        ItemNews.objects.create(text='Новость 1')
+        ItemNews.objects.create(title_news='Новость 1')
         self.assertEqual(ItemNews.objects.count(), 1)
 
         response = self.client.get('/')
