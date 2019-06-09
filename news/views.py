@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import ItemNews
@@ -15,4 +16,9 @@ def news_view(request, id_item):
         return render(request, 'club_news.html', {'items': items})
     else:
         item = ItemNews.objects.get(id=id_item)
-        return  render(request, 'news.html', {'item': item})
+        creation_date = datetime.datetime.strftime(item.creation_date, '%d.%m.%Y')
+        context = {
+            'item': item,
+            'date': creation_date,
+        }
+        return  render(request, 'news.html', context)

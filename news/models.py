@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.urls import reverse
 
@@ -5,6 +6,12 @@ from django.urls import reverse
 class ItemNews(models.Model):
     """отдельная новость"""
     title_news = models.CharField(default='',max_length=70)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    content= models.TextField(default='')
+
+
+    def __str__(self):
+        return self.title_news
 
     # #Заготовка "разрешения" URL
     # def get_absolute_url(self):

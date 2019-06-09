@@ -1,3 +1,4 @@
+import datetime
 from django.test import TestCase
 from news.models import ItemNews
 
@@ -37,7 +38,15 @@ class ItemModelTest(TestCase):
         self.assertIn('Новость 1', response.content.decode('utf8'))
         self.assertTemplateUsed(response, 'index.html')
 
+    def test_news_have_date_creation(self):
+        """тест: новость имеет дату создания"""
+        news = ItemNews.objects.create(title_news='Новость 1')
+        self.assertIsInstance(news.creation_date, datetime.datetime)
 
-
-
-
+    def test_news_have_content(self):
+        """тест: мы видим текст новости"""
+        text_content = 'Lorem ipsum'
+        news = ItemNews.objects.create(
+            title_news='Новость 1',
+            content=text_content)
+        self.assertEqual(news.content, 'Lorem ipsum')

@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
 {% block news %}
     <h3>{{ item.title_news }}</h3>
+    <p id="date_item_news">{{ item.creation_date|date:'d.m.Y' }}</p>
+    <div id="item_news">{{ item.content }}</div>
 {% endblock %}

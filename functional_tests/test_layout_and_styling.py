@@ -17,3 +17,4 @@ class LayoutAndStylingTest(FunctionalTest):
             960,
             delta=20
         )
+

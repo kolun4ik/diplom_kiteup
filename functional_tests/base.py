@@ -21,8 +21,12 @@ class FunctionalTest(StaticLiveServerTestCase):
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
             self.live_server_url = 'http://' + staging_server
-        ItemNews.objects.create(title_news='Новость 1')
-        ItemNews.objects.create(title_news='Новость 2')
+
+        for i in range(1,6):
+            ItemNews.objects.create(
+                title_news=f'Новость {i}',
+                content='Lorem ipsum')
+
 
     def tearDown(self):
         """Демонтаж"""

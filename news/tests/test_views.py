@@ -1,3 +1,4 @@
+import datetime
 from django.test import TestCase
 from news.models import ItemNews
 
@@ -24,3 +25,26 @@ class NewsViewTest(TestCase):
 
         self.assertContains(response, 'Новость 1')
         self.assertNotContains(response, 'Новость 2')
+
+    def test_view_date_dispalay(self):
+        """тест: отображать дату создания новости"""
+        date = datetime.datetime.now()
+        news = ItemNews.objects.create(title_news='Новость 1')
+        response = self.client.get(f'/club-news/{news.id}')
+        self.assertContains(response, date.strftime('%d.%m.%Y'))
+
+    def test_display_news_content(self):
+        """тест: содержимое новости"""
+        news = ItemNews.objects.create(
+            title_news='Новость 1',
+            content = 'Lorem ipsum'
+        )
+        self.assertEqual('Lorem ipsum', news.content)
+
+    # 1)Использовать тестовый клиент Django,
+    # 2) Проверить используемый шаблон и каждый элемент в контексте шаблона.
+    # 3) Проверить, чтобы все обьекты били правильными либо наборы queryset имели правильные элементы.
+    # 4) Проверить, чтобы все формы имели правильный класс.
+    # 5) ПОдумать о тестировании логики шаблона: любой оператор for или if может заслужить минимального теста.
+    # 6) В отношении представлений, которые обрабатывают POST-запросы, удостовериться, что тестируються оба случая: допустимый и недопустимый.
+    # 7) Факультативно проверить на исправность, что форма выведена в качестве HTMLи ее ошибки визуально отображаются
