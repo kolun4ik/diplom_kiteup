@@ -1,14 +1,45 @@
 from django.test import TestCase
 from news.models import ItemNews
-
+from pages.models import Pages
 # Не забывать, что это "модульные" (интеграционные) тесты
 
-class PagesViewTest(TestCase):
+class PageIndexViewTest(TestCase):
     """тест домашней страницы kiteup.ru"""
     def test_uses_index_template(self):
         """тест: для главной страницы используется шаблон index.html"""
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'index.html')
+
+    def test_display_five_last_news_on_index_page(self):
+        """тест: на Главной странице отображать 5 последних новостей"""
+        for i in range(6):
+            ItemNews.objects.create(
+                title_news=f'{i}',
+                content=''
+            )
+        last_five = ItemNews.objects.order_by('-creation_date')[:5]
+        self.assertEqual(len(last_five), 5)
+        # Сделать проверку, что новости отсортированы в обратном порядке
+
+
+class PageObuchenieViewTest(TestCase):
+    """тест раздела Кайт школа"""
+
+    def test_uses_obuchenie_template(self):
+        """для раздела КАЙТ ШКОЛА используется шаблон obuchenie.html"""
+        response = self.client.get('/obuchenie-kitesurfing')
+        self.assertTemplateUsed(response, 'obuchenie.html')
+        self.assertEqual(response.status_code, 200)
+
+    def test_display_page_content(self):
+        """тест: страница отображает некий текст"""
+        page = Pages.objects.create(
+            title = 'Заголовок',
+            body = 'Текст страницы',
+        )
+        response = self.client.get('/obuchenie-kitesurfing')
+        self.assertContains(response, 'Текст страницы')
+
 
 
 

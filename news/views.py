@@ -12,7 +12,7 @@ from .models import ItemNews
 def news_view(request, id_item):
     """представление отдельной новости"""
     if id_item == '':
-        items = ItemNews.objects.all()
+        items = ItemNews.objects.all()[:5]
         return render(request, 'club_news.html', {'items': items})
     else:
         item = ItemNews.objects.get(id=id_item)

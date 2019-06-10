@@ -15,6 +15,17 @@ class NewsViewTest(TestCase):
         response = self.client.get(f'/club-news/{news.id}')
         self.assertTemplateUsed(response, 'news.html')
 
+
+    def test_display_five_last_news_on_club_news_page(self):
+        """тест: в разделе Новости отображать 5 последних новостей"""
+        for i in range(6):
+            ItemNews.objects.create(
+                title_news=f'{i}',
+                content=''
+            )
+        last_five = ItemNews.objects.order_by('-creation_date')[:5]
+        self.assertEqual(len(last_five), 5)
+
     def test_display_only_item_news(self):
         """тест: отображать определенную новость по id"""
         # создаем 2 разные новости
@@ -26,7 +37,7 @@ class NewsViewTest(TestCase):
         self.assertContains(response, 'Новость 1')
         self.assertNotContains(response, 'Новость 2')
 
-    def test_view_date_dispalay(self):
+    def test_view_dispalay_date(self):
         """тест: отображать дату создания новости"""
         date = datetime.datetime.now()
         news = ItemNews.objects.create(title_news='Новость 1')
