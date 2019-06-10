@@ -15,9 +15,9 @@ class NewVisitorTest(FunctionalTest):
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Кайт клуб \"Вверх\"', header_text)
         # теперь, когда мы зашли на главную страницу kiteup.ru, мы хотим
-        # видеть список новостей
-        self.wait_for_row_in_news_table('Новость 3')
-        self.wait_for_row_in_news_table('Новость 4')
+        # видеть список из 5 новостей, в порядке убывания по дате создания.
+        self.wait_for_row_in_news_table('Новость 6')
+        self.wait_for_row_in_news_table('Новость 5')
 
     # @skip("test skip")
     def test_display_five_last_news_in_index_page(self):

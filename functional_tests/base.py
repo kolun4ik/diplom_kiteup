@@ -1,12 +1,15 @@
 import os
-import time
+from time import sleep, time
+from unittest import skip
+
+from pages.models import Pages
+from news.models import ItemNews
+
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
-from news.models import ItemNews
-from pages.models import Pages
-from unittest import skip
+
 
 
 MAX_WAIT = 5
@@ -23,15 +26,22 @@ class FunctionalTest(StaticLiveServerTestCase):
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
             self.live_server_url = 'http://' + staging_server
-        # Сгенерировали новости
-        for i in range(1,7):
-            ItemNews.objects.create(
-                title_news=f'Новость {i}',
-                content='Lorem ipsum')
+
         # Сгенерировали атрибуты страницы
         Pages.objects.create(
             title='Здравствуйте, мы – кайт-клуб «Вверх».',
-            body='Test')
+            body='Замена слова «школа» на «клуб» тоже неслучайна')
+
+        # Расширяя функционал (сортировка по убыванию, пагинация) понадобилось
+        # создавать список новостей (> 5 пунктов). В тестах выявилась регрессия, возможно
+        # из-за того, что новости создаются с маленькой разницей во времени.
+        # Ставлю задержку при создании в 1 секунду.
+        for i in range(1,7):
+            ItemNews.objects.create(
+                title_news=f'Новость {i}',
+                content=f'Lorem ipsum {i}')
+            sleep(1)
+
 
     def tearDown(self):
         """Демонтаж"""
@@ -39,7 +49,7 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def wait_for_row_in_news_table(self, item_text):
         """Ожидание новости в таблице с новостями"""
-        start_time = time.time()
+        start_time = time()
         while True:
             try:
                 list = self.browser.find_element_by_id('id_news_list')
@@ -47,9 +57,9 @@ class FunctionalTest(StaticLiveServerTestCase):
                 self.assertIn(item_text, [item.text for item in items])
                 return
             except (AssertionError, WebDriverException) as e:
-                if time.time() - start_time > MAX_WAIT:
+                if time() - start_time > MAX_WAIT:
                     raise e
-                time.sleep(0.5)
+                sleep(0.5)
 
 
     def get_element_by_link(self, text_link):
