@@ -1,14 +1,17 @@
 from django.test import TestCase
 from news.models import ItemNews
-from pages.models import Pages
+from pages.models import Page
 # Не забывать, что это "модульные" (интеграционные) тесты
+
 
 class PageIndexViewTest(TestCase):
     """тест домашней страницы kiteup.ru"""
+
     def test_uses_index_template(self):
         """тест: для главной страницы используется шаблон index.html"""
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'index.html')
+
 
     def test_display_five_last_news_on_index_page(self):
         """тест: на Главной странице отображать 5 последних новостей"""
@@ -25,23 +28,28 @@ class PageIndexViewTest(TestCase):
 class PageObuchenieViewTest(TestCase):
     """тест раздела Кайт школа"""
 
+    def test_display_page_content(self):
+        """тест: страница отображает некий текст"""
+        page = Page.objects.create(
+            title='Заголовок',
+            body='Текст страницы',
+        )
+        response = self.client.get('/obuchenie-kitesurfing')
+        self.assertContains(response, 'Текст страницы')
+
+
     def test_uses_obuchenie_template(self):
         """для раздела КАЙТ ШКОЛА используется шаблон obuchenie.html"""
         response = self.client.get('/obuchenie-kitesurfing')
         self.assertTemplateUsed(response, 'obuchenie.html')
         self.assertEqual(response.status_code, 200)
 
-    def test_display_page_content(self):
-        """тест: страница отображает некий текст"""
-        page = Pages.objects.create(
-            title = 'Заголовок',
-            body = 'Текст страницы',
-        )
-        response = self.client.get('/obuchenie-kitesurfing')
-        self.assertContains(response, 'Текст страницы')
 
-
-
+    def test_uses_faq_template(self):
+        """для раздела 'ЧаВо?' используется шаблон faq.html"""
+        response = self.client.get('/faq')
+        self.assertTemplateUsed(response, 'faq.html')
+        self.assertEqual(response.status_code, 200)
 
 
 # 1)Использовать тестовый клиент Django,

@@ -36,7 +36,6 @@ class NewVisitorTest(FunctionalTest):
         self.assertRegex(content, REGEX_ANY_TEXT)
 
 
-
         # Также новости могут иметь ко-во просмотров и комментарии
 
         # тест, который никогда не срабатывает

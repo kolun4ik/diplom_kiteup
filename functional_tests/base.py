@@ -2,7 +2,7 @@ import os
 from time import sleep, time
 from unittest import skip
 
-from pages.models import Pages
+from pages.models import Page
 from news.models import ItemNews
 
 from selenium import webdriver
@@ -27,10 +27,15 @@ class FunctionalTest(StaticLiveServerTestCase):
         if staging_server:
             self.live_server_url = 'http://' + staging_server
 
-        # Сгенерировали атрибуты страницы
-        Pages.objects.create(
+        # Сгенерировали атрибуты страницы /obuchenie-kitesurfing
+        Page.objects.create(
             title='Здравствуйте, мы – кайт-клуб «Вверх».',
             body='Замена слова «школа» на «клуб» тоже неслучайна')
+
+        # Сгенерировали атрибуты страницы /faq
+        Page.objects.create(
+            title='Часто задаваемые вопросы:',
+            body='Прежде чем звонить нам, почитайте ЧаВо...')
 
         # Расширяя функционал (сортировка по убыванию, пагинация) понадобилось
         # создавать список новостей (> 5 пунктов). В тестах выявилась регрессия, возможно

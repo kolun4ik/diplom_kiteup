@@ -2,7 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-class Pages(models.Model):
+class Page(models.Model):
     """Сраница основного раздела сайта kiteup.ru"""
-    title = models.CharField(default='',max_length=80)
-    body = models.TextField(default='')
+    title = models.CharField(default='', max_length=80)
+    link = models.CharField(default='', max_length=50)
+    body = models.TextField('Content', default='')
+
+    def __str__(self):
+        return self.link

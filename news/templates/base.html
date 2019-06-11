@@ -59,7 +59,7 @@
                       <a class="nav-link" href="{% url 'obuchenie' %}">Кайт школа</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">ЧаВо?</a>
+                      <a class="nav-link" href="{% url 'faq' %}">ЧаВо?</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'news_view' ''%}">Новости</a>
@@ -95,7 +95,8 @@
                  <div class="col-sm-12 col-md-9">
                   <div class="blog-block post-content-area">
                    <div class="blog-post">
-                     {% block  news %} {% endblock %}
+                     {% block  content %}
+                     {% endblock %}
                     </div>
                   </div>
                 <div class="mb-60"></div>
