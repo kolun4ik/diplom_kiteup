@@ -52,6 +52,12 @@ class PageObuchenieViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+    def test_uses_contacts_template(self):
+        """для раздела 'Контакты' используется шаблон contacts.html"""
+        response = self.client.get('/contacts')
+        self.assertTemplateUsed(response, 'contacts.html')
+        self.assertEqual(response.status_code, 200)
+
 # 1)Использовать тестовый клиент Django,
 # 2) Проверить используемый шаблон и каждый элемент в контексте шаблона.
 # 3) Проверить, чтобы все обьекты били правильными либо наборы queryset имели правильные элементы.

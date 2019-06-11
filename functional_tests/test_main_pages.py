@@ -49,3 +49,11 @@ class NewVisitorTest(FunctionalTest):
         page_faq = self.browser.find_element_by_id('page_content').text
         self.assertEquals(header_h2, 'Часто задаваемые вопросы:')
         self.assertRegex(page_faq, REGEX_ANY_TEXT)
+
+    def test_can_start_a_contacts_page(self):
+        """тест: отобразить раздел 'Контакты' (/contacts)"""
+        self.browser.get(self.live_server_url + '/contacts')
+        header_h2 = self.browser.find_element_by_tag_name('h2').text
+        page_cont = self.browser.find_element_by_id('page_content').text
+        self.assertEquals(header_h2, 'Контакты')
+        self.assertRegex(page_cont, REGEX_ANY_TEXT)
