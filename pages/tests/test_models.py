@@ -9,6 +9,7 @@ class PagesModelTest(TestCase):
         self.assertEqual(Page.objects.count(), 0)
         Page.objects.create(
             title='Страница 1',
+            link='obuchenie-kitesurfing',
             body='Текст страницы 1')
         self.assertEqual(Page.objects.count(), 1)
         response = self.client.get('/obuchenie-kitesurfing')

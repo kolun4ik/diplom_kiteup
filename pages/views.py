@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from news.models import ItemNews
 from .models import Page
 # Create your views here.
@@ -11,26 +11,29 @@ def index(request):
 
 def obuchenie(request):
     """страница 'КАЙТ ШКОЛА'"""
-    page = Page.objects.first()
-    return render(request, 'obuchenie.html', {'page': page})
+    page = get_object_or_404(Page, link='obuchenie-kitesurfing')
+    context = {
+        'title': page.title,
+        'content': page.body,
+    }
+    return render(request, 'obuchenie.html', context)
 
 
 def faq(request):
     """страница 'ЧаВо'"""
-    # page = Page.objects.get(link='/faq')
-    # УЖАСНЫЙ ГОВНОКОД, но пока ничего не придумал, время поджимает
+    page = get_object_or_404(Page, link='faq')
     context = {
-        'title': 'Часто задаваемые вопросы:',
-        'content': 'Прежде чем звонить нам, почитайте ЧаВо – вполне возможно, что ответ на ваш вопрос здесь уже есть.'
+        'title': page.title,
+        'content': page.body,
     }
     return render(request, 'faq.html', context)
 
 
 def contacts(request):
     """страница 'Контакты'"""
-    # УЖАСНЫЙ ГОВНОКОД, но пока ничего не придумал, время поджимает
+    page = get_object_or_404(Page, link='contacts')
     context = {
-        'title': 'Контакты',
-        'content': 'Информацию по всем вопросам взаимодействия Вы можете отправить, используя форму, расположенную ниже.'
+        'title': page.title,
+        'content': page.body,
     }
     return render(request, 'contacts.html', context)

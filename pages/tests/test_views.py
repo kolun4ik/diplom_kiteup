@@ -1,6 +1,8 @@
 from django.test import TestCase
+from unittest import skip
 from news.models import ItemNews
 from pages.models import Page
+
 # Не забывать, что это "модульные" (интеграционные) тесты
 
 
@@ -18,7 +20,7 @@ class PageIndexViewTest(TestCase):
         for i in range(6):
             ItemNews.objects.create(
                 title_news=f'{i}',
-                content=''
+                content='Текст'
             )
         last_five = ItemNews.objects.order_by('-creation_date')[:5]
         self.assertEqual(len(last_five), 5)
@@ -26,34 +28,79 @@ class PageIndexViewTest(TestCase):
 
 
 class PageObuchenieViewTest(TestCase):
-    """тест раздела Кайт школа"""
+    """тест раздела 'Кайт школа'"""
 
     def test_display_page_content(self):
         """тест: страница отображает некий текст"""
         page = Page.objects.create(
             title='Заголовок',
-            body='Текст страницы',
+            link='obuchenie-kitesurfing',
+            body='Текст',
         )
         response = self.client.get('/obuchenie-kitesurfing')
-        self.assertContains(response, 'Текст страницы')
+        self.assertContains(response, 'Заголовок')
 
 
     def test_uses_obuchenie_template(self):
         """для раздела КАЙТ ШКОЛА используется шаблон obuchenie.html"""
+        page = Page.objects.create(
+            title='Заголовок',
+            link='obuchenie-kitesurfing',
+            body='Текст',
+        )
         response = self.client.get('/obuchenie-kitesurfing')
         self.assertTemplateUsed(response, 'obuchenie.html')
         self.assertEqual(response.status_code, 200)
 
 
+# @skip('Skip this test')
+class PageFaqViewTest(TestCase):
+    """тест раздела 'ЧаВо?'"""
+
+    def test_display_page_content(self):
+        """тест: страница отображает некий текст"""
+        page = Page.objects.create(
+            title='Заголовок',
+            link='faq',
+            body='Текст',
+        )
+        response = self.client.get('/faq')
+        self.assertContains(response, 'Заголовок')
+
+
     def test_uses_faq_template(self):
         """для раздела 'ЧаВо?' используется шаблон faq.html"""
+        page = Page.objects.create(
+            title='Заголовок',
+            link='faq',
+            body='Текст',
+        )
         response = self.client.get('/faq')
         self.assertTemplateUsed(response, 'faq.html')
         self.assertEqual(response.status_code, 200)
 
+# @skip('Skip this test')
+class PageContactsViewTest(TestCase):
+    """тест раздела 'Контакты'"""
+
+    def test_display_page_content(self):
+        """тест: страница отображает некий текст"""
+        page = Page.objects.create(
+            title='Заголовок',
+            link='contacts',
+            body='Текст',
+        )
+        response = self.client.get('/contacts')
+        self.assertContains(response, 'Заголовок')
+
 
     def test_uses_contacts_template(self):
         """для раздела 'Контакты' используется шаблон contacts.html"""
+        page = Page.objects.create(
+            title='Заголовок',
+            link = 'contacts',
+            body='Текст'
+        )
         response = self.client.get('/contacts')
         self.assertTemplateUsed(response, 'contacts.html')
         self.assertEqual(response.status_code, 200)
