@@ -1,4 +1,3 @@
-from time import sleep
 from .base import FunctionalTest, REGEX_ANY_TEXT
 from selenium.webdriver.common.keys import Keys
 from unittest import skip
@@ -117,6 +116,6 @@ class NewVisitorTest(FunctionalTest):
     def test_cannot_send_empy_feild_of_form(self):
         """тест: форма не отправляет пустые поля"""
         self.browser.get(self.live_server_url + '/contacts')
-        input_name = self.get_item_by_id('name').send_keys(Keys.ENTER)
+        self.get_item_by_id('name').send_keys(Keys.ENTER)
         error = self.browser.find_element_by_css_selector('.with-errors').text
         self.wait_for(lambda: self.assertEqual(error, 'Введите ваше имя'))

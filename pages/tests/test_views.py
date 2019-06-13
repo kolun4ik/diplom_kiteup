@@ -1,5 +1,6 @@
 from django.test import TestCase
 from unittest import skip
+from unittest.mock import patch
 from news.models import ItemNews
 from pages.models import Page
 from pages.forms import ContactForm
@@ -38,56 +39,51 @@ class PageIndexViewTest(TestCase):
 class PageObuchenieViewTest(TestCase):
     """тест раздела 'Кайт школа'"""
 
+    def create_page(self, title='Заголовок', link='/', body='Текст'):
+        """Создает Page для тестирования"""
+        # по link подумать, как сделать uniq и, чтобы он, был в urls.py
+        return Page.objects.create(title=title, link=link, body=body)
+
     def test_display_page_content(self):
         """тест: страница отображает некий текст"""
-        page = Page.objects.create(
-            title='Заголовок',
-            link='obuchenie-kitesurfing',
-            body='Текст',
-        )
+        self.create_page(link='obuchenie-kitesurfing')
         response = self.client.get('/obuchenie-kitesurfing')
         self.assertContains(response, 'Заголовок')
 
 
     def test_uses_obuchenie_template(self):
         """для раздела КАЙТ ШКОЛА используется шаблон obuchenie.html"""
-        page = Page.objects.create(
-            title='Заголовок',
-            link='obuchenie-kitesurfing',
-            body='Текст',
-        )
+        self.create_page(link='obuchenie-kitesurfing')
         response = self.client.get('/obuchenie-kitesurfing')
         self.assertTemplateUsed(response, 'obuchenie.html')
         self.assertEqual(response.status_code, 200)
 
 
-# @skip('Skip this test')
+
 class PageFaqViewTest(TestCase):
     """тест раздела 'ЧаВо?'"""
 
+    def create_page(self, title='Заголовок', link='/', body='Текст'):
+        """Создает Page для тестирования"""
+        # по link подумать, как сделать uniq и, чтобы он, был в urls.py
+        return Page.objects.create(title=title, link=link, body=body)
+
+
     def test_display_page_content(self):
         """тест: страница отображает некий текст"""
-        page = Page.objects.create(
-            title='Заголовок',
-            link='faq',
-            body='Текст',
-        )
+        self.create_page(link='faq')
         response = self.client.get('/faq')
         self.assertContains(response, 'Заголовок')
 
 
     def test_uses_faq_template(self):
         """для раздела 'ЧаВо?' используется шаблон faq.html"""
-        page = Page.objects.create(
-            title='Заголовок',
-            link='faq',
-            body='Текст',
-        )
+        self.create_page(link='faq')
         response = self.client.get('/faq')
         self.assertTemplateUsed(response, 'faq.html')
         self.assertEqual(response.status_code, 200)
 
-# @skip('Skip this test')
+
 class PageContactsViewTest(TestCase):
     """тест раздела 'Контакты'"""
 
@@ -95,6 +91,7 @@ class PageContactsViewTest(TestCase):
         """Создает Page для тестирования"""
         # по link подумать, как сделать uniq и, чтобы он, был в urls.py
         return Page.objects.create(title=title, link=link, body=body)
+
 
     def test_display_page_content(self):
         """тест: страница отображает некий текст"""
@@ -112,13 +109,6 @@ class PageContactsViewTest(TestCase):
 
 
     @skip('Skip this test')
-    def test_can_save_a_POST_request(self):
-        """тест можно сохранить POST запрос"""
-        # пока ничего не сохраняем, нам нужно отправлять
-        # сообщение на почту
-        pass
-
-    @skip('Skip this test')
     def test_redirect_after_POST(self):
         """тест: переадресяция после POST запроса"""
         self.create_page(link='contacts')
@@ -130,19 +120,36 @@ class PageContactsViewTest(TestCase):
     def test_display_success_mgs(self):
         """тест: отображается сообщенее об успешной отправке из формы"""
         self.create_page(link='contacts')
-
-        # и респонс об успешной отправке
         response = self.client.post('/contacts', POST_DATA)
-        # в респонсе заголовки, как проверить сообщение пока не знаю
-        # self.assertIn('Ваше сообщение успешно отравлено', response)
+        self.assertIn('Ожидайте ответа', response.context['content'])
 
-        # Проверить, что пустая форма не отправляется
 
-    @skip('Skip this test')
+    # Проверить, что пустая форма не отправляется
+
+
+    @skip('Skip this test because assertIsIntsnce display exeption')
     def test_contacts_page_uses_contact_form(self):
         """тест: страница 'КОНТАКТЫ' использует форму ContactForm"""
         response = self.client.get('/contacts')
         self.assertIsInstance(response.context['form'], ContactForm)
+
+
+class SendContactViewTest(TestCase):
+    """тест представления contacts, которое должно
+        отправить сообщение на почту"""
+
+    @skip('Skip this test')
+    @patch('pages.views.send_mail')
+    def test_sends_mail_to_addres_from_post(self, mock_send_mail):
+        """тест: отправить данные на почту"""
+        self.client.post('/contacts', POST_DATA)
+        self.assertEqual(mock_send_mail.called, False)
+        (subject, body, from_email, to_list), kwargs = mock_send_mail.call_args
+        self.assertEqual(subject, 'Тест')
+        self.assertEqual(from_email, 'nick@name.ru')
+        self.assertEqual(to_list, ['kiteup@rambler.ru'])
+
+
 
 # 1)Использовать тестовый клиент Django,
 # 2) Проверить используемый шаблон и каждый элемент в контексте шаблона.

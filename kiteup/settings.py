@@ -99,6 +99,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Email send message from Django
+EMAIL_HOST = 'smtp.rambler.ru'
+EMAIL_HOST_USER = 'kiteup@rambler.ru'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
