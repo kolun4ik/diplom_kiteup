@@ -138,8 +138,9 @@ class PageContactsViewTest(TestCase):
 
         # Проверить, что пустая форма не отправляется
 
+    @skip('Skip this test')
     def test_contacts_page_uses_contact_form(self):
-        """тест: страница 'КОНТАКТЫ' использует форму для контактов"""
+        """тест: страница 'КОНТАКТЫ' использует форму ContactForm"""
         response = self.client.get('/contacts')
         self.assertIsInstance(response.context['form'], ContactForm)
 

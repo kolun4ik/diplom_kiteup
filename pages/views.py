@@ -38,7 +38,7 @@ def contacts(request):
         'content': page.body,
         'success': False,
         'error': False,
-        'form': ContactForm,
+        'form': ContactForm(),
     }
     if request.method == 'POST':
         name = request.POST.get('name1')

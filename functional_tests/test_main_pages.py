@@ -40,7 +40,7 @@ class NewVisitorTest(FunctionalTest):
         """тест: отобразить раздел 'КАЙТ ШКОЛА' (/obuchenie-kitesurfing)"""
         self.browser.get(self.live_server_url + '/obuchenie-kitesurfing')
         header_h2 = self.browser.find_element_by_tag_name('h2').text
-        page_obuchenie = self.browser.find_element_by_id('page_content').text
+        page_obuchenie = self.get_item_by_id('page_content').text
         self.assertEquals(header_h2, 'Здравствуйте, мы – кайт-клуб «Вверх».')
         self.assertRegex(page_obuchenie, REGEX_ANY_TEXT)
 
@@ -50,7 +50,7 @@ class NewVisitorTest(FunctionalTest):
         """тест: отобразить раздел 'ЧаВо?' (/faq)"""
         self.browser.get(self.live_server_url + '/faq')
         header_h2 = self.browser.find_element_by_tag_name('h2').text
-        page_faq = self.browser.find_element_by_id('page_content').text
+        page_faq = self.get_item_by_id('page_content').text
         self.assertEquals(header_h2, 'Часто задаваемые вопросы:')
         self.assertRegex(page_faq, REGEX_ANY_TEXT)
 
@@ -60,7 +60,7 @@ class NewVisitorTest(FunctionalTest):
         """тест: отобразить раздел 'Контакты' (/contacts)"""
         self.browser.get(self.live_server_url + '/contacts')
         header_h2 = self.browser.find_element_by_tag_name('h2').text
-        page_cont = self.browser.find_element_by_id('page_content').text
+        page_cont = self.get_item_by_id('page_content').text
         self.assertEquals(header_h2, 'Контакты')
         self.assertRegex(page_cont, REGEX_ANY_TEXT)
 
@@ -68,11 +68,11 @@ class NewVisitorTest(FunctionalTest):
     def test_can_display_a_form_input_items(self):
         """тест: контактная форма должна иметь поля ввода"""
         self.browser.get(self.live_server_url + '/contacts')
-        input_name = self.browser.find_element_by_id('name')
-        input_email = self.browser.find_element_by_id('email')
-        input_subject = self.browser.find_element_by_id('subject')
-        input_msg = self.browser.find_element_by_id('message')
-        button = self.browser.find_element_by_id('form-submit')
+        input_name = self.get_item_by_id('name')
+        input_email = self.get_item_by_id('email')
+        input_subject = self.get_item_by_id('subject')
+        input_msg = self.get_item_by_id('message')
+        button = self.get_item_by_id('form-submit')
 
         self.assertEquals(
             input_name.get_attribute('placeholder'),
@@ -95,11 +95,11 @@ class NewVisitorTest(FunctionalTest):
         """тест: заполняем поля формы и отправляем в action, хотим
             видеть сообщение об успешной отправке"""
         self.browser.get(self.live_server_url + '/contacts')
-        input_name = self.browser.find_element_by_id('name')
-        input_email = self.browser.find_element_by_id('email')
-        input_subject = self.browser.find_element_by_id('subject')
-        input_msg = self.browser.find_element_by_id('message')
-        button = self.browser.find_element_by_id('form-submit')
+        input_name = self.get_item_by_id('name')
+        input_email = self.get_item_by_id('email')
+        input_subject = self.get_item_by_id('subject')
+        input_msg = self.get_item_by_id('message')
+        button = self.get_item_by_id('form-submit')
 
         input_name.send_keys('Joe')
         input_email.send_keys('11_ka@rambler.ru')
@@ -110,13 +110,13 @@ class NewVisitorTest(FunctionalTest):
         # Здесь мы хотим увидеть респонс об успешной отправке
         self.wait_for(
             lambda: self.assertEquals(
-                self.browser.find_element_by_id('success').text,
+                self.get_item_by_id('success').text,
                 'Ваше сообщение успешно отравлено.'))
 
 
     def test_cannot_send_empy_feild_of_form(self):
         """тест: форма не отправляет пустые поля"""
         self.browser.get(self.live_server_url + '/contacts')
-        input_name = self.browser.find_element_by_id('name').send_keys(Keys.ENTER)
+        input_name = self.get_item_by_id('name').send_keys(Keys.ENTER)
         error = self.browser.find_element_by_css_selector('.with-errors').text
         self.wait_for(lambda: self.assertEqual(error, 'Введите ваше имя'))

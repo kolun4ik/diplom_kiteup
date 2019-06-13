@@ -10,7 +10,6 @@ class ContactFormTest(TestCase):
         """тест: поля ввода формы имеют атриббуты placeholder и css классы"""
         form = ContactForm()
         # form.as_p() - выводит форму в виде HTML разметки
-        print(form.as_p())
 
         self.assertIn('placeholder="Имя:"', form.as_p())
         self.assertIn('class="form-control"', form.as_p())
