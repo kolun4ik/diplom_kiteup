@@ -6,12 +6,11 @@ class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
 
     # @skip("test skip")
-    def test_display_all_news_in_different_urls(self):
-        """тест: видим все новости в разделе /club-news/"""
+    def test_display_free_items_news_in_different_urls(self):
+        """тест: видим все новости в разделе 'Новости'(/club-news/)"""
         self.browser.get(self.live_server_url + '/club-news/')
-        url = self.browser.find_element_by_id('id_item_news')
-        # проверим что url ссылки содержит некий шаблон /club-news/
-        self.assertTrue(url)
+        url = self.browser.find_elements_by_id('id_item_news')
+        self.assertEquals(len(url), 3)
 
     # @skip("skip test only one news")
     def test_display_only_one_news(self):

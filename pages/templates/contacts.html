@@ -2,6 +2,52 @@
 {% block content %}
 <h2>{{ title }}</h2>
 <div id="page_content">
+    {% autoescape off %}
     {{ content }}
+    {% endautoescape %}
 </div>
-{% endblock %}
+    {% if success %}
+       <p id="success">Ваше сообщение успешно отравлено.</p>
+    {% else %}
+    <h3 class="title-head text-center">Контактная форма</h3>
+    {% if error %}
+        <span style="text-corol: red;">{{ error }}</span>
+    {% endif %}
+    <form class="contact-form" data-toggle="validator" method="post" action="/contacts">
+      {% csrf_token %}
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-user"></i>
+                        {{ form.name }}
+<!--                    <input type="text" class="form-control" id="name" placeholder="Имя:" required data-error="Введите ваше имя">-->
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-envelope-o"></i>
+                    <input type="email" class="form-control" id="email" placeholder="Email:" required data-error="Введите адресс email ">
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-pencil-square-o"></i>
+                    <input type="text" class="form-control" id="subject" placeholder="Тема:" required data-error="Введите Тему сообщения">
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <textarea id="message" rows="8" placeholder="Сообщение:" required data-error="Введите ваше сообщение"></textarea>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                  <button type="submit" id="form-submit" class="btn btn-common btn-form-submit">Отправить сообщение</button>
+                  <div id="msgSubmit" class="h3 text-center hidden"></div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </form>
+          {% endif %}
+{% endblock content %}

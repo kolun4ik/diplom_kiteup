@@ -10,11 +10,8 @@ from selenium.common.exceptions import WebDriverException
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
-
-
 MAX_WAIT = 5
 REGEX_ANY_TEXT = '.+'
-
 
 
 class FunctionalTest(StaticLiveServerTestCase):
@@ -81,3 +78,16 @@ class FunctionalTest(StaticLiveServerTestCase):
         link = self.browser.find_element_by_link_text(text_link).get_attribute('href')
         self.browser.get(link)
         return link
+
+    def wait_for(self, fn):
+        """Ожидать"""
+        # Явное ожидание для Selenium, для корректного обновления страницы
+        # например: после отправки Keys.ENTER, чтобы оно точно попало в assert
+        start_time = time()
+        while True:
+            try:
+                return fn()
+            except (AssertionError, WebDriverException) as e:
+                if time() - start_time > MAX_WAIT:
+                    raise e
+                sleep(0.5)

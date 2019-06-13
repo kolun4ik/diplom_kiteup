@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Bootstrap UI Kit">
-  <meta name="keywords" content="ui kit">
-  <meta name="author" content="UIdeck">
-
+  <meta name="description" content="Kite club KITEUP">
+  <meta name="keywords" content="kiting, kitesurfing">
+  <meta name="author" content="Th0rn">
   <title>Кайт клуб "Вверх"</title>
-
   <!-- CSS Files -->
   <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/bootstrap/css/main.css">
@@ -62,7 +59,7 @@
                       <a class="nav-link" href="{% url 'faq' %}">ЧаВо?</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'news_view' ''%}">Новости</a>
+                      <a class="nav-link" href="{% url 'news_view' '' %}">Новости</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="#">Статьи</a>
@@ -83,7 +80,7 @@
                 </div>
               </div>
             </nav>
-            {% block slider %}{% endblock %}
+            {% block slider %}{% endblock slider %}
           </div>
         </div>
         <div class="row">
@@ -96,7 +93,8 @@
                   <div class="blog-block post-content-area">
                    <div class="blog-post">
                      {% block  content %}
-                     {% endblock %}
+
+                     {% endblock content %}
                     </div>
                   </div>
                 <div class="mb-60"></div>

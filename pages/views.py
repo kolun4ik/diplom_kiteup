@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from news.models import ItemNews
 from .models import Page
+from .forms import ContactForm
 # Create your views here.
 
 def index(request):
@@ -35,5 +36,18 @@ def contacts(request):
     context = {
         'title': page.title,
         'content': page.body,
+        'success': False,
+        'error': False,
+        'form': ContactForm,
     }
+    if request.method == 'POST':
+        name = request.POST.get('name1')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        msg = request.POST.get('message')
+
+        context['content'] = 'Ожидайте ответа'
+        context['success'] = True
+        return render_to_response('contacts.html', context)
+
     return render(request, 'contacts.html', context)

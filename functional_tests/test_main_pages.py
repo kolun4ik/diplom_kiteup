@@ -1,6 +1,7 @@
-from .base import FunctionalTest, REGEX_ANY_TEXT
-from unittest import skip
 from time import sleep
+from .base import FunctionalTest, REGEX_ANY_TEXT
+from selenium.webdriver.common.keys import Keys
+from unittest import skip
 
 
 class NewVisitorTest(FunctionalTest):
@@ -44,6 +45,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertRegex(page_obuchenie, REGEX_ANY_TEXT)
 
 
+    # @skip("test skip")
     def test_can_start_a_faq_page(self):
         """тест: отобразить раздел 'ЧаВо?' (/faq)"""
         self.browser.get(self.live_server_url + '/faq')
@@ -53,6 +55,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertRegex(page_faq, REGEX_ANY_TEXT)
 
 
+    # @skip("test skip")
     def test_can_start_a_contacts_page(self):
         """тест: отобразить раздел 'Контакты' (/contacts)"""
         self.browser.get(self.live_server_url + '/contacts')
@@ -60,3 +63,60 @@ class NewVisitorTest(FunctionalTest):
         page_cont = self.browser.find_element_by_id('page_content').text
         self.assertEquals(header_h2, 'Контакты')
         self.assertRegex(page_cont, REGEX_ANY_TEXT)
+
+
+    def test_can_display_a_form_input_items(self):
+        """тест: контактная форма должна иметь поля ввода"""
+        self.browser.get(self.live_server_url + '/contacts')
+        input_name = self.browser.find_element_by_id('name')
+        input_email = self.browser.find_element_by_id('email')
+        input_subject = self.browser.find_element_by_id('subject')
+        input_msg = self.browser.find_element_by_id('message')
+        button = self.browser.find_element_by_id('form-submit')
+
+        self.assertEquals(
+            input_name.get_attribute('placeholder'),
+            'Имя:')
+        self.assertEquals(
+            input_email.get_attribute('placeholder'),
+            'Email:')
+        self.assertEquals(
+            input_subject.get_attribute('placeholder'),
+            'Тема:')
+        self.assertEquals(
+            input_msg.get_attribute('placeholder'),
+            'Сообщение:')
+        self.assertEquals(
+            button.text,
+            'Отправить сообщение')
+
+
+    def test_can_send_fill_form_items(self):
+        """тест: заполняем поля формы и отправляем в action, хотим
+            видеть сообщение об успешной отправке"""
+        self.browser.get(self.live_server_url + '/contacts')
+        input_name = self.browser.find_element_by_id('name')
+        input_email = self.browser.find_element_by_id('email')
+        input_subject = self.browser.find_element_by_id('subject')
+        input_msg = self.browser.find_element_by_id('message')
+        button = self.browser.find_element_by_id('form-submit')
+
+        input_name.send_keys('Joe')
+        input_email.send_keys('11_ka@rambler.ru')
+        input_subject.send_keys('Тест')
+        input_msg.send_keys('Сообщение')
+        button.send_keys(Keys.ENTER)
+
+        # Здесь мы хотим увидеть респонс об успешной отправке
+        self.wait_for(
+            lambda: self.assertEquals(
+                self.browser.find_element_by_id('success').text,
+                'Ваше сообщение успешно отравлено.'))
+
+
+    def test_cannot_send_empy_feild_of_form(self):
+        """тест: форма не отправляет пустые поля"""
+        self.browser.get(self.live_server_url + '/contacts')
+        input_name = self.browser.find_element_by_id('name').send_keys(Keys.ENTER)
+        error = self.browser.find_element_by_css_selector('.with-errors').text
+        self.wait_for(lambda: self.assertEqual(error, 'Введите ваше имя'))

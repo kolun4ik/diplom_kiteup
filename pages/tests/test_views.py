@@ -2,12 +2,20 @@ from django.test import TestCase
 from unittest import skip
 from news.models import ItemNews
 from pages.models import Page
+from pages.forms import ContactForm
+from time import sleep
+
+POST_DATA = {
+            'name': 'Joe',
+            'email': 'nick@name.ru',
+            'subject': 'Тест',
+            'message': 'Сообщение',}
 
 # Не забывать, что это "модульные" (интеграционные) тесты
 
-
 class PageIndexViewTest(TestCase):
     """тест домашней страницы kiteup.ru"""
+
 
     def test_uses_index_template(self):
         """тест: для главной страницы используется шаблон index.html"""
@@ -83,27 +91,57 @@ class PageFaqViewTest(TestCase):
 class PageContactsViewTest(TestCase):
     """тест раздела 'Контакты'"""
 
+    def create_page(self, title='Заголовок', link='/', body='Текст'):
+        """Создает Page для тестирования"""
+        # по link подумать, как сделать uniq и, чтобы он, был в urls.py
+        return Page.objects.create(title=title, link=link, body=body)
+
     def test_display_page_content(self):
         """тест: страница отображает некий текст"""
-        page = Page.objects.create(
-            title='Заголовок',
-            link='contacts',
-            body='Текст',
-        )
+        self.create_page(link='contacts')
         response = self.client.get('/contacts')
         self.assertContains(response, 'Заголовок')
 
 
     def test_uses_contacts_template(self):
         """для раздела 'Контакты' используется шаблон contacts.html"""
-        page = Page.objects.create(
-            title='Заголовок',
-            link = 'contacts',
-            body='Текст'
-        )
+        self.create_page(link='contacts')
         response = self.client.get('/contacts')
         self.assertTemplateUsed(response, 'contacts.html')
         self.assertEqual(response.status_code, 200)
+
+
+    @skip('Skip this test')
+    def test_can_save_a_POST_request(self):
+        """тест можно сохранить POST запрос"""
+        # пока ничего не сохраняем, нам нужно отправлять
+        # сообщение на почту
+        pass
+
+    @skip('Skip this test')
+    def test_redirect_after_POST(self):
+        """тест: переадресяция после POST запроса"""
+        self.create_page(link='contacts')
+        response = self.client.post('/contacts', POST_DATA)
+        # после отправки post запроса хотим увидеть переадресацию
+        self.assertRedirects(response, '/contacts')
+
+    # @skip('Skip this test')
+    def test_display_success_mgs(self):
+        """тест: отображается сообщенее об успешной отправке из формы"""
+        self.create_page(link='contacts')
+
+        # и респонс об успешной отправке
+        response = self.client.post('/contacts', POST_DATA)
+        # в респонсе заголовки, как проверить сообщение пока не знаю
+        # self.assertIn('Ваше сообщение успешно отравлено', response)
+
+        # Проверить, что пустая форма не отправляется
+
+    def test_contacts_page_uses_contact_form(self):
+        """тест: страница 'КОНТАКТЫ' использует форму для контактов"""
+        response = self.client.get('/contacts')
+        self.assertIsInstance(response.context['form'], ContactForm)
 
 # 1)Использовать тестовый клиент Django,
 # 2) Проверить используемый шаблон и каждый элемент в контексте шаблона.
