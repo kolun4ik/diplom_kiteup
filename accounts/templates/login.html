@@ -26,21 +26,6 @@
         <div class="row">
           <div class="col-md-12">
             <!-- top-menu-inverse -->
-            <div class="top-menu top-menu-inverse">
-              <p>
-                <span class="left">
-                  <a href="#"><i class="fa fa-phone"></i> (+7) 915 269 15 51</a>
-                  <a href="#"><i class="fa fa-envelope"></i> info@kiteup.ru</a>
-                </span>
-                <span class="right hidden-sm-down">
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                  <label class="btn btn-top-menu-inverse"><a href="{% url 'login' %}"><i class="fa fa-lock"></i> Вход</a></label>
-                  <label class="btn btn-top-menu-inverse"><a href="{% url 'register' %}"><i class="fa fa-pencil"></i>Регистрация</a></label>
-                </span>
-              </p>
-            </div>
-            <div class="text-center"><h1>Кайт клуб "Вверх"</h1></div>
              <nav class="navbar navbar-toggleable-sm navbar-light bg-black">
               <div class="container">
                 <a class="navbar-brand" href="{% url 'index' %}"><img src="/static/bootstrap/img/logo-1.png" alt=""></a>
@@ -80,63 +65,46 @@
                 </div>
               </div>
             </nav>
-            {% block slider %}{% endblock slider %}
+
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <!-- Blog content + sidebar -->
-             <section class="blog">
-              <div class="container">
-               <div class="row">
-                 <div class="col-sm-12 col-md-9">
-                  <div class="blog-block post-content-area">
-                   <div class="blog-post">
-                     {% block  content %}
+          {% block forms %}
+       <h3 class="title-head text-center">Войти</h3>
 
-                     {% endblock content %}
-                    </div>
-                  </div>
-                <div class="mb-60"></div>
-              </div>
-                    <!-- Blog sidebar area -->
-                    <div class="col-sm-12 col-md-3">
-                      <div class="blog-block blog-posts-widget">
-                        <div class="widget-title">
-                          <h4>События и мероприятия</h4>
-                        </div>
-                        <div class="blog-posts-small">
-                          <div class="blog-post-small first-post">
-                            <img src="img/blog/thumb1.jpg">
-                            <a href="#">Мероприятие #1</a>
-                            <p>Опубликованно <a href="#" class="post-date">Сент. 03, 2016</a></p>
-                          </div>
-                          <div class="blog-post-small mid-post">
-                            <img src="img/blog/thumb1.jpg">
-                            <a href="#">Мероприятие #2</a>
-                            <p>Опубликованно <a href="#" class="post-date">Сент. 01, 2016</a></p>
-                          </div>
-                          <div class="blog-post-small mid-post">
-                            <img src="img/blog/thumb1.jpg">
-                            <a href="#">Мероприятие #3</a>
-                            <p>Опубликованно <a href="#" class="post-date">Авг. 19, 2016</a></p>
-                          </div>
-                          <div class="blog-post-small last-post">
-                            <img src="img/blog/thumb1.jpg">
-                            <a href="#">Мероприятие #4</a>
-                            <p>Опубликованно <a href="#" class="post-date">Авг. 16, 2016</a></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+    <form class="contact-form" data-toggle="validator" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+              <div class="row">
+                  <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-user"></i>
+                        <input type="text" name="username" id="username" placeholder="Логин:" class="form-control" data-error="Введите ваш логин" required>
+                    <div class="help-block with-errors"></div>
                   </div>
                 </div>
-              </section>
-              <div class="mb-60"></div>
-          </div>
-        </div>
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-lock"></i>
+                      <input type="password" name="password" id="password" placeholder="Пароль:" class="form-control" data-error="Введите пароль" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">
+                  <button type="submit" id="form-submit" class="btn btn-common btn-form-submit">Войти</button>
+                  <div id="msgSubmit" class="h3 text-center hidden"></div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </form>
+          {% endblock forms %}
+    <div class="row">
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
         <footer class="footer">
-        <!-- Container Starts -->
         <!-- Copyright -->
         <div id="copyright">
             <div class="row">

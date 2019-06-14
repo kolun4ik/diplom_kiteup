@@ -2,9 +2,9 @@
 {% block content %}
     <h3>{{ item.title_news }}</h3>
     <p id="date_item_news">{{ item.creation_date|date:'d.m.Y' }}</p>
-    {% autoescape off %}
+
     <div id="item_news">
-        {% endautoescape %}
+        {% autoescape off %}
         {{ item.content }}
         {% endautoescape %}
     </div>

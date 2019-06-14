@@ -1,0 +1,53 @@
+{% extends 'login.html' %}
+
+{% block forms %}
+<h3 class="title-head text-center">Регистрационная форма</h3>
+
+    <form class="contact-form" data-toggle="validator" method="post" action="{% url 'register' %}">
+      {% csrf_token %}
+              <div class="row">
+                  <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-user"></i>
+                        <input type="text" name="username" id="username" placeholder="Логин:" class="form-control" data-error="Введите ваш логин" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-envelope-o"></i>
+                      <input type="email" name="email" id="email" placeholder="Email:" class="form-control" data-error="Введите адресс email" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-lock"></i>
+                      <input type="password" name="password" id="password" placeholder="Пароль:" class="form-control" data-error="Введите пароль" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4">
+                  <div class="form-group">
+                    <i class="contact-icon fa fa-lock"></i>
+                      <input type="password" name="password2" id="password2" placeholder="Подтверждение пароля:" class="form-control" data-error="Введите подтверждающий пароль" required>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">
+                  <button type="submit" id="form-submit" class="btn btn-common btn-form-submit">Зарегестрироваться</button>
+                  <div id="msgSubmit" class="h3 text-center hidden"></div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </form>
+{% endblock forms %}
