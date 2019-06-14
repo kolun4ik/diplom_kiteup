@@ -70,7 +70,14 @@
         </div>
           {% block forms %}
        <h3 class="title-head text-center">Войти</h3>
-
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            Error:
+          {% else %}
+            {{ message.tags|title }}
+          {% endif %}
+        {{ message }}
+      </div>
+    </div>
     <form class="contact-form" data-toggle="validator" method="post" action="{% url 'login' %}">
       {% csrf_token %}
               <div class="row">

@@ -10,4 +10,6 @@
     <h3>Для доступа к личным данным нужно автроизоваться.</h3>
     <a href="{% url 'login' %}">Войти</a>
 {% endif %}
+
+{{ messages.error }}
 {% endblock forms %}
