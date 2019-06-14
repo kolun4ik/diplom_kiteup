@@ -8,5 +8,34 @@
         </li>
         {% endfor %}
     </ul>
-    <p>Page: <a href="">[1,2,3 ...] >> </a></p>
+    <div class="row">
+        <div class="col-sm-4">
+            {% if items.has_previous %}
+            <a href="?page={{ items.previous_page_number }}"> << Назад </a>
+            {% else %}
+            <p>&nbsp;&nbsp;Начало</p>
+            {% endif %}
+        </div>
+        <div class="col-sm-4">
+            <div class="text-center">
+            {% for num in items.paginator.page_range %}
+            {% if num == items.number %}
+                <span class="current"><b> {{ num }} </b></span>
+            {% else %}
+                <a href="?page={{ num }}"> {{ num }} </a>
+            {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-4 ">
+            <div class="text-right">
+            {% if items.has_next %}
+            <a href="?page={{ items.next_page_number }}"> Далее >></a>
+            {% else %}
+            <p>Окончание</p>
+            {% endif %}
+        </div>
+        </div>
+</div>
+
 {% endblock %}
