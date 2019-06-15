@@ -46,15 +46,19 @@ def contacts(request):
         data = request.POST
         form = ContactForm(data=data)
         if form.is_valid():
-            # Отправить Запрос на почту
-            # send_mail('subject', 'body', 'from_email', ['kiteup@rambler.ru'])
-            # send_mail(
-            #     data['subject'],
-            #     data['message'],
-            #     data['email'],
-            #     ['kiteup@rambler.ru'],
-            #     fail_silently=False,
-            # )
+            # Отправить Запрос на почту самому себе и
+            # на адрес отправителя дубль
+            send_mail(
+                'Сообщение с kiteup.ru | Тема: ' + data['subject'],
+                'Тема: {}\nОт кого: {}\nEmail: {}\nСообщение:\n{}'.format(
+                    data['subject'],
+                    data['name'],
+                    data['email'],
+                    data['message']),
+                'kiteup@rambler.ru',
+                ['kiteup@rambler.ru'],
+                fail_silently=False,
+            )
 
             context['content'] = 'Ожидайте ответа'
             context['success'] = True
