@@ -6,7 +6,7 @@ from unittest import skip
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
 
-    # @skip("test skip")
+    @skip("test skip")
     def test_can_start_a_index_page(self):
         """тест: отобразить главную страницу kiteup.ru"""
         self.browser.get(self.live_server_url)
@@ -21,7 +21,7 @@ class NewVisitorTest(FunctionalTest):
         self.wait_for_row_in_news_table('Новость 5')
 
 
-    # @skip("test skip")
+    @skip("test skip")
     def test_display_five_last_news_in_index_page(self):
         """тест: видим последние 5  новостей на главной странице"""
         # На главной странице мы видим анонсы (краткое содержание)  новостей сайта
@@ -34,7 +34,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertEquals(len(urls), 5)
 
 
-    # @skip("test skip")
+    @skip("test skip")
     def test_can_start_a_teaching_kitesurfing_page(self):
         """тест: отобразить раздел 'КАЙТ ШКОЛА' (/obuchenie-kitesurfing)"""
         self.browser.get(self.live_server_url + '/obuchenie-kitesurfing')
@@ -44,7 +44,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertRegex(page_obuchenie, REGEX_ANY_TEXT)
 
 
-    # @skip("test skip")
+    @skip("test skip")
     def test_can_start_a_faq_page(self):
         """тест: отобразить раздел 'ЧаВо?' (/faq)"""
         self.browser.get(self.live_server_url + '/faq')
@@ -54,7 +54,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertRegex(page_faq, REGEX_ANY_TEXT)
 
 
-    # @skip("test skip")
+    @skip("test skip")
     def test_can_start_a_contacts_page(self):
         """тест: отобразить раздел 'Контакты' (/contacts)"""
         self.browser.get(self.live_server_url + '/contacts')
@@ -90,32 +90,4 @@ class NewVisitorTest(FunctionalTest):
             'Отправить сообщение')
 
 
-    def test_can_send_fill_form_items(self):
-        """тест: заполняем поля формы и отправляем в action, хотим
-            видеть сообщение об успешной отправке"""
-        self.browser.get(self.live_server_url + '/contacts')
-        input_name = self.get_item_by_id('name')
-        input_email = self.get_item_by_id('email')
-        input_subject = self.get_item_by_id('subject')
-        input_msg = self.get_item_by_id('message')
-        button = self.get_item_by_id('form-submit')
 
-        input_name.send_keys('Joe')
-        input_email.send_keys('11_ka@rambler.ru')
-        input_subject.send_keys('Тест')
-        input_msg.send_keys('Сообщение')
-        button.send_keys(Keys.ENTER)
-
-        # Здесь мы хотим увидеть респонс об успешной отправке
-        self.wait_for(
-            lambda: self.assertEquals(
-                self.get_item_by_id('success').text,
-                'Ваше сообщение успешно отравлено.'))
-
-
-    def test_cannot_send_empy_feild_of_form(self):
-        """тест: форма не отправляет пустые поля"""
-        self.browser.get(self.live_server_url + '/contacts')
-        self.get_item_by_id('name').send_keys(Keys.ENTER)
-        error = self.browser.find_element_by_css_selector('.with-errors').text
-        self.wait_for(lambda: self.assertEqual(error, 'Введите ваше имя'))
