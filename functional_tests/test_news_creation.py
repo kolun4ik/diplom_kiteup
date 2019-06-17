@@ -13,6 +13,14 @@ class NewVisitorTest(FunctionalTest):
         url = self.browser.find_elements_by_id('id_item_news')
         self.assertEquals(len(url), 3)
 
+    def test_display_every_news_item_with_preview_image(self):
+        """тест: каждая новость в списки отображается с картинкой"""
+        self.news_objects_creation(3)
+        self.browser.get(self.live_server_url + '/club-news/')
+        news = self.browser.find_element_by_id('id_item_news')
+        image = news.find_element_by_tag_name('img')
+        self.assertTrue(image)
+
 
     # @skip("skip test only one news")
     def test_display_only_one_news(self):

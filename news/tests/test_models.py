@@ -44,9 +44,16 @@ class ItemModelTest(TestCase):
         self.assertIsInstance(news.creation_date, datetime.datetime)
 
     def test_news_have_content(self):
-        """тест: мы видим текст новости"""
+        """тест: текст новости"""
         text_content = 'Lorem ipsum'
         news = ItemNews.objects.create(
             title_news='Новость 1',
             content=text_content)
         self.assertEqual(news.content, 'Lorem ipsum')
+
+    def test_news_have_image(self):
+        """тест: каждая новость с картинкой"""
+        news = ItemNews.objects.create(
+            title_news='Новость 1',
+            content='Lorem ipsum',
+            image='/static/news/test_news.jpg')

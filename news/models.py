@@ -8,6 +8,7 @@ class ItemNews(models.Model):
     title_news = models.CharField(default='',max_length=70)
     creation_date = models.DateTimeField(auto_now_add=True)
     content= models.TextField(default='')
+    image = models.ImageField(upload_to='news/',blank=True)
 
 
     def __str__(self):

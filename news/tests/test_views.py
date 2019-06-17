@@ -38,6 +38,14 @@ class NewsViewTest(TestCase):
         last_five = ItemNews.objects.order_by('-creation_date')[:5]
         self.assertEqual(len(last_five), 5)
 
+    def test_display_item_in_news_list_have_image(self):
+        """тест: каждый пункт новости из превью отображается с картинкой"""
+        news = ItemNews.objects.create(
+            title_news='Новость 1',
+            content='Lorem ipsum 1',
+            image='/img/test_news.jpg')
+        self.assertTrue(news.image)
+
     def test_display_only_item_news(self):
         """тест: отображать определенную новость по id"""
         # создаем 2 разные новости

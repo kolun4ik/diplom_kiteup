@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Новости</h2>
-    <ul class="list-style pl-0" id="id_news_list">
-        {% for item in items %}
-        <li id="id_item_news">
-            <i class="fa fa-anchor grey" aria-hidden="true"></i><a href="{% url 'news_view' item.id %}">{{ item.title_news }}</a>
-        </li>
-        {% endfor %}
-    </ul>
+<h2>Новости</h2>
+<div class="row">
+{% for item in items %}
+ <!-- Start card -->
+          <div class="col-sm-6 col-md-4">
+            <div class="card" id="id_item_news">
+              <img class="card-img-top" src="/static/news/test_news.jpg" alt="">
+              <div class="card-block text-center">
+                <h3 class="card-title">{{ item.title_news }}</h3>
+                <p class="card-text">{{ item.content }}</p>
+                <a href="{% url 'news_view' item.id %}">Читать</a>
+              </div>
+            </div>
+          </div>
+          <!-- End card -->
+    {% endfor %}
+</div>
+
     <div class="col-md12">
     <ul class="pagination justify-content-center">
          {% if items.has_previous %}
@@ -17,7 +27,7 @@
          {% endif %}
          {% for num in items.paginator.page_range %}
             {% if num == items.number %}
-                <li class="page-item"><a href="?page={{ num }}"><b> {{ num }} </b></a></li>
+                <li class="page-item">{{ num }}</li>
             {% else %}
                 <li class="page-item"><a href="?page={{ num }}"> {{ num }} </a></li>
             {% endif %}
