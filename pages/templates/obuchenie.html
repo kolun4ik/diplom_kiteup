@@ -2,7 +2,8 @@
 {% block content %}
 <h2>{{ title }}</h2>
 <div id="page_content">
-    {% autoescape off %}
-    {{ content }}</div>
-    {% endautoescape %}
+{% autoescape off %}
+{{ content }}
+</div>
+{% endautoescape %}
 {% endblock %}

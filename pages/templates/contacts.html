@@ -2,52 +2,51 @@
 {% block content %}
 <h2>{{ title }}</h2>
 <div id="page_content">
-    {% autoescape off %}
-    {{ content }}
-    {% endautoescape %}
+{% autoescape off %}
+{{ content }}
+{% endautoescape %}
 </div>
-    {% if success %}
-       <p id="success">Ваше сообщение успешно отравлено.</p>
-    {% else %}
-    <h3 class="title-head text-center">Контактная форма</h3>
-    {% if error %}
-        <span style="text-corol: red;">{{ error }}</span>
-    {% endif %}
-    <form class="contact-form" data-toggle="validator" method="post" action="/contacts">
-      {% csrf_token %}
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <i class="contact-icon fa fa-user"></i>
-                        {{ form.name }}
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <i class="contact-icon fa fa-envelope-o"></i>
-                      {{ form.email }}
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <i class="contact-icon fa fa-pencil-square-o"></i>
-                      {{ form.subject }}
-                    <div class="help-block with-errors"></div>
-                  </div>
-                </div>
-                <div class="col-sm-12">
-                  <div class="form-group">
-                      {{ form.message }}
-<!--                    <textarea id="message" rows="8" placeholder="Сообщение:" required data-error="Введите ваше сообщение"></textarea>-->
-                    <div class="help-block with-errors"></div>
-                  </div>
-                  <button type="submit" id="form-submit" class="btn btn-common btn-form-submit">Отправить сообщение</button>
-                  <div id="msgSubmit" class="h3 text-center hidden"></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </form>
-          {% endif %}
+{% if success %}
+<p id="success">Ваше сообщение успешно отравлено.</p>
+{% else %}
+<h3 class="title-head text-center">Контактная форма</h3>
+{% if error %}
+<span style="text-corol: red;">{{ error }}</span>
+{% endif %}
+<form class="contact-form" data-toggle="validator" method="post" action="/contacts">
+{% csrf_token %}
+<div class="row">
+  <div class="col-sm-4">
+    <div class="form-group">
+      <i class="contact-icon fa fa-user"></i>
+      {{ form.name }}
+    <div class="help-block with-errors"></div>
+  </div>
+</div>
+ <div class="col-sm-4">
+  <div class="form-group">
+    <i class="contact-icon fa fa-envelope-o"></i>
+    {{ form.email }}
+    <div class="help-block with-errors"></div>
+  </div>
+</div>
+<div class="col-sm-4">
+  <div class="form-group">
+    <i class="contact-icon fa fa-pencil-square-o"></i>
+    {{ form.subject }}
+    <div class="help-block with-errors"></div>
+  </div>
+</div>
+<div class="col-sm-12">
+  <div class="form-group">
+    {{ form.message }}
+    <div class="help-block with-errors"></div>
+  </div>
+  <button type="submit" id="form-submit" class="btn btn-common btn-form-submit">Отправить сообщение</button>
+  <div id="msgSubmit" class="h3 text-center hidden"></div>
+  <div class="clearfix"></div>
+</div>
+</div>
+</form>
+{% endif %}
 {% endblock content %}
