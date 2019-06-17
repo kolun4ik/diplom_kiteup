@@ -26,9 +26,6 @@ class TestEmailSend(FunctionalTest):
         input_msg.send_keys('Сообщение')
         button.send_keys(Keys.ENTER)
 
-        # появляется сообщение об успешной отправки на почту
-        # запроса из контактной формы
-
         self.wait_for(
             lambda: self.assertEquals(
                 self.get_item_by_id('success').text,

@@ -1,10 +1,7 @@
 import os
 from time import sleep, time
-from unittest import skip
-
-from pages.models import Page
 from news.models import ItemNews
-
+from pages.models import Page
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -17,8 +14,15 @@ REGEX_ANY_TEXT = '.+'
 class FunctionalTest(StaticLiveServerTestCase):
     """функциональный тест"""
 
+    @classmethod
+    def setUpClass(cls):
+        """Выполняется единажды, при создании экземпляра класса"""
+        super().setUpClass()
+        # Перенести сюда создание статических страниц, но тесты начинают рушиться,
+        # требуеться выясниь причину или мое понимание процесса
+
     def setUp(self):
-        """Установка"""
+        """Установка, выполняется для каждого метода test_*()"""
         self.browser = webdriver.Firefox()
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server:
@@ -42,20 +46,26 @@ class FunctionalTest(StaticLiveServerTestCase):
             link='contacts',
             body='Информацию по всем вопросам взаимодействия Вы можете отправить, используя форму, расположенную ниже.')
 
-        # Расширяя функционал (сортировка по убыванию, пагинация) понадобилось
-        # создавать список новостей (> 5 пунктов). В тестах выявилась регрессия, возможно
-        # из-за того, что новости создаются с маленькой разницей во времени.
-        # Ставлю задержку при создании в 1 секунду.
-        for i in range(1,7):
-            ItemNews.objects.create(
-                title_news=f'Новость {i}',
-                content=f'Lorem ipsum {i}')
-            sleep(1)
-
 
     def tearDown(self):
         """Демонтаж"""
         self.browser.quit()
+
+    def page_objects_creation(self,page):
+        """Ф-ция создает main page раздел сайта"""
+        Page.objects.create(
+            title='Контакты',
+            link='contacts',
+            body='Информацию по всем вопросам взаимодействия Вы можете отправить, используя форму, расположенную ниже.')
+
+
+    def news_objects_creation(self, n=2):
+        """Создатель новостей"""
+        for i in range(1, n):
+            ItemNews.objects.create(
+                title_news=f'Новость {i}',
+                content=f'Lorem ipsum {i}')
+            sleep(0.5)
 
     def wait_for_row_in_news_table(self, item_text):
         """Ожидание новости в таблице с новостями"""
@@ -71,10 +81,9 @@ class FunctionalTest(StaticLiveServerTestCase):
                     raise e
                 sleep(0.5)
 
-
-    def get_element_by_link(self, text_link):
+    def get_element_by_link(self, text_link, page=''):
         """Ф-ция возвращает ссылку, найденную по тексту ссылки"""
-        self.browser.get(self.live_server_url)
+        self.browser.get(self.live_server_url + page)
         link = self.browser.find_element_by_link_text(text_link).get_attribute('href')
         self.browser.get(link)
         return link
@@ -91,7 +100,6 @@ class FunctionalTest(StaticLiveServerTestCase):
                 if time() - start_time > MAX_WAIT:
                     raise e
                 sleep(0.5)
-
 
     def get_item_by_id(self, item):
         """получить поле ввода для элемента"""

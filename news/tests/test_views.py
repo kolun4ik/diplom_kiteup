@@ -1,6 +1,8 @@
 import datetime
 from django.test import TestCase
 from news.models import ItemNews
+from time import sleep
+
 
 
 # Create your tests here.
@@ -8,6 +10,16 @@ from news.models import ItemNews
 class NewsViewTest(TestCase):
     """тест представления новостей, раздел сайта 'Новости':
     kiteup.ru/club-news/"""
+
+    def news_objects_creation(self, n=2):
+        """Создатель новостей"""
+        for i in range(1, n):
+            ItemNews.objects.create(
+                title_news=f'Новость {i}',
+                content=f'Lorem ipsum {i}')
+            sleep(0.5)
+
+
     def test_uses_news_template(self):
         """тест: раздел Новости (kiteup.ru/club-news/1)использует
         шаблон news.html"""
@@ -51,6 +63,18 @@ class NewsViewTest(TestCase):
             content = 'Lorem ipsum'
         )
         self.assertEqual('Lorem ipsum', news.content)
+
+    def test_display_link_on_next_page_in_pagination(self):
+        """тест: отображается по ссылке вида /club-news/?page=N
+            страница с другим списком новостей"""
+        self.news_objects_creation(7)
+        count = ItemNews.objects.all().count()
+        page_number = count // 3
+        response = self.client.get(f'/club-news/?page={page_number}')
+        self.assertContains(response, 'Новость 1')
+
+
+
 
     # 1)Использовать тестовый клиент Django,
     # 2) Проверить используемый шаблон и каждый элемент в контексте шаблона.

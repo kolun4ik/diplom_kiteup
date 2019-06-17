@@ -3,9 +3,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from unittest import skip
 
+
 class ContactFormTest(FunctionalTest):
     """Тест формы в разделе 'КОНТАКТЫ'"""
-
 
     def test_can_send_fill_form_items(self):
         """тест: заполняем поля формы и отправляем в action, хотим
