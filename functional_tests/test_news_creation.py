@@ -13,6 +13,7 @@ class NewVisitorTest(FunctionalTest):
         url = self.browser.find_elements_by_id('id_item_news')
         self.assertEquals(len(url), 3)
 
+    # @skip("test skip")
     def test_display_every_news_item_with_preview_image(self):
         """тест: каждая новость в списки отображается с картинкой"""
         self.news_objects_creation(3)
@@ -52,7 +53,7 @@ class NewVisitorTest(FunctionalTest):
             msg="Ожидаем увидеть дату в формате dd.mm.YYYY")
         self.assertRegex(content, REGEX_ANY_TEXT)
 
-
+    # @skip("skip test have paginator")
     def test_activation_link_page_in_pagination(self):
         """тест: активация ссылки в пагинаторе изменяет список новостей"""
         self.news_objects_creation(9)

@@ -30,6 +30,7 @@ DEBUG = True
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'news.apps.NewsConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
 ]
+
+# AUTH_USER_MODEL = 'accounts.User'
+# AUTHENTICATION_BACKANDS = [
+#     'accounts.authentication.PasswordAutnenticationBackend'
+# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,6 +89,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

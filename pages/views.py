@@ -34,13 +34,12 @@ def faq(request):
 def contacts(request):
     """страница 'Контакты'"""
     page = get_object_or_404(Page, link='contacts')
-    form = ContactForm()
     context = {
         'title': page.title,
         'content': page.body,
         'success': False,
         'error': False,
-        'form': form,
+        'form': ContactForm(),
     }
     if request.method == 'POST':
         data = request.POST

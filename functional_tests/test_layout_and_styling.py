@@ -4,18 +4,6 @@ from unittest import skip
 
 class LayoutAndStylingTest(FunctionalTest):
     """тест макета и стилевого оформления"""
-    @skip('skip test')
-    def test_layout_and_styling(self):
-        """тест макета и стилевого оформления"""
-        self.browser.get(self.live_server_url)
-        self.browser.set_window_size(1920,1080)
-        header_h1 = self.browser.find_element_by_tag_name('h1')
-
-        self.assertAlmostEqual(
-            header_h1.location['x'] + header_h1.size['width'] / 2,
-            960,
-            delta=20
-        )
 
     def test_page_club_news_has_paginator(self):
         """тест: на странице в в разделе 'НОВОСТИ' есть Paginator"""
@@ -31,7 +19,7 @@ class LayoutAndStylingTest(FunctionalTest):
             delta=20
         )
 
-    @skip('test skip')
+    # @skip('test skip')
     def test_can_display_a_form_input_items(self):
         """тест: контактная форма должна иметь поля ввода"""
         self.browser.get(self.live_server_url + '/contacts')

@@ -11,13 +11,7 @@ class NewVisitorTest(FunctionalTest):
         """тест: отобразить главную страницу kiteup.ru"""
         self.news_objects_creation(7)
         self.browser.get(self.live_server_url)
-        # Заголовок и шапка страницы говорят нам, что мы на
-        # сайте kiteup.ru - 'Кайт-клуб "Вверх"'
         self.assertIn('Кайт клуб \"Вверх\"', self.browser.title)
-        header_text = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('Кайт клуб \"Вверх\"', header_text)
-        # теперь, когда мы зашли на главную страницу kiteup.ru, мы хотим
-        # видеть список из 5 новостей, в порядке убывания по дате создания.
         self.wait_for_row_in_news_table('Новость 6')
         self.wait_for_row_in_news_table('Новость 5')
 
@@ -65,6 +59,21 @@ class NewVisitorTest(FunctionalTest):
         self.assertEquals(header_h2, 'Контакты')
         self.assertRegex(page_cont, REGEX_ANY_TEXT)
 
+
+    def test_can_start_a_login_page(self):
+        """тест: отобразить раздел для авторизации"""
+        self.browser.get(self.live_server_url)
+        link_login =  self.get_element_by_link('Войти')
+        self.browser.get(link_login)
+        form = self.browser.find_element_by_tag_name('form')
+        self.assertTrue(form)
+
+
+    def test_can_start_a_dashboard_page(self):
+        """тест: отобразить личный кабинет пользователя"""
+        response = self.browser.get(self.live_server_url + '/accounts/dashboard')
+        header_h3 = self.browser.find_element_by_tag_name('h3').text
+        self.assertEquals(header_h3, 'Личный кабинет пользователя')
 
 
 

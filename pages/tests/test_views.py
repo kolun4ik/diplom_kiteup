@@ -17,7 +17,6 @@ POST_DATA = {
 class PageIndexViewTest(TestCase):
     """тест домашней страницы kiteup.ru"""
 
-
     def test_uses_index_template(self):
         """тест: для главной страницы используется шаблон index.html"""
         response = self.client.get('/')
@@ -50,7 +49,6 @@ class PageObuchenieViewTest(TestCase):
         response = self.client.get('/obuchenie-kitesurfing')
         self.assertContains(response, 'Заголовок')
 
-
     def test_uses_obuchenie_template(self):
         """для раздела КАЙТ ШКОЛА используется шаблон obuchenie.html"""
         self.create_page(link='obuchenie-kitesurfing')
@@ -68,13 +66,11 @@ class PageFaqViewTest(TestCase):
         # по link подумать, как сделать uniq и, чтобы он, был в urls.py
         return Page.objects.create(title=title, link=link, body=body)
 
-
     def test_display_page_content(self):
         """тест: страница отображает некий текст"""
         self.create_page(link='faq')
         response = self.client.get('/faq')
         self.assertContains(response, 'Заголовок')
-
 
     def test_uses_faq_template(self):
         """для раздела 'ЧаВо?' используется шаблон faq.html"""
@@ -108,14 +104,6 @@ class PageContactsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-    @skip('Skip this test')
-    def test_redirect_after_POST(self):
-        """тест: переадресяция после POST запроса"""
-        self.create_page(link='contacts')
-        response = self.client.post('/contacts', POST_DATA)
-        # после отправки post запроса хотим увидеть переадресацию
-        self.assertRedirects(response, '/contacts')
-
     # @skip('Skip this test')
     def test_display_success_mgs(self):
         """тест: отображается сообщенее об успешной отправке из формы"""
@@ -123,15 +111,12 @@ class PageContactsViewTest(TestCase):
         response = self.client.post('/contacts', POST_DATA)
         self.assertIn('Ожидайте ответа', response.context['content'])
 
-
-    # Проверить, что пустая форма не отправляется
-
-
-    @skip('Skip this test because assertIsIntsnce display exeption')
+    @skip('Skip this test because assertIsInstance display exception')
     def test_contacts_page_uses_contact_form(self):
         """тест: страница 'КОНТАКТЫ' использует форму ContactForm"""
         response = self.client.get('/contacts')
         self.assertIsInstance(response.context['form'], ContactForm)
+    # Проверить, что пустая форма не отправляется
 
 
 class SendContactViewTest(TestCase):
