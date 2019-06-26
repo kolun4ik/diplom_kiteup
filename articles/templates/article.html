@@ -13,7 +13,9 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            {% autoescape off %}
             {{ article.content }}
+            {% endautoescape %}
         </div>
     </div>
 {% endblock content %}

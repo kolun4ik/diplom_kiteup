@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.shortcuts import reverse
+from tinymce import HTMLField
 from django.contrib.auth.models import User
 from django.db.models import DO_NOTHING, CASCADE
 from datetime import date
@@ -11,7 +12,7 @@ class Article(models.Model):
     slug = models.SlugField(default='',unique=True)
     title = models.CharField(default='', max_length=70)
     description = models.TextField('Описание', default='')
-    content = models.TextField(default='')
+    content = HTMLField('Content')
     date_creation = models.DateTimeField(auto_now_add=True)
     published = models.DateField('опубликовано',null=True, blank=True,default=timezone.now)
     image = models.ImageField(upload_to='articles/', blank=True)
@@ -22,6 +23,8 @@ class Article(models.Model):
 
     class Meta:
         ordering = ('-published',)
+        verbose_name = 'Статьи'
+        verbose_name_plural = 'Статьи'
 
     def get_absolute_url(self):
         return reverse('article', args=[str(self.id)])

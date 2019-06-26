@@ -15,4 +15,5 @@ urlpatterns = [
     re_path(r'^articles/', include(articles_urls)),
     path('accounts/', include(accounts_urls)),
     path('admin/', admin.site.urls),
+    re_path(r'^tinymce/', include('tinymce.urls')),
 ]

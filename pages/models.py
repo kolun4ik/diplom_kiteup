@@ -10,3 +10,7 @@ class Page(models.Model):
 
     def __str__(self):
         return self.link
+
+    class Meta:
+        verbose_name = 'Страницы'
+        verbose_name_plural = 'Статические страницы'

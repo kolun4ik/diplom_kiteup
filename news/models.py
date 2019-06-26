@@ -11,10 +11,9 @@ class ItemNews(models.Model):
     image = models.ImageField(upload_to='news/',blank=True)
 
 
+    class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+
     def __str__(self):
         return self.title_news
-
-    # #Заготовка "разрешения" URL
-    # def get_absolute_url(self):
-    #     """Получить абсолютный URL"""
-    #     return reverse('news_view', args=[self.id])

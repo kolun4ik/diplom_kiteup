@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from articles.models import Article
 from unittest import skip
 
-@skip('Skip Class')
+# @skip('Skip Class')
 class ArticlesViewTest(TestCase):
     """тест представления статей , раздел сайта 'Статьи'
     (kiteup.ru/articles/)"""

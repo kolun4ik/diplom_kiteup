@@ -14,7 +14,9 @@
                   <i class="fa fa-user-o"></i>&nbsp;<a href="#">Th0rn</a>
                 </div>
                 <div class="description">
+                  {% autoescape off %}
                   {{ article.description }}
+                  {% endautoescape %}
                 </div>
               </div>
               <div class="extra">
