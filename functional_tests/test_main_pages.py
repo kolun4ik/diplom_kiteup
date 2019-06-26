@@ -49,6 +49,14 @@ class NewVisitorTest(FunctionalTest):
         self.assertEquals(header_h2, 'Часто задаваемые вопросы:')
         self.assertRegex(page_faq, REGEX_ANY_TEXT)
 
+    def test_can_start_articles_page(self):
+        """тест: отобразить раздел 'Статьи'(/articles)"""
+        self.articles_objects_creation(3)
+        self.browser.get(self.live_server_url + '/articles/')
+        header_h2 = self.browser.find_element_by_tag_name('h2').text
+        page_articles = self.browser.find_elements_by_id('id_item_article')
+        self.assertEquals(header_h2, 'Статьи')
+        self.assertGreater(len(page_articles), 0)
 
     # @skip("test skip")
     def test_can_start_a_contacts_page(self):

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3 class="title-head text-center">{{ article }}</h3>
+    <div class="row">
+        <div class="col-md-4">
+            Автор: {{ article.author }}
+        </div>
+        <div class="col-md-4">
+            Опубликовано: {{ article.published }}
+        </div>
+        <div class="mb-60"></div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ article.content }}
+        </div>
+    </div>
+{% endblock content %}

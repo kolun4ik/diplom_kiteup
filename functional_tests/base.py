@@ -2,6 +2,7 @@ import os
 from time import sleep, time
 from news.models import ItemNews
 from pages.models import Page
+from articles.models import Article
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -14,12 +15,6 @@ REGEX_ANY_TEXT = '.+'
 class FunctionalTest(StaticLiveServerTestCase):
     """функциональный тест"""
 
-    @classmethod
-    def setUpClass(cls):
-        """Выполняется единажды, при создании экземпляра класса"""
-        super().setUpClass()
-        # Перенести сюда создание статических страниц, но тесты начинают рушиться,
-        # требуеться выясниь причину или мое понимание процесса
 
     def setUp(self):
         """Установка, выполняется для каждого метода test_*()"""
@@ -59,13 +54,22 @@ class FunctionalTest(StaticLiveServerTestCase):
             body='Информацию по всем вопросам взаимодействия Вы можете отправить, используя форму, расположенную ниже.')
 
 
-    def news_objects_creation(self, n=2):
+    def news_objects_creation(self, n=1):
         """Создатель новостей"""
-        for i in range(1, n):
+        for i in range(1, n+1):
             ItemNews.objects.create(
                 title_news=f'Новость {i}',
                 content=f'Lorem ipsum {i}')
             sleep(0.5)
+
+    def articles_objects_creation(self, n=1):
+        """Создатель статей"""
+        for i in range(1,n+1):
+            Article.objects.create(
+                title=f'Статья {i}',
+                description='Краткое описание статьи',
+                slug=f'slug-{i}'
+            )
 
     def wait_for_row_in_news_table(self, item_text):
         """Ожидание новости в таблице с новостями"""
@@ -100,6 +104,7 @@ class FunctionalTest(StaticLiveServerTestCase):
                 if time() - start_time > MAX_WAIT:
                     raise e
                 sleep(0.5)
+
 
     def get_item_by_id(self, item):
         """получить поле ввода для элемента"""

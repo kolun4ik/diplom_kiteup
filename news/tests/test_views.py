@@ -4,9 +4,6 @@ from news.models import ItemNews
 from time import sleep
 
 
-
-# Create your tests here.
-
 class NewsViewTest(TestCase):
     """тест представления новостей, раздел сайта 'Новости':
     kiteup.ru/club-news/"""

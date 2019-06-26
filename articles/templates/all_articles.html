@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Статьи</h2>
+<div class="row" id="page_content">
+{% for article in list_articles %}
+    <div class="col-md-4" id="id_item_article">
+            <div class="card-2">
+              <div class="image">
+                <img src="/static/articles/empty.jpg">
+              </div>
+              <div class="card-block">
+                <h3 class="card-title">{{ article.title }}</h3>
+                <div class="meta">
+                  <i class="fa fa-user-o"></i>&nbsp;<a href="#">Th0rn</a>
+                </div>
+                <div class="description">
+                  {{ article.description }}
+                </div>
+              </div>
+              <div class="extra">
+                <span class="right">
+                  <a href="{{ article.slug }}">Читать</a>
+                </span>
+                <span>
+                  <i class="fa fa-eye"></i>
+                  0
+                </span>
+              </div>
+            </div>
+          </div>
+<!--<p>{{ article.description }}</p>-->
+<!--{{ article.image }}-->
+<!--<a href="{% url 'articles_view' %}{{ article.url }}">Читать далее</a>-->
+{% endfor %}
+</div>
+{% endblock content %}

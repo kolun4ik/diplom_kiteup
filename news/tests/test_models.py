@@ -57,3 +57,4 @@ class ItemModelTest(TestCase):
             title_news='Новость 1',
             content='Lorem ipsum',
             image='/static/news/test_news.jpg')
+

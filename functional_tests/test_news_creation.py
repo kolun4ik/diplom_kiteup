@@ -22,14 +22,20 @@ class NewVisitorTest(FunctionalTest):
         image = news.find_element_by_tag_name('img')
         self.assertTrue(image)
 
-
     # @skip("skip test only one news")
-    def test_display_only_one_news(self):
-        """тест: отображаем новость по ссылке"""
+    def test_display_only_one_news_on_index_page(self):
+        """тест: отображаем новость по ссылке на главной странице"""
         self.news_objects_creation()
-        link = self.get_element_by_link('Новость 1')
+        link = self.get_element_by_link('Новость 1',)
         self.assertEqual(self.browser.current_url, link)
 
+    # @skip("skip test only one news")
+    def test_display_only_one_news_by_link_on_news_page(self):
+        """тест: отображаем новость по ссылке 'Читать' со страницы 'Новости'"""
+        self.news_objects_creation()
+        link = self.get_element_by_link('Читать','/club-news/')
+        self.browser.get(link)
+        self.assertEqual(self.browser.current_url, link)
 
     # @skip("skip test title")
     def test_open_news_have_a_title(self):
