@@ -2,8 +2,8 @@ import locale
 import time
 from .base import myTestCase
 from articles.models import Article
+from articles.views import ArticlesListView, ArticleDetailView
 from unittest import skip
-
 
 
 # @skip('Skip Class')
@@ -11,11 +11,20 @@ class ArticlesViewTest(myTestCase):
     """тест представления статей , раздел сайта 'Статьи'
     (kiteup.ru/articles/)"""
 
+    def setUp(self):
+        """Начальные установки"""
+        self.response = self.client.get('/articles/')
+
     def test_uses_all_articles_template(self):
         """тест: раздел Статьи (kiteup.ru/articles/)
          использует шаблон all_article.html"""
-        response = self.client.get('/articles/')
-        self.assertTemplateUsed(response, 'all_articles.html')
+        self.assertTemplateUsed(self.response, 'all_articles.html')
+
+    def test_event_uses_view_as_class_based_view(self):
+        """тест: использование представления Event как Class-Based view"""
+        self.assertEqual(
+            self.response.resolver_match.func.__name__,
+            ArticlesListView.as_view().__name__)
 
     def test_display_all_last_articles_on_articles_page(self):
         """тест: в разделе Статьи отображать все статьи"""
@@ -28,34 +37,40 @@ class ArticleViewTest(myTestCase):
     """тест представления статьи , раздел сайта 'Статьи/Статья'
     (kiteup.ru/articles/slug)"""
 
+    def setUp(self):
+        """Начальные установки"""
+        self.response = self.client.get('/articles/slug-1')
+
     def test_uses_all_articles_template(self):
         """тест: раздел Статьи/Сатья (kiteup.ru/articles/slug)использует
         шаблон article.html"""
-        response = self.client.get('/articles/slug-1')
-        self.assertTemplateUsed(response, 'article.html')
+        self.assertTemplateUsed(self.response, 'article.html')
+
+    def test_event_uses_view_as_class_based_view(self):
+        """тест: использование представления Event как Class-Based view"""
+        self.assertEqual(
+            self.response.resolver_match.func.__name__,
+            ArticleDetailView.as_view().__name__)
 
     def test_display_article_title(self):
         """тест: у статьи есть заголовок"""
-        response = self.client.get('/articles/slug-1')
-        self.assertContains(response, 'Название статьи 1')
+        self.assertContains(self.response, 'Название статьи 1')
 
     def test_display_article_author(self):
         """тест: у статьи есть автор"""
-        response = self.client.get('/articles/slug-1')
-        self.assertContains(response, 'admin')
+        self.assertContains(self.response, 'admin')
 
-    @skip('skip error locale output for cyr month')
+    @skip('skip error locale output for cyrilic month')
     def test_display_article_date_publication(self):
         """тест: у статьи есть дата публикации"""
+
         locale.setlocale(locale.LC_ALL, 'Russian')
         date_now = time.strftime('%d %B, %Y', time.localtime())
-        response = self.client.get('/articles/slug-1')
-        self.assertContains(response, date_now)
+        self.assertContains(self.response, date_now)
 
     def test_dysplay_article_content(self):
         """тест: собвстенно текст статьи"""
-        response = self.client.get('/articles/slug-1')
-        self.assertContains(response,'Текст статьи 1')
+        self.assertContains(self.response,'Текст статьи 1')
 
 
 # 1)Использовать тестовый клиент Django,

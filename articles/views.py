@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from .models import Article
 
 
-class ArticleListView(ListView):
+class ArticlesListView(ListView):
     template_name = 'all_articles.html'
     context_object_name = 'list_articles'
 

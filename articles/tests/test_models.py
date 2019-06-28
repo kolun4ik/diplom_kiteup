@@ -7,40 +7,39 @@ from .base import myTestCase
 from articles.models import Article
 
 
-
-
 class ArticleModelTest(myTestCase):
     """тест модели Статья"""
+
+    def first(self):
+        """Return first article object"""
+        first = Article.objects.first()
+        return first
 
     def test_can_save_a_article(self):
         """тест: можно сохранить статью в БД"""
         count = Article.objects.count()
         Article.objects.create(title='Следущая статья')
-        self.assertEqual(Article.objects.count(), count + 1)
+        self.assertNotEqual(Article.objects.count(), count)
 
     def test_article_have_date_creation(self):
         """тест: статья имеет дату создания"""
-        article = Article.objects.first()
-        self.assertIsInstance(article.date_creation, datetime.datetime)
+        self.assertIsInstance(self.first().date_creation, datetime.datetime)
 
     def test_article_have_date_publication(self):
         """тест: статья имеет дату публикации"""
-        article = Article.objects.first()
-        self.assertEqual(article.published, timezone.now().date())
+        self.assertEqual(self.first().published, timezone.now().date())
 
     def test_article_have_content(self):
         """тест: контент статьи"""
-        article = Article.objects.first()
-        self.assertEqual(article.content, 'Текст статьи 1')
+        self.assertEqual(self.first().content, 'Текст статьи 1')
 
     def test_article_have_image(self):
         """тест: каждая статья с картинкой"""
-        article = Article.objects.first()
-        self.assertIn( 'test_article.jpg', os.path.join(settings.STATIC_ROOT, str(article.image)))
+        self.assertIn( 'test_article.jpg', os.path.join(settings.STATIC_ROOT, str(self.first().image)))
         
     def test_article_have_unique_slug_url(self):
         """тест: статья имет уникадьный Url"""
-        article1 = Article.objects.first()
+        article1 = Article.objects.all()[0]
         article2 = Article.objects.all()[1]
         self.assertNotEqual(article1.slug, article2.slug)
 

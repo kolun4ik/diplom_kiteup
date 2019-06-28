@@ -1,5 +1,5 @@
 from .base import myTestCase
-from events.views import EventsListView
+from events.views import EventsListView, EventDetailView
 from unittest import skip
 
 # @skip('Skip Class')
@@ -40,6 +40,12 @@ class EventViewTest(myTestCase):
         """тест: раздел Мероприятия/Мероприятие (kiteup.ru/events/slug) использует
         шаблон event.html"""
         self.assertTemplateUsed(self.response, 'event.html')
+
+    def test_event_uses_view_as_class_based_view(self):
+        """тест: использование представления Event как Class-Based view"""
+        self.assertEqual(
+            self.response.resolver_match.func.__name__,
+            EventDetailView.as_view().__name__)
 
     def test_display_event_title(self):
         """тест: у мероприятия есть заголовок"""
