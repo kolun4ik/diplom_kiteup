@@ -1,84 +1,77 @@
 import datetime
-from django.test import TestCase
+from unittest import skip
+from .base import myTestCase
 from news.models import ItemNews
-from time import sleep
 
 
-class NewsViewTest(TestCase):
-    """тест представления новостей, раздел сайта 'Новости':
-    kiteup.ru/club-news/"""
+class ClubNewsViewTest(myTestCase):
+    """тест представления  'Новости'(kiteup.ru/club-news/)"""
 
-    def news_objects_creation(self, n=2):
-        """Создатель новостей"""
-        for i in range(1, n):
-            ItemNews.objects.create(
-                title_news=f'Новость {i}',
-                content=f'Lorem ipsum {i}')
-            sleep(0.5)
+    def setUp(self):
+        self.response = self.client.get('/club-news/')
 
+    def test_uses_club_news_template(self):
+        """тест: раздел 'Новости' (kiteup.ru/club-news/) использует
+        шаблон club_news.html"""
+        self.assertTemplateUsed(self.response, 'club_news.html')
+
+    # @skip('skip test')
+    def test_display_free_last_news_on_club_news_page(self):
+        """тест: в разделе Новости отображать 3 последних новостей"""
+        # Пагинацией управляет Paginator, и он разбивает новости
+        # по три на каждой странице. Надо вытащить настройки из
+        # пагинатора, и их сравнить.
+        paginator = self.response.context['items']
+        self.assertEqual(str(paginator), '<Page 1 of 2>')
+
+    # @skip('skip test')
+    # def test_display_item_in_news_list_have_image(self):
+    #     """тест: каждый пункт новости из превью отображается с картинкой"""
+        # Не знаю как вытащить картинку в Response client()
+        # image = self.response.context['items']
+        # self.assertTrue(image)
+
+
+class NewsViwsTest(myTestCase):
+    """тест представления  'Новости/Новость' (kiteup.ru/club-news/id_news)"""
+
+    def setUp(self):
+        self.response = self.client.get('/club-news/1')
 
     def test_uses_news_template(self):
-        """тест: раздел Новости (kiteup.ru/club-news/1)использует
-        шаблон news.html"""
-        news = ItemNews.objects.create(title_news='Новость 1')
-        response = self.client.get(f'/club-news/{news.id}')
-        self.assertTemplateUsed(response, 'news.html')
+        """тест: раздел Новости/Новость (kiteup.ru/club-news/id_news)
+            использует шаблон news.html"""
+        self.assertTemplateUsed(self.response, 'news.html')
 
-
-    def test_display_five_last_news_on_club_news_page(self):
-        """тест: в разделе Новости отображать 5 последних новостей"""
-        for i in range(6):
-            ItemNews.objects.create(
-                title_news=f'{i}',
-                content=''
-            )
-        last_five = ItemNews.objects.order_by('-creation_date')[:5]
-        self.assertEqual(len(last_five), 5)
-
-    def test_display_item_in_news_list_have_image(self):
-        """тест: каждый пункт новости из превью отображается с картинкой"""
-        news = ItemNews.objects.create(
-            title_news='Новость 1',
-            content='Lorem ipsum 1',
-            image='/img/test_news.jpg')
-        self.assertTrue(news.image)
-
+    # @skip('skip test')
     def test_display_only_item_news(self):
         """тест: отображать определенную новость по id"""
-        # создаем 2 разные новости
-        correct_news = ItemNews.objects.create(title_news='Новость 1')
-        news2 = ItemNews.objects.create(title_news='Новость 2')
-        # делаем запрос на отображение корректной новости
-        response = self.client.get(f'/club-news/{correct_news.id}')
-
+        news_1 = ItemNews.objects.all()[0]
+        news2 = ItemNews.objects.all()[1]
+        response = self.client.get(f'/club-news/{news_1.id}')
         self.assertContains(response, 'Новость 1')
         self.assertNotContains(response, 'Новость 2')
 
+    # @skip('skip test')
     def test_view_dispalay_date(self):
         """тест: отображать дату создания новости"""
         date = datetime.datetime.now()
-        news = ItemNews.objects.create(title_news='Новость 1')
-        response = self.client.get(f'/club-news/{news.id}')
-        self.assertContains(response, date.strftime('%d.%m.%Y'))
+        self.assertContains(self.response, date.strftime('%d.%m.%Y'))
 
+    # @skip('skip test')
     def test_display_news_content(self):
         """тест: содержимое новости"""
-        news = ItemNews.objects.create(
-            title_news='Новость 1',
-            content = 'Lorem ipsum'
-        )
-        self.assertEqual('Lorem ipsum', news.content)
+        self.assertContains(self.response, 'Новость 1')
+        self.assertNotContains(self.response, 'Новость 2')
 
+    # @skip('skip test')
     def test_display_link_on_next_page_in_pagination(self):
         """тест: отображается по ссылке вида /club-news/?page=N
             страница с другим списком новостей"""
-        self.news_objects_creation(7)
         count = ItemNews.objects.all().count()
         page_number = count // 3
         response = self.client.get(f'/club-news/?page={page_number}')
         self.assertContains(response, 'Новость 1')
-
-
 
 
     # 1)Использовать тестовый клиент Django,
