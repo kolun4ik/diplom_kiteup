@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <h2>Мероприятия</h2>
+    <div class="mb-60"></div>
+</div>
+<div class="row">
+    {%  for event in list_events %}
+ <div class="blog-block post-content-area" id="id_item_events" >
+     <img src="/static/events/kitelab_2019.jpg" height="300px">
+     <div class="blog-post">
+         <h3><a href="#">{{ event.title }}</a></h3>
+         <p>{{ event.description }}</p>
+         <a href="{{ event.slug }}" class="btn btn-common">Читать</a>
+     </div>
+ </div>
+<div class="mb-60"></div>
+    {% endfor %}
+</div>
+{% endblock content %}

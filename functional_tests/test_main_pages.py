@@ -15,7 +15,6 @@ class NewVisitorTest(FunctionalTest):
         self.wait_for_row_in_news_table('Новость 6')
         self.wait_for_row_in_news_table('Новость 5')
 
-
     # @skip("test skip")
     def test_display_five_last_news_in_index_page(self):
         """тест: видим последние 5  новостей на главной странице"""
@@ -29,7 +28,6 @@ class NewVisitorTest(FunctionalTest):
         self.assertRegex(link, regex)
         self.assertEquals(len(urls), 5)
 
-
     # @skip("test skip")
     def test_can_start_a_teaching_kitesurfing_page(self):
         """тест: отобразить раздел 'КАЙТ ШКОЛА' (/obuchenie-kitesurfing)"""
@@ -38,7 +36,6 @@ class NewVisitorTest(FunctionalTest):
         page_obuchenie = self.get_item_by_id('page_content').text
         self.assertEquals(header_h2, 'Здравствуйте, мы – кайт-клуб «Вверх».')
         self.assertRegex(page_obuchenie, REGEX_ANY_TEXT)
-
 
     # @skip("test skip")
     def test_can_start_a_faq_page(self):
@@ -49,6 +46,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertEquals(header_h2, 'Часто задаваемые вопросы:')
         self.assertRegex(page_faq, REGEX_ANY_TEXT)
 
+    # @skip("test skip")
     def test_can_start_articles_page(self):
         """тест: отобразить раздел 'Статьи'(/articles)"""
         self.articles_objects_creation(3)
@@ -67,7 +65,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertEquals(header_h2, 'Контакты')
         self.assertRegex(page_cont, REGEX_ANY_TEXT)
 
-
+    # @skip("test skip")
     def test_can_start_a_login_page(self):
         """тест: отобразить раздел для авторизации"""
         self.browser.get(self.live_server_url)
@@ -76,7 +74,7 @@ class NewVisitorTest(FunctionalTest):
         form = self.browser.find_element_by_tag_name('form')
         self.assertTrue(form)
 
-
+    # @skip("test skip")
     def test_can_start_a_dashboard_page(self):
         """тест: отобразить личный кабинет пользователя"""
         response = self.browser.get(self.live_server_url + '/accounts/dashboard')
@@ -84,6 +82,9 @@ class NewVisitorTest(FunctionalTest):
         self.assertEquals(header_h3, 'Личный кабинет пользователя')
 
 
-
-
+    def test_can_start_a_events_page(self):
+        """тест: отобразить раздел 'События' (/events/)"""
+        response = self.browser.get(self.live_server_url + '/events')
+        header_h2 = self.browser.find_element_by_tag_name('h2').text
+        self.assertEquals(header_h2, 'Мероприятия')
 

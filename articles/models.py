@@ -3,12 +3,11 @@ from django.utils import timezone
 from django.shortcuts import reverse
 from tinymce import HTMLField
 from django.contrib.auth.models import User
-from django.db.models import DO_NOTHING, CASCADE
-from datetime import date
+from django.db.models import CASCADE
 
 
 class Article(models.Model):
-    """Отдельная статья"""
+    """Статья"""
     slug = models.SlugField(default='',unique=True)
     title = models.CharField(default='', max_length=70)
     description = models.TextField('Описание', default='')

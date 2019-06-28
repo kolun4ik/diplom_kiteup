@@ -3,6 +3,7 @@ from time import sleep, time
 from news.models import ItemNews
 from pages.models import Page
 from articles.models import Article
+from events.models import Event
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -15,6 +16,20 @@ REGEX_ANY_TEXT = '.+'
 class FunctionalTest(StaticLiveServerTestCase):
     """функциональный тест"""
 
+    def events_objects_creation(self, n=1):
+        """Создаем тестовые мероприятия"""
+        for i in range(1, n+1):
+            Event.objects.create(
+                title=f'Мероприяте {i}',
+                content='Краткое описание мероприятия',
+                slug=f'slug-{i}'
+            )
+            # print(i)
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.events_objects_creation(cls, 3)
 
     def setUp(self):
         """Установка, выполняется для каждого метода test_*()"""
@@ -64,10 +79,11 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def articles_objects_creation(self, n=1):
         """Создатель статей"""
-        for i in range(1,n+1):
+        for i in range(1, n+1):
             Article.objects.create(
                 title=f'Статья {i}',
                 description='Краткое описание статьи',
+                content='Текст статьи',
                 slug=f'slug-{i}'
             )
 
@@ -104,7 +120,6 @@ class FunctionalTest(StaticLiveServerTestCase):
                 if time() - start_time > MAX_WAIT:
                     raise e
                 sleep(0.5)
-
 
     def get_item_by_id(self, item):
         """получить поле ввода для элемента"""

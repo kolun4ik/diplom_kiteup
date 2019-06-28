@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'accounts.apps.AccountsConfig',
     'articles.apps.ArticlesConfig',
+    'events.apps.EventsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

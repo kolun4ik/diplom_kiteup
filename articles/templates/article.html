@@ -5,14 +5,14 @@
         <div class="col-md-4">
             Автор: {{ article.author }}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" id="date_item_article">
             Опубликовано: {{ article.published }}
         </div>
         <div class="mb-60"></div>
 
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" id="item_article">
             {% autoescape off %}
             {{ article.content }}
             {% endautoescape %}
