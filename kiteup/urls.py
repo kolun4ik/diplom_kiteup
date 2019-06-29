@@ -1,6 +1,7 @@
 """kiteup URL Configuration"""
 from django.contrib import admin
 from django.urls import path, re_path, include
+from django.views.generic import RedirectView
 from pages import views as pages_views
 from news import urls as news_urls
 from accounts import urls as accounts_urls
@@ -16,6 +17,7 @@ urlpatterns = [
     re_path(r'^articles/', include(articles_urls)),
     re_path(r'^events/', include(events_urls)),
     path('accounts/', include(accounts_urls)),
-    path('admin/', admin.site.urls),
     re_path(r'^tinymce/', include('tinymce.urls')),
+    re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/img/favicon.ico')),
+    path('admin/', admin.site.urls),
 ]

@@ -45,6 +45,9 @@ def _update_settings(source_folder, site_name):
         key = ''.join(random.SystemRandom().choice(chars) for _ in range(50))
         append(secret_key_file, f'SECRET_KEY = "{key}"')
     append(settings_path, '\nfrom .secret_key import SECRET_KEY')
+    sed(settings_path,
+        "FIXTURE_DIRS = ['../fixtures/']",
+        "FIXTURE_DIRS = []")
 
 def _updatevirtualenv(source_folder):
     """обновление виртуальной среды"""

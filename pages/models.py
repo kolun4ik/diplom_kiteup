@@ -13,4 +13,4 @@ class Page(models.Model):
 
     class Meta:
         verbose_name = 'Страницы'
-        verbose_name_plural = 'Статические страницы'
+        verbose_name_plural = 'Статичные страницы'
