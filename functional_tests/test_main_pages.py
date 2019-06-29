@@ -5,26 +5,24 @@ from unittest import skip
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
+    fixtures = ['news.json','pages.json','articles.json']
 
     # @skip("test skip")
     def test_can_start_a_index_page(self):
         """тест: отобразить главную страницу kiteup.ru"""
-        self.news_objects_creation(7)
         self.browser.get(self.live_server_url)
         self.assertIn('Кайт клуб \"Вверх\"', self.browser.title)
-        self.wait_for_row_in_news_table('Новость 6')
-        self.wait_for_row_in_news_table('Новость 5')
+        self.wait_for_row_in_news_list('Новость 6')
+        self.wait_for_row_in_news_list('Новость 5')
 
     # @skip("test skip")
     def test_display_five_last_news_in_index_page(self):
         """тест: видим последние 5  новостей на главной странице"""
         # На главной странице мы видим анонсы (краткое содержание)  новостей сайта
-        self.news_objects_creation(7)
         self.browser.get(self.live_server_url)
         urls = self.browser.find_elements_by_id('id_item_news')
         link = self.browser.find_element_by_link_text('Новость 6').get_attribute('href')
         regex = '/club-news/'
-        # проверим что url ссылки содержит некий шаблон /club-news/
         self.assertRegex(link, regex)
         self.assertEquals(len(urls), 5)
 
@@ -49,7 +47,6 @@ class NewVisitorTest(FunctionalTest):
     # @skip("test skip")
     def test_can_start_articles_page(self):
         """тест: отобразить раздел 'Статьи'(/articles)"""
-        self.articles_objects_creation(3)
         self.browser.get(self.live_server_url + '/articles/')
         header_h2 = self.browser.find_element_by_tag_name('h2').text
         page_articles = self.browser.find_elements_by_id('id_item_article')
@@ -77,14 +74,13 @@ class NewVisitorTest(FunctionalTest):
     # @skip("test skip")
     def test_can_start_a_dashboard_page(self):
         """тест: отобразить личный кабинет пользователя"""
-        response = self.browser.get(self.live_server_url + '/accounts/dashboard')
+        self.browser.get(self.live_server_url + '/accounts/dashboard')
         header_h3 = self.browser.find_element_by_tag_name('h3').text
         self.assertEquals(header_h3, 'Личный кабинет пользователя')
 
-
+    # @skip("test skip")
     def test_can_start_a_events_page(self):
         """тест: отобразить раздел 'События' (/events/)"""
-        response = self.browser.get(self.live_server_url + '/events')
+        self.browser.get(self.live_server_url + '/events')
         header_h2 = self.browser.find_element_by_tag_name('h2').text
         self.assertEquals(header_h2, 'Мероприятия')
-

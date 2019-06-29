@@ -16,21 +16,6 @@ REGEX_ANY_TEXT = '.+'
 class FunctionalTest(StaticLiveServerTestCase):
     """функциональный тест"""
 
-    def events_objects_creation(self, n=1):
-        """Создаем тестовые мероприятия"""
-        for i in range(1, n+1):
-            Event.objects.create(
-                title=f'Мероприяте {i}',
-                content='Краткое описание мероприятия',
-                slug=f'slug-{i}'
-            )
-            # print(i)
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.events_objects_creation(cls, 3)
-
     def setUp(self):
         """Установка, выполняется для каждого метода test_*()"""
         self.browser = webdriver.Firefox()
@@ -38,56 +23,11 @@ class FunctionalTest(StaticLiveServerTestCase):
         if staging_server:
             self.live_server_url = 'http://' + staging_server
 
-        # Сгенерировали атрибуты страницы /obuchenie-kitesurfing
-        Page.objects.create(
-            title='Здравствуйте, мы – кайт-клуб «Вверх».',
-            link='obuchenie-kitesurfing',
-            body='Замена слова «школа» на «клуб» тоже неслучайна')
-
-        # Сгенерировали атрибуты страницы /faq
-        Page.objects.create(
-            title='Часто задаваемые вопросы:',
-            link='faq',
-            body='Прежде чем звонить нам, почитайте ЧаВо...')
-
-        # Сгенерировали атрибуты страницы /contacts
-        Page.objects.create(
-            title='Контакты',
-            link='contacts',
-            body='Информацию по всем вопросам взаимодействия Вы можете отправить, используя форму, расположенную ниже.')
-
-
     def tearDown(self):
         """Демонтаж"""
         self.browser.quit()
 
-    def page_objects_creation(self,page):
-        """Ф-ция создает main page раздел сайта"""
-        Page.objects.create(
-            title='Контакты',
-            link='contacts',
-            body='Информацию по всем вопросам взаимодействия Вы можете отправить, используя форму, расположенную ниже.')
-
-
-    def news_objects_creation(self, n=1):
-        """Создатель новостей"""
-        for i in range(1, n+1):
-            ItemNews.objects.create(
-                title_news=f'Новость {i}',
-                content=f'Lorem ipsum {i}')
-            sleep(0.5)
-
-    def articles_objects_creation(self, n=1):
-        """Создатель статей"""
-        for i in range(1, n+1):
-            Article.objects.create(
-                title=f'Статья {i}',
-                description='Краткое описание статьи',
-                content='Текст статьи',
-                slug=f'slug-{i}'
-            )
-
-    def wait_for_row_in_news_table(self, item_text):
+    def wait_for_row_in_news_list(self, item_text):
         """Ожидание новости в таблице с новостями"""
         start_time = time()
         while True:
