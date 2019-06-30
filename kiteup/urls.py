@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
+from pages.views import NewsListView
 from pages import views as pages_views
 from news import urls as news_urls
 from accounts import urls as accounts_urls
@@ -9,7 +10,7 @@ from articles import urls as articles_urls
 from events import urls as events_urls
 
 urlpatterns = [
-    path('', pages_views.index, name='index'),
+    path('', NewsListView.as_view(), name='index'),
     path('obuchenie-kitesurfing', pages_views.obuchenie, name='obuchenie'),
     path('faq', pages_views.faq ,name='faq'),
     path('contacts', pages_views.contacts ,name='contacts'),

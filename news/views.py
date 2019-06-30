@@ -1,15 +1,26 @@
 import datetime
 from django.shortcuts import render
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
-from .models import ItemNews
+from django.views.generic.dates import ArchiveIndexView
+from .models import New
+
+
+class NewsIndexView(ArchiveIndexView):
+    model = New
+    date_field = 'created'
+    template_name = 'index.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context[''] = ''
+
 
 
 def news_view(request, id_item):
     """представление  'Новости'"""
     if id_item == '':
         context = dict()
-        items = ItemNews.objects.all().order_by('-creation_date')
+        items = New.objects.all().order_by('-created')
         paginator = Paginator(items,3)
         page = request.GET.get('page')
         try:
@@ -27,10 +38,10 @@ def news_view(request, id_item):
             }
         return render(request, 'club_news.html', context)
     else:
-        item = ItemNews.objects.get(id=id_item)
-        creation_date = datetime.datetime.strftime(item.creation_date, '%d.%m.%Y')
+        item = New.objects.get(id=id_item)
+        created = datetime.datetime.strftime(item.created, '%d.%m.%Y')
         context = {
             'item': item,
-            'date': creation_date,
+            'date': created,
         }
         return  render(request, 'news.html', context)

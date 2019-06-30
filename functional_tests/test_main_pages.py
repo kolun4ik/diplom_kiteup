@@ -1,7 +1,7 @@
 from .base import FunctionalTest, REGEX_ANY_TEXT
 from selenium.webdriver.common.keys import Keys
 from unittest import skip
-
+from news.models import New
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""

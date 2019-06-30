@@ -1,5 +1,5 @@
 from .base import FunctionalTest, REGEX_ANY_TEXT
-from news.models import ItemNews
+from news.models import New
 from unittest import skip
 
 
@@ -9,7 +9,7 @@ class NewVisitorTest(FunctionalTest):
 
     def test_uses_fixtures_for_every_test(self):
         """тест: используем fixtures"""
-        count = ItemNews.objects.all().count()
+        count = New.objects.all().count()
         self.assertEqual(count, 6)
 
     # @skip("test skip")

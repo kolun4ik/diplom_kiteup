@@ -1,7 +1,7 @@
 import datetime
 from unittest import skip
 from .base import myTestCase
-from news.models import ItemNews
+from news.models import New
 
 
 class ClubNewsViewTest(myTestCase):
@@ -46,8 +46,8 @@ class NewsViwsTest(myTestCase):
     # @skip('skip test')
     def test_display_only_item_news(self):
         """тест: отображать определенную новость по id"""
-        news_1 = ItemNews.objects.all()[0]
-        news2 = ItemNews.objects.all()[1]
+        news_1 = New.objects.all()[0]
+        news2 = New.objects.all()[1]
         response = self.client.get(f'/club-news/{news_1.id}')
         self.assertContains(response, 'Новость 1')
         self.assertNotContains(response, 'Новость 2')
@@ -68,7 +68,7 @@ class NewsViwsTest(myTestCase):
     def test_display_link_on_next_page_in_pagination(self):
         """тест: отображается по ссылке вида /club-news/?page=N
             страница с другим списком новостей"""
-        count = ItemNews.objects.all().count()
+        count = New.objects.all().count()
         page_number = count // 3
         response = self.client.get(f'/club-news/?page={page_number}')
         self.assertContains(response, 'Новость 1')

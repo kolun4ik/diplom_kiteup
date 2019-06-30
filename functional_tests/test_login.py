@@ -18,7 +18,6 @@ class LoginTest(FunctionalTest):
     def test_can_get_a_log_in(self):
         """тест: заходим на страницу авторизации
         активировав кнопку 'Войти'"""
-        self.browser.get(self.live_server_url)
         link_login = self.get_element_by_link('Войти')
         self.browser.get(link_login)
         self.browser.find_element_by_name('username').send_keys(USER_NAME)

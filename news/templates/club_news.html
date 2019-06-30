@@ -8,7 +8,7 @@
   <div class="card" id="id_item_news">
     <img class="card-img-top" src="/static/news/test_news.jpg" alt="">
     <div class="card-block text-center">
-      <h3 class="card-title">{{ item.title_news }}</h3>
+      <h3 class="card-title">{{ item.title }}</h3>
       <p class="card-text">{{ item.content }}</p>
       <a href="{% url 'news_view' item.id %}">Читать</a>
     </div>

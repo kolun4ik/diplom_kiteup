@@ -1,7 +1,7 @@
 from django.test import TestCase
 from unittest import skip
 from unittest.mock import patch
-from news.models import ItemNews
+from news.models import New
 from pages.models import Page
 from pages.forms import ContactForm
 from time import sleep
@@ -17,20 +17,20 @@ POST_DATA = {
 class PageIndexViewTest(TestCase):
     """тест домашней страницы kiteup.ru"""
 
+    # @skip('skiped test')
     def test_uses_index_template(self):
         """тест: для главной страницы используется шаблон index.html"""
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'index.html')
 
-
     def test_display_five_last_news_on_index_page(self):
         """тест: на Главной странице отображать 5 последних новостей"""
         for i in range(6):
-            ItemNews.objects.create(
-                title_news=f'{i}',
+            New.objects.create(
+                title=f'{i}',
                 content='Текст'
             )
-        last_five = ItemNews.objects.order_by('-creation_date')[:5]
+        last_five = New.objects.order_by('-created')[:5]
         self.assertEqual(len(last_five), 5)
         # Сделать проверку, что новости отсортированы в обратном порядке
 

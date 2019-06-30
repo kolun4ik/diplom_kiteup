@@ -1,9 +1,5 @@
 import os
 from time import sleep, time
-from news.models import ItemNews
-from pages.models import Page
-from articles.models import Article
-from events.models import Event
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
