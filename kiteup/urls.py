@@ -1,5 +1,7 @@
 """kiteup URL Configuration"""
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, re_path, include
 from django.views.generic import RedirectView
 from pages.views import NewsListView
@@ -21,4 +23,4 @@ urlpatterns = [
     re_path(r'^tinymce/', include('tinymce.urls')),
     re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/img/favicon.ico')),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

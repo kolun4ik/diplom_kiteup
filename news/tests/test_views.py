@@ -31,6 +31,11 @@ class ClubNewsViewTest(myTestCase):
         # image = self.response.context['items']
         # self.assertTrue(image)
 
+    # def test_every_item_in_news_list_have_description_lt_100_symbols(self):
+    #     """тест: у новости в списке новосте есть описание не юолее 100 символов"""
+    #     desc = self.response.context['items']
+
+
 
 class NewsViwsTest(myTestCase):
     """тест представления  'Новости/Новость' (kiteup.ru/club-news/id_news)"""

@@ -1,3 +1,4 @@
+from django.test import tag
 from .base import FunctionalTest, REGEX_ANY_TEXT
 from news.models import New
 from unittest import skip
@@ -27,8 +28,16 @@ class NewVisitorTest(FunctionalTest):
         image = news.find_element_by_tag_name('img')
         self.assertTrue(image)
 
+    @tag('new')
+    def test_display_every_news_item_with_description(self):
+        """тест: каждая новость имеет краткое описание"""
+        self.browser.get(self.live_server_url + '/club-news/')
+        desc = self.browser.find_element_by_class_name('card-text').text
+        self.assertRegex(desc, REGEX_ANY_TEXT)
+        self.assertGreater(250, len(desc))
+
     # @skip("skip test only one news")
-    def test_display_only_one_news_on_index_page(self):
+    def test_display_only_one_news_by_link_on_index_page(self):
         """тест: отображаем новость по ссылке на главной странице"""
         link = self.get_element_by_link('Новость 6',)
         self.assertEqual(self.browser.current_url, link)

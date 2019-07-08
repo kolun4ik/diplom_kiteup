@@ -139,3 +139,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static/'))
 
 FIXTURE_DIRS = ['../fixtures/']
+
+# Media folder settings
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../uploads'))
+

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <h2>Новости</h2>
 <div class="row">
@@ -6,10 +7,16 @@
  <!-- Start card -->
 <div class="col-sm-6 col-md-4">
   <div class="card" id="id_item_news">
-    <img class="card-img-top" src="/static/news/test_news.jpg" alt="">
+    {% if item.image %}
+    <img class="card-img-top" src="{{ item.image.url }}" alt="">
+    {% else %}
+    <img class="card-img-top" src="{% static 'img/empty.jpg' %}" alt="">
+    {% endif %}
     <div class="card-block text-center">
       <h3 class="card-title">{{ item.title }}</h3>
-      <p class="card-text">{{ item.content }}</p>
+      {% autoescape off %}
+      <p class="card-text">{{ item.description }}</p>
+      {% endautoescape %}
       <a href="{% url 'news_view' item.id %}">Читать</a>
     </div>
   </div>

@@ -13,6 +13,7 @@ class myTestCase(TestCase):
         for i in range(1, 7):
             New.objects.create(
                 title=f'Новость {i}',
+                description='Desc news 1',
                 content=f'Lorem ipsum {i}',
                 image='\\img\\test_news.jpg')
             sleep(0.5)
