@@ -15,5 +15,5 @@ class myTestCase(TestCase):
                 title=f'Новость {i}',
                 description='Desc news 1',
                 content=f'Lorem ipsum {i}',
-                image='\\img\\test_news.jpg')
+                image='news\\test_news.jpg')
             sleep(0.5)

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     'events.apps.EventsConfig',
     'filebrowser',
+    'sorl.thumbnail',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

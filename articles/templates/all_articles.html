@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
 {% block content %}
 <h2>Статьи</h2>
 <div class="row" id="page_content">
@@ -6,7 +8,11 @@
     <div class="col-md-4" id="id_item_article">
             <div class="card-2">
               <div class="image">
-                <img src="{{ article.image }}">
+                {% thumbnail article.image "233x233" crop="center" as im %}
+                   <img src="{{ im.url }}">
+                {% empty %}
+                  <img src="{% static 'img/empty_articles.png' %}">
+                {% endthumbnail %}
               </div>
               <div class="card-block">
                 <h3 class="card-title">{{ article.title }}</h3>

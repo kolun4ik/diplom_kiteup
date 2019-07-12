@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
 {% block content %}
 <div class="row">
     <h2>Мероприятия</h2>
@@ -7,9 +9,13 @@
 <div class="row">
     {%  for event in list_events %}
  <div class="blog-block post-content-area" id="id_item_events" >
-     <img src="/static/events/kitelab_2019.jpg" height="300px">
+     {% thumbnail event.image "795x300" crop="center" as im %}
+        <img src="{{ im.url }}" height="300px" width="795px">
+     {% empty %}
+     <img src="{% static 'img/empty_events.png' %}" alt="">
+     {% endthumbnail %}
      <div class="blog-post">
-         <h3><a href="#">{{ event.title }}</a></h3>
+         <h3><a href="{{ event.slug }}">{{ event.title }}</a></h3>
          <p>{{ event.description }}</p>
          <a href="{{ event.slug }}" class="btn btn-common">Читать</a>
      </div>

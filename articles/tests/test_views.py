@@ -63,7 +63,6 @@ class ArticleViewTest(myTestCase):
     @skip('skip error locale output for cyrilic month')
     def test_display_article_date_publication(self):
         """тест: у статьи есть дата публикации"""
-
         locale.setlocale(locale.LC_ALL, 'Russian')
         date_now = time.strftime('%d %B, %Y', time.localtime())
         self.assertContains(self.response, date_now)

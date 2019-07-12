@@ -1,8 +1,9 @@
 from django.contrib import admin
+from sorl.thumbnail.admin import AdminImageMixin
 from .models import Event
 
 # Register your models here.
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('title','slug','visible')
     fields = ('slug','title','description','content','image','published','visible')
     prepopulated_fields = {"slug": ("title",)}

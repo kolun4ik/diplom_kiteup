@@ -22,5 +22,5 @@ class myTestCase(TestCase):
                 author=admin,
                 description = 'Краткое описание статьи длинной 100 знаков',
                 content=f'Текст статьи {i}',
-                image='/articles/test_article.jpg',
+                image='articles\\test_article.jpg',
             )

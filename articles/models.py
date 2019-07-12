@@ -1,9 +1,11 @@
 from django.db import models
+from django.db.models import CASCADE
 from django.utils import timezone
 from django.shortcuts import reverse
 from tinymce import HTMLField
+from sorl.thumbnail import ImageField
 from django.contrib.auth.models import User
-from django.db.models import CASCADE
+
 
 
 class Article(models.Model):
@@ -14,7 +16,7 @@ class Article(models.Model):
     content = HTMLField('Content')
     date_creation = models.DateTimeField(auto_now_add=True)
     published = models.DateField('опубликовано',null=True, blank=True,default=timezone.now)
-    image = models.ImageField(upload_to='articles/', blank=True)
+    image = ImageField(upload_to='articles/', blank=True)
     author = models.ForeignKey(User, verbose_name='Автор',null=True,blank=True,on_delete=CASCADE)
 
     def __str__(self):

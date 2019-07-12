@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from tinymce import HTMLField
+from sorl.thumbnail import ImageField
 
 
 class Event(models.Model):
@@ -9,7 +10,7 @@ class Event(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     published = models.DateField('опубликовано', null=True, blank=True, default=timezone.now)
     content = HTMLField('Content')
-    image = models.ImageField(upload_to='events/', blank=True)
+    image = ImageField(upload_to='events/', blank=True)
     slug = models.SlugField(default='', unique=True)
     description = models.TextField('Описание', default='')
     visible = models.BooleanField(default=True)

@@ -1,4 +1,4 @@
-from time import sleep
+from django.test import tag
 from .base import FunctionalTest, REGEX_ANY_TEXT
 from unittest import skip
 
@@ -13,6 +13,24 @@ class NewVisitorTest(FunctionalTest):
         self.browser.get(self.live_server_url + '/articles/')
         url = self.browser.find_elements_by_id('id_item_article')
         self.assertGreater(len(url), 1)
+
+
+    # @tag('new')
+    # @skip("test skip")
+    def test_display_every_article_item_with_preview_image(self):
+        """тест: каждая статьая в списки отображается с картинкой 233x233"""
+        self.browser.get(self.live_server_url + '/articles/')
+        news = self.browser.find_element_by_id('id_item_article')
+        image = news.find_element_by_tag_name('img')
+        self.assertTrue(image)
+
+    # @tag('new')
+    def test_display_every_article_item_with_description(self):
+        """тест: каждая статья имеет краткое описание"""
+        self.browser.get(self.live_server_url + '/articles/')
+        desc = self.browser.find_element_by_class_name('description').text
+        self.assertRegex(desc, REGEX_ANY_TEXT)
+        self.assertGreater(250, len(desc))
 
     # @skip("skip test title")
     def test_display_article_by_slug_link(self):
