@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'articles.apps.ArticlesConfig',
     'events.apps.EventsConfig',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -144,3 +145,5 @@ FIXTURE_DIRS = ['../fixtures/']
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../uploads'))
 
+# FILEBROWSER_DIRECTORY = ''
+# DIRECTORY = ''

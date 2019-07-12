@@ -10,6 +10,8 @@ from news import urls as news_urls
 from accounts import urls as accounts_urls
 from articles import urls as articles_urls
 from events import urls as events_urls
+from filebrowser.sites import site
+
 
 urlpatterns = [
     path('', NewsListView.as_view(), name='index'),
@@ -20,6 +22,7 @@ urlpatterns = [
     re_path(r'^articles/', include(articles_urls)),
     re_path(r'^events/', include(events_urls)),
     path('accounts/', include(accounts_urls)),
+    path('admin/filebrowser/', site.urls),
     re_path(r'^tinymce/', include('tinymce.urls')),
     re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/img/favicon.ico')),
     path('admin/', admin.site.urls),

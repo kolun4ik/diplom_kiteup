@@ -14,5 +14,10 @@ class Event(models.Model):
     description = models.TextField('Описание', default='')
     visible = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ('-published',)
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
+
     def __str__(self):
         return self.title
