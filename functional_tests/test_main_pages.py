@@ -5,7 +5,7 @@ from news.models import New
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
-    fixtures = ['news.json','pages.json','articles.json']
+    fixtures = ['news.yaml','pages.yaml','articles.yaml','users.yaml']
 
     # @skip("test skip")
     def test_can_start_a_index_page(self):
@@ -18,7 +18,6 @@ class NewVisitorTest(FunctionalTest):
     # @skip("test skip")
     def test_display_five_last_news_in_index_page(self):
         """тест: видим последние 5  новостей на главной странице"""
-        # На главной странице мы видим анонсы (краткое содержание)  новостей сайта
         self.browser.get(self.live_server_url)
         urls = self.browser.find_elements_by_id('id_item_news')
         link = self.browser.find_element_by_link_text('Новость 6').get_attribute('href')

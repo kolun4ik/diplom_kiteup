@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 from django.utils import timezone
 from django.conf import settings
-from django.contrib.auth.models import User
 from .base import myTestCase
 from events.models import Event
 
@@ -44,7 +43,7 @@ class EventModelTest(myTestCase):
     def test_event_have_description(self):
         """тест: мероприятие имеет краткое описание длинной 100 символов"""
         event = Event.objects.first()
-        self.assertEqual(event.description, 'Краткое описание мероприятия длинной 100 знаков')
+        self.assertEqual(event.description, 'Краткое описание мероприятия 1')
 
     def test_event_have_visible_true_false_field(self):
         """"тест: мероприятие имеет поля, показывающее статус

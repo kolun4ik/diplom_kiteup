@@ -1,0 +1,28 @@
+---
+- model: events.Event
+  pk: 1
+  fields:
+    title: Мероприятие 1
+    description: Краткое описание мероприятия 1
+    content: Текст мероприятия 1
+    slug: slug-1
+    created: '2019-06-27 13:10:44.949Z'
+    image: events/test_event_img.jpg
+- model: events.Event
+  pk: 2
+  fields:
+    title: Мероприятие 2
+    description: Краткое описание мероприятия 2
+    content: Текст мероприятия 2
+    slug: slug-2
+    created: '2019-06-28 13:10:44.949Z'
+    image: events/test_event_img.jpg
+- model: events.Event
+  pk: 3
+  fields:
+    title: Мероприятие 3
+    description: Краткое описание мероприятия 3
+    content: Текст мероприятия 3
+    slug: slug-3
+    created: '2019-06-29 13:10:44.949Z'
+    image: events/test_event_img.jpg

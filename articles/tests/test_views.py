@@ -54,11 +54,11 @@ class ArticleViewTest(myTestCase):
 
     def test_display_article_title(self):
         """тест: у статьи есть заголовок"""
-        self.assertContains(self.response, 'Название статьи 1')
+        self.assertContains(self.response, 'Статья 1')
 
     def test_display_article_author(self):
         """тест: у статьи есть автор"""
-        self.assertContains(self.response, 'admin')
+        self.assertContains(self.response, 'test')
 
     @skip('skip error locale output for cyrilic month')
     def test_display_article_date_publication(self):
@@ -69,7 +69,7 @@ class ArticleViewTest(myTestCase):
 
     def test_dysplay_article_content(self):
         """тест: собвстенно текст статьи"""
-        self.assertContains(self.response,'Текст статьи 1')
+        self.assertContains(self.response,'Текст статьи')
 
 
 # 1)Использовать тестовый клиент Django,

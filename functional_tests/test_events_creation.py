@@ -4,7 +4,7 @@ from events.models import Event
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
-    fixtures = ['events.json']
+    fixtures = ['events.yaml']
 
     # @skip("test skip")
     def test_display_all_events_on_events_page(self):

@@ -31,7 +31,7 @@ class ArticleModelTest(myTestCase):
 
     def test_article_have_content(self):
         """тест: контент статьи"""
-        self.assertEqual(self.first().content, 'Текст статьи 1')
+        self.assertEqual(self.first().content, 'Текст статьи')
 
     def test_article_have_image(self):
         """тест: каждая статья с картинкой"""
@@ -46,7 +46,7 @@ class ArticleModelTest(myTestCase):
     def test_article_have_description(self):
         """тест: статья имеет краткое описание длинной 100 символов"""
         article = Article.objects.first()
-        self.assertEqual(article.description, 'Краткое описание статьи длинной 100 знаков')
+        self.assertEqual(article.description, 'Краткое описание статьи 1')
 
     def test_article_have_author(self):
         """тест: у статьи есть автор"""

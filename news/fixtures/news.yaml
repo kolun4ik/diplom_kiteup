@@ -1,0 +1,49 @@
+---
+- model: news.New
+  pk: 1
+  fields:
+    title: Новость 1
+    created: '2019-06-25 12:35:33.197Z'
+    description: Desc news 1
+    content: Lorem ipsum 1
+    image: news\test_news.jpg
+- model: news.New
+  pk: 2
+  fields:
+    title: Новость 2
+    created: '2019-06-26 12:35:33.197Z'
+    description: Desc news 1
+    content: Lorem ipsum 1
+    image: news\test_news.jpg
+- model: news.New
+  pk: 3
+  fields:
+    title: Новость 3
+    created: '2019-06-27 12:35:33.197Z'
+    description: Desc news 1
+    content: Lorem ipsum 1
+    image: news\test_news.jpg
+- model: news.New
+  pk: 4
+  fields:
+    title: Новость 4
+    created: '2019-06-28 12:35:33.197Z'
+    description: Desc news 1
+    content: Lorem ipsum 1
+    image: news\test_news.jpg
+- model: news.New
+  pk: 5
+  fields:
+    title: Новость 5
+    created: '2019-06-29 12:35:33.197Z'
+    description: Desc news 1
+    content: Lorem ipsum 1
+    image: news\test_news.jpg
+- model: news.New
+  pk: 6
+  fields:
+    title: Новость 6
+    created: '2019-06-30 12:35:33.197Z'
+    description: Desc news 1
+    content: Lorem ipsum 1
+    image: news\test_news.jpg

@@ -1,19 +1,12 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
 
 USER_NAME = 'test'
-USER_EMAIL = '1@r.ru'
 PASSWORD = '123'
 
 class LoginVewsTest(TestCase):
     """Тест представления login()"""
-
-    @classmethod
-    def setUpTestData(cls):
-        User.objects.create_user(
-            username=USER_NAME,
-            password=PASSWORD)
+    fixtures = ['users.yaml']
 
     def test_uses_login_template(self):
         """тест: раздел Войти (kiteup.ru/accounts/login)использует
@@ -23,7 +16,7 @@ class LoginVewsTest(TestCase):
 
     def test_login_ok(self):
         """тест: успешный логин"""
-        login_ok = self.client.login(username='test', password='123')
+        login_ok = self.client.login(username=USER_NAME, password=PASSWORD)
         self.assertTrue(login_ok)
 
     def test_login_fake(self):

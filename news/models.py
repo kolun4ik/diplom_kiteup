@@ -15,6 +15,7 @@ class New(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+        # db_table = "custom_table_name"
 
     def __str__(self):
         return self.title

@@ -49,7 +49,7 @@ class EventViewTest(myTestCase):
 
     def test_display_event_title(self):
         """тест: у мероприятия есть заголовок"""
-        self.assertContains(self.response, 'Название мероприятия 1')
+        self.assertContains(self.response, 'Мероприятие 1')
 
     def test_dysplay_event_content(self):
         """тест: собвстенно текст статьи"""

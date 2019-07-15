@@ -1,0 +1,31 @@
+---
+- model: articles.Article
+  pk: 1
+  fields:
+    title: Статья 1
+    description: Краткое описание статьи 1
+    content: Текст статьи
+    slug: slug-1
+    author: 1
+    date_creation: '2019-06-27T19:16:11.802Z'
+    image: articles\test_article.jpg
+- model: articles.Article
+  pk: 2
+  fields:
+    title: Статья 2
+    description: Краткое описание статьи 2
+    content: Текст статьи
+    slug: slug-2
+    author: 1
+    date_creation: '2019-06-28T19:16:11.802Z'
+    image: articles\test_article.jpg
+- model: articles.Article
+  pk: 3
+  fields:
+    title: Статья 3
+    description: Краткое описание статьи 3
+    content: Текст статьи
+    slug: slug-3
+    author: 1
+    date_creation: '2019-06-29T19:16:11.802Z'
+    image: articles\test_article.jpg

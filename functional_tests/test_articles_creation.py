@@ -5,7 +5,7 @@ from unittest import skip
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
-    fixtures = ['articles.json']
+    fixtures = ['articles.yaml','users.yaml']
 
     # @skip("test skip")
     def test_display_all_articles_on_articles_page(self):

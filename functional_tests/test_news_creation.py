@@ -6,7 +6,7 @@ from unittest import skip
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
-    fixtures = ['news.json']
+    fixtures = ['news.yaml']
 
     def test_uses_fixtures_for_every_test(self):
         """тест: используем fixtures"""
@@ -28,7 +28,7 @@ class NewVisitorTest(FunctionalTest):
         image = news.find_element_by_tag_name('img')
         self.assertTrue(image)
 
-    @tag('new')
+    # @skip("test skip")
     def test_display_every_news_item_with_description(self):
         """тест: каждая новость имеет краткое описание"""
         self.browser.get(self.live_server_url + '/club-news/')

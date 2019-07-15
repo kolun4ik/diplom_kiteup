@@ -1,0 +1,20 @@
+---
+- model: pages.Page
+  pk: 1
+  fields:
+    title: Здравствуйте, мы – кайт-клуб «Вверх».
+    link: obuchenie-kitesurfing
+    body: Замена слова «школа» на «клуб» тоже неслучайна
+- model: pages.Page
+  pk: 2
+  fields:
+    title: 'Часто задаваемые вопросы:'
+    link: faq
+    body: Прежде чем звонить нам, почитайте ЧаВо...
+- model: pages.Page
+  pk: 3
+  fields:
+    title: Контакты
+    link: contacts
+    body: Информацию по всем вопросам взаимодействия Вы можете отправить, используя
+      форму, расположенную ниже.

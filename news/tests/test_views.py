@@ -1,4 +1,3 @@
-import datetime
 from unittest import skip
 from .base import myTestCase
 from news.models import New
@@ -52,7 +51,6 @@ class NewsViwsTest(myTestCase):
     def test_display_only_item_news(self):
         """тест: отображать определенную новость по id"""
         news_1 = New.objects.all()[0]
-        news2 = New.objects.all()[1]
         response = self.client.get(f'/club-news/{news_1.id}')
         self.assertContains(response, 'Новость 1')
         self.assertNotContains(response, 'Новость 2')
@@ -60,8 +58,8 @@ class NewsViwsTest(myTestCase):
     # @skip('skip test')
     def test_view_dispalay_date(self):
         """тест: отображать дату создания новости"""
-        date = datetime.datetime.now()
-        self.assertContains(self.response, date.strftime('%d.%m.%Y'))
+        data_firts_news = '25.06.2019'
+        self.assertContains(self.response, data_firts_news)
 
     # @skip('skip test')
     def test_display_news_content(self):
