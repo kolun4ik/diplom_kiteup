@@ -5,7 +5,7 @@ from .models import Event
 
 
 class EventsListView(ListView):
-    template_name = 'all_events.html'
+    template_name = 'events/all_events.html'
     context_object_name = 'list_events'
 
     def get_queryset(self):
@@ -13,7 +13,7 @@ class EventsListView(ListView):
 
 
 class EventDetailView(DetailView):
-    template_name = "event.html"
+    template_name = "events/event.html"
     model = Event
     context_object_name = 'event'
 

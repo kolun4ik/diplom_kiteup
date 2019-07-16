@@ -14,7 +14,7 @@ class EventsViewTest(myTestCase):
     def test_uses_all_events_template(self):
         """тест: раздел Мероприятия (kiteup.ru/events/)
          использует шаблон all_events.html"""
-        self.assertTemplateUsed(self.response, 'all_events.html')
+        self.assertTemplateUsed(self.response, 'events/all_events.html')
 
     def test_events_uses_view_as_class_based_view(self):
         """тест: использование представления Events как Class-Based view"""
@@ -39,7 +39,7 @@ class EventViewTest(myTestCase):
     def test_uses_all_articles_template(self):
         """тест: раздел Мероприятия/Мероприятие (kiteup.ru/events/slug) использует
         шаблон event.html"""
-        self.assertTemplateUsed(self.response, 'event.html')
+        self.assertTemplateUsed(self.response, 'events/event.html')
 
     def test_event_uses_view_as_class_based_view(self):
         """тест: использование представления Event как Class-Based view"""

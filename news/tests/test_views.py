@@ -12,7 +12,7 @@ class ClubNewsViewTest(myTestCase):
     def test_uses_club_news_template(self):
         """тест: раздел 'Новости' (kiteup.ru/club-news/) использует
         шаблон club_news.html"""
-        self.assertTemplateUsed(self.response, 'club_news.html')
+        self.assertTemplateUsed(self.response, 'news/club_news.html')
 
     # @skip('skip test')
     def test_display_free_last_news_on_club_news_page(self):
@@ -45,7 +45,7 @@ class NewsViwsTest(myTestCase):
     def test_uses_news_template(self):
         """тест: раздел Новости/Новость (kiteup.ru/club-news/id_news)
             использует шаблон news.html"""
-        self.assertTemplateUsed(self.response, 'news.html')
+        self.assertTemplateUsed(self.response, 'news/news.html')
 
     # @skip('skip test')
     def test_display_only_item_news(self):

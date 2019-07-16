@@ -5,7 +5,7 @@ from .models import Article
 
 
 class ArticlesListView(ListView):
-    template_name = 'all_articles.html'
+    template_name = 'articles/all_articles.html'
     context_object_name = 'list_articles'
 
     def get_queryset(self):
@@ -13,6 +13,6 @@ class ArticlesListView(ListView):
 
 
 class ArticleDetailView(DetailView):
-    template_name = 'article.html'
+    template_name = 'articles/article.html'
     context_object_name = 'article'
     model = Article

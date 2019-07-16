@@ -19,7 +19,7 @@ def login(request):
             messages.error(request, 'Не правильно введены имя пользователя или пароль')
             return redirect('login')
     else:
-        return render(request, 'login.html')
+        return render(request, 'accounts/login.html')
 
 
 def logout(request):
@@ -57,8 +57,8 @@ def register(request):
             messages.error(request, 'Введеный вами пароли не совпадают')
             return redirect('register')
     else:
-        return render(request, 'register.html')
+        return render(request, 'accounts/register.html')
 
 def dashboard(request):
     """Личный кабинет пользователя"""
-    return render(request, 'dashboard.html')
+    return render(request, 'accounts/dashboard.html')

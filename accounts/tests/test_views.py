@@ -12,7 +12,7 @@ class LoginVewsTest(TestCase):
         """тест: раздел Войти (kiteup.ru/accounts/login)использует
         шаблон login.html"""
         response = self.client.get(reverse('login'))
-        self.assertTemplateUsed(response, 'login.html')
+        self.assertTemplateUsed(response, 'accounts/login.html')
 
     def test_login_ok(self):
         """тест: успешный логин"""
@@ -31,6 +31,6 @@ class DashboardViewsTest(TestCase):
     def test_uses_dashboard_template(self):
         """тест: раздел 'Личный кабинет' использует шаблон dashboard.html"""
         response = self.client.get(reverse('dashboard'))
-        self.assertTemplateUsed(response, 'dashboard.html')
+        self.assertTemplateUsed(response, 'accounts/dashboard.html')
 
 

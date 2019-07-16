@@ -36,7 +36,7 @@ def news_view(request, id_item):
             context = {
                 'items': paginator.page(paginator.num_pages),
             }
-        return render(request, 'club_news.html', context)
+        return render(request, 'news/club_news.html', context)
     else:
         item = New.objects.get(id=id_item)
         created = datetime.datetime.strftime(item.created, '%d.%m.%Y')
@@ -44,4 +44,4 @@ def news_view(request, id_item):
             'item': item,
             'date': created,
         }
-        return  render(request, 'news.html', context)
+        return  render(request, 'news/news.html', context)
