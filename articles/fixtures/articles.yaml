@@ -1,31 +1,37 @@
 ---
 - model: articles.Article
-  pk: 1
+  pk: 3
   fields:
-    title: Статья 1
-    description: Краткое описание статьи 1
-    content: Текст статьи
-    slug: slug-1
+    title: Статья 3
+    description: Краткое описание статьи 3
+    content: Текст статьи 3
+    slug: slug-3
     author: 1
-    date_creation: '2019-06-27T19:16:11.802Z'
+    created: '2019-06-28 19:16:11.802Z'
+    published: 2019-06-28
+    updated: '2019-06-28 19:16:11.802Z'
     image: articles\test_article.jpg
 - model: articles.Article
   pk: 2
   fields:
     title: Статья 2
     description: Краткое описание статьи 2
-    content: Текст статьи
+    content: Текст статьи 2
     slug: slug-2
     author: 1
-    date_creation: '2019-06-28T19:16:11.802Z'
+    created: '2019-06-27 19:16:11.802Z'
+    published: 2019-06-27
+    updated: '2019-06-27 19:16:11.802Z'
     image: articles\test_article.jpg
 - model: articles.Article
-  pk: 3
+  pk: 1
   fields:
-    title: Статья 3
-    description: Краткое описание статьи 3
-    content: Текст статьи
-    slug: slug-3
+    title: Статья 1
+    description: Краткое описание статьи 1
+    content: Текст статьи 1
+    slug: slug-1
     author: 1
-    date_creation: '2019-06-29T19:16:11.802Z'
+    created: '2019-06-26 19:16:11.802Z'
+    published: 2019-06-26
+    updated: '2019-06-26 19:16:11.802Z'
     image: articles\test_article.jpg

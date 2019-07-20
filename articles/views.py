@@ -9,7 +9,7 @@ class ArticlesListView(ListView):
     context_object_name = 'list_articles'
 
     def get_queryset(self):
-        return Article.objects.all().order_by('-published')
+        return Article.objects.all().order_by('-published').filter(status='published')
 
 
 class ArticleDetailView(DetailView):

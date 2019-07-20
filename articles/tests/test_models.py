@@ -21,17 +21,21 @@ class ArticleModelTest(myTestCase):
         Article.objects.create(title='Следущая статья')
         self.assertNotEqual(Article.objects.count(), count)
 
-    def test_article_have_date_creation(self):
+    def test_article_have_date_created(self):
         """тест: статья имеет дату создания"""
-        self.assertIsInstance(self.first().date_creation, datetime.datetime)
+        self.assertIsInstance(self.first().created, datetime.datetime)
 
     def test_article_have_date_publication(self):
         """тест: статья имеет дату публикации"""
-        self.assertEqual(self.first().published, timezone.now().date())
+        self.assertIsInstance(self.first().published, datetime.date)
+
+    def test_article_have_date_updated(self):
+        """тест: статья имеет дату создания"""
+        self.assertIsInstance(self.first().updated, datetime.datetime)
 
     def test_article_have_content(self):
         """тест: контент статьи"""
-        self.assertEqual(self.first().content, 'Текст статьи')
+        self.assertEqual(self.first().content, 'Текст статьи 3')
 
     def test_article_have_image(self):
         """тест: каждая статья с картинкой"""
@@ -45,8 +49,8 @@ class ArticleModelTest(myTestCase):
 
     def test_article_have_description(self):
         """тест: статья имеет краткое описание длинной 100 символов"""
-        article = Article.objects.first()
-        self.assertEqual(article.description, 'Краткое описание статьи 1')
+        first = Article.objects.last()
+        self.assertEqual(self.first().description, 'Краткое описание статьи 3')
 
     def test_article_have_author(self):
         """тест: у статьи есть автор"""
