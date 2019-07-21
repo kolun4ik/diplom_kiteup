@@ -66,7 +66,19 @@ class NewVisitorTest(FunctionalTest):
         #     '(\d{2}).(\d{2}).(\d{4})',
         #     msg="Ожидаем увидеть дату в формате dd.mm.YYYY")
         self.assertRegex(content, REGEX_ANY_TEXT)
-        
+
+    @skip("skip test have date and content")
+    def test_article_have_hit_counter(self):
+        """тест: каждая статья имеет счетчик просмотров"""
+        #XPath: /html/body/div[1]/div[2]/div[1]/div[1]/div/div/div[1]/div/div[3]/span[2]
+        self.browser.get(self.live_server_url + '/articles/')
+        hit_count_1 = self.browser.find_element_by_xpath('//div[@class="card-2"]/div[@class="extra"]/span[2]').text
+        slug = self.browser.find_element_by_link_text('Читать').get_attribute('href')
+        self.browser.get(slug)
+        self.browser.get(self.live_server_url + '/articles/')
+        hit_count_2 = self.browser.find_element_by_xpath('//div[@class="card-2"]/div[@class="extra"]/span[2]').text
+        self.assertGreater(hit_count_2, hit_count_1)
+
         
 
 
