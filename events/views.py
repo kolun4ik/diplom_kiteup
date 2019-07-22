@@ -9,7 +9,7 @@ class EventsListView(ListView):
     context_object_name = 'list_events'
 
     def get_queryset(self):
-        return Event.objects.all()
+        return Event.objects.all().order_by('-published').filter(visible=True)[:5]
 
 
 class EventDetailView(DetailView):

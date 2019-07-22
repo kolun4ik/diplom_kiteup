@@ -3,26 +3,71 @@
   pk: 1
   fields:
     title: Мероприятие 1
+    longtitle: Мероприятие 1 лонг
     description: Краткое описание мероприятия 1
     content: Текст мероприятия 1
     slug: slug-1
     created: '2019-06-27 13:10:44.949Z'
+    published: 2019-06-27
+    updated: '2019-06-27 13:10:44.949Z'
     image: events/test_event_img.jpg
 - model: events.Event
   pk: 2
   fields:
     title: Мероприятие 2
+    longtitle: Мероприятие 2 лонг
     description: Краткое описание мероприятия 2
     content: Текст мероприятия 2
     slug: slug-2
     created: '2019-06-28 13:10:44.949Z'
+    updated: '2019-06-28 13:10:44.949Z'
+    published: 2019-06-28
     image: events/test_event_img.jpg
 - model: events.Event
   pk: 3
   fields:
     title: Мероприятие 3
+    longtitle: Мероприятие 3 лонг
     description: Краткое описание мероприятия 3
     content: Текст мероприятия 3
     slug: slug-3
     created: '2019-06-29 13:10:44.949Z'
+    updated: '2019-06-29 13:10:44.949Z'
+    published: 2019-06-29
+    image: events/test_event_img.jpg
+- model: events.Event
+  pk: 4
+  fields:
+    title: Мероприятие 4
+    longtitle: Мероприятие 4 лонг
+    description: Краткое описание мероприятия 4
+    content: Текст мероприятия 4
+    slug: slug-4
+    created: '2019-06-30 13:10:44.949Z'
+    updated: '2019-06-30 13:10:44.949Z'
+    published: 2019-06-30
+    image: events/test_event_img.jpg
+- model: events.Event
+  pk: 5
+  fields:
+    title: Мероприятие 5
+    longtitle: Мероприятие 5 лонг
+    description: Краткое описание мероприятия 5
+    content: Текст мероприятия 5
+    slug: slug-5
+    created: '2019-07-01 13:10:44.949Z'
+    updated: '2019-07-01 13:10:44.949Z'
+    published: 2019-07-01
+    image: events/test_event_img.jpg
+- model: events.Event
+  pk: 6
+  fields:
+    title: Мероприятие 6
+    longtitle: Мероприятие 6 лонг
+    description: Краткое описание мероприятия 6
+    content: Текст мероприятия 6
+    slug: slug-6
+    created: '2019-07-02 13:10:44.949Z'
+    updated: '2019-07-02 13:10:44.949Z'
+    published: 2019-07-02
     image: events/test_event_img.jpg

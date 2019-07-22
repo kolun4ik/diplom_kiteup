@@ -1,6 +1,6 @@
 ---
 - model: articles.Article
-  id: 1
+  pk: 1
   fields:
     author: 1
     content: <p>Страница на реконструкции</p>
@@ -11,7 +11,7 @@
     title: Отчет о поездке в Анапу
     updated: '2014-09-30 07:49:13'
 - model: articles.Article
-  id: 2
+  pk: 2
   fields:
     author: 1
     content: <p>Страница на реконструкции</p>
@@ -22,7 +22,7 @@
     title: Тесты кайта Slingshot RPM 9 м 2014 года выпуска
     updated: '2014-09-30 08:13:12'
 - model: articles.Article
-  id: 3
+  pk: 3
   fields:
     author: 1
     content: <p>Страница на реконструкции</p>
@@ -33,7 +33,7 @@
     title: Разведывательная поездка в Волгоград в июне 2014 г
     updated: '2014-09-30 07:50:09'
 - model: articles.Article
-  id: 4
+  pk: 4
   fields:
     author: 1
     content: <p>Страница на реконструкции</p>
@@ -44,7 +44,7 @@
     title: Отчет о проведении 3 этапа кубка России "Кубок озера Плещеево"
     updated: '2014-09-30 07:50:34'
 - model: articles.Article
-  id: 5
+  pk: 5
   fields:
     author: 1
     content: "<p>На тесты был взят кайт Октан 2 от Параависа.</p>\r\n<p>Такой размер\
@@ -92,7 +92,7 @@
     title: Тест универсального кайта от Paraavisa - Octane 2 15 м.
     updated: '2016-02-11 20:44:19'
 - model: articles.Article
-  id: 6
+  pk: 6
   fields:
     author: 1
     content: "<p>Всегда было приятно открывать для себя новые места каталок - расширять\
@@ -155,7 +155,7 @@
     title: Расширяем горизонты - поездка на Истринское водахранилище.
     updated: '2015-01-13 19:17:04'
 - model: articles.Article
-  id: 7
+  pk: 7
   fields:
     author: 1
     content: "<p>О лэндкайтинге начинают вспоминать в межсезонье, когда катать по\
@@ -260,7 +260,7 @@
     title: Фестиваль лендкайтинга "PowerSlide 7". 10 октября. Коломна
     updated: '2015-10-12 12:34:43'
 - model: articles.Article
-  id: 8
+  pk: 8
   fields:
     author: 1
     content: "<p><strong>KiteLab</strong> традиционно проводиться на последнем издыхании\

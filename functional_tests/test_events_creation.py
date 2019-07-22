@@ -1,17 +1,19 @@
-from .base import FunctionalTest, REGEX_ANY_TEXT
+from django.test import tag
 from unittest import skip
-from events.models import Event
+from .base import FunctionalTest, REGEX_ANY_TEXT
+
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
     fixtures = ['events.yaml']
 
+    @tag('new')
     # @skip("test skip")
-    def test_display_all_events_on_events_page(self):
-        """тест: видим все мероприятия в разделе 'Мероприятия'(/events/)"""
+    def test_display_five_events_on_events_page(self):
+        """тест: видим 5 последних мероприятия в разделе 'Мероприятия'(/events/)"""
         self.browser.get(self.live_server_url + '/events/')
         url = self.browser.find_elements_by_id('id_item_events')
-        self.assertGreater(len(url), 1)
+        self.assertEqual(len(url), 5)
 
     # @skip("skip test title")
     def test_display_event_by_slug_link(self):
@@ -36,7 +38,7 @@ class NewVisitorTest(FunctionalTest):
 
     # @skip("skip test have date and content")
     def test_open_event_have_content(self):
-        """тест: каждая новость имеет дату создания и контент"""
+        """тест: каждое мероприятие имеет контент"""
         self.get_element_by_link('Читать', '/events/')
         content = self.get_item_by_id('item_event').text
         self.assertRegex(content, REGEX_ANY_TEXT)

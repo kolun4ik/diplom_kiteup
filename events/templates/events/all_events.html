@@ -15,9 +15,11 @@
      <img src="{% static 'img/empty_events.png' %}" alt="">
      {% endthumbnail %}
      <div class="blog-post">
+         {% autoescape off %}
          <h3><a href="{{ event.slug }}">{{ event.title }}</a></h3>
-         <p>{{ event.description }}</p>
+         <p>{{ event.introtext }}</p>
          <a href="{{ event.slug }}" class="btn btn-common">Читать</a>
+         {% endautoescape %}
      </div>
  </div>
 <div class="mb-60"></div>

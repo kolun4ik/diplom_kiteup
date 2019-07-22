@@ -15,7 +15,6 @@ class NewVisitorTest(FunctionalTest):
         self.assertGreater(len(url), 1)
 
 
-    # @tag('new')
     # @skip("test skip")
     def test_display_every_article_item_with_preview_image(self):
         """тест: каждая статьая в списки отображается с картинкой 233x233"""

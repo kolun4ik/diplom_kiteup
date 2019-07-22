@@ -1,5 +1,6 @@
 from .base import myTestCase
 from events.views import EventsListView, EventDetailView
+from events.models import Event
 from unittest import skip
 
 # @skip('Skip Class')
@@ -23,9 +24,21 @@ class EventsViewTest(myTestCase):
             EventsListView.as_view().__name__)
 
     def test_display_all_last_articles_on_articles_page(self):
-        """тест: в разделе Мероприятия отображать все статьи"""
+        """тест: в разделе Мероприятия отображать все мероприятия"""
         count = len(self.response.context['list_events'])
         self.assertGreater(count, 1)
+
+    def test_display_title_in_everyone_articles(self):
+        """тест: в списке каждое мероприятие с заголовком"""
+        self.assertEqual(self.response.context['list_events'][4].title, 'Мероприятие 2')
+
+    def test_not_display_article_is_visible_false(self):
+        """тест: Мероприятие с признаком visible=False не отображать в списке"""
+        count_context = len(self.response.context['list_events'])
+        Event.objects.create(visible = True)
+        count_all = Event.objects.count()
+        self.assertGreater(count_all, count_context)
+        self.assertEqual(count_context, 5)
 
 # @skip('Skip Class')
 class EventViewTest(myTestCase):
@@ -47,9 +60,13 @@ class EventViewTest(myTestCase):
             self.response.resolver_match.func.__name__,
             EventDetailView.as_view().__name__)
 
-    def test_display_event_title(self):
-        """тест: у мероприятия есть заголовок"""
-        self.assertContains(self.response, 'Мероприятие 1')
+    def test_display_event_date_published(self):
+        """тест: у мероприятия есть дата публикации"""
+        self.assertContains(self.response, '27 июня 2019 г.')
+
+    def test_display_event_longtitle(self):
+        """тест: у мероприятия есть длинный заголовок"""
+        self.assertContains(self.response, 'Мероприятие 1 лонг')
 
     def test_dysplay_event_content(self):
         """тест: собвстенно текст статьи"""
