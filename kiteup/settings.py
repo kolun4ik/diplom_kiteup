@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
+    'hitcount',
 ]
 
 # AUTH_USER_MODEL = 'accounts.User'

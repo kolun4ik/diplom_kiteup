@@ -5,9 +5,10 @@ from django.shortcuts import reverse
 from tinymce import HTMLField
 from sorl.thumbnail import ImageField
 from django.contrib.auth.models import User
+from hitcount.models import HitCount, HitCountMixin
 
 
-class Article(models.Model):
+class Article(models.Model, HitCountMixin):
     """Статья"""
     STATUS_CHOICES = (
         ('draft', 'Черновик'),

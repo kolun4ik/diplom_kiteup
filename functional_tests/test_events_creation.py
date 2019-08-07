@@ -7,7 +7,6 @@ class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
     fixtures = ['events.yaml']
 
-    @tag('new')
     # @skip("test skip")
     def test_display_five_events_on_events_page(self):
         """тест: видим 5 последних мероприятия в разделе 'Мероприятия'(/events/)"""
@@ -42,3 +41,10 @@ class NewVisitorTest(FunctionalTest):
         self.get_element_by_link('Читать', '/events/')
         content = self.get_item_by_id('item_event').text
         self.assertRegex(content, REGEX_ANY_TEXT)
+
+    @skip("skip test becose widget not exist")
+    def test_events_page_have_widget_arhive_events(self):
+        """тест: на странице Мероприятия есть виджет 'Архив мероприятий'"""
+        self.browser.get(self.live_server_url + '/events/')
+        # протестировать существование виджета
+        # ссылки открывают нужные формации по годам, месяцам

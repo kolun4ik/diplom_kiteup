@@ -8,6 +8,9 @@
         <div class="col-md-4" id="date_item_article">
             Опубликовано: {{ article.published }}
         </div>
+        <div class="col-md-4" id="date_item_article">
+            Просмотров: {{ hitcount.total_hits }}
+        </div>
         <div class="mb-60"></div>
 
     </div>
@@ -18,4 +21,5 @@
             {% endautoescape %}
         </div>
     </div>
+
 {% endblock content %}

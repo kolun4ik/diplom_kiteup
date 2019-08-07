@@ -17,7 +17,7 @@
               <div class="card-block">
                 <h3 class="card-title">{{ article.title }}</h3>
                 <div class="meta">
-                  <i class="fa fa-user-o"></i>&nbsp;<a href="#">Th0rn</a>
+                  <i class="fa fa-user-o"></i>&nbsp;<a href="#">{{ article.author }}</a>
                 </div>
                 <div class="description">
                   {% autoescape off %}
@@ -31,7 +31,11 @@
                 </span>
                 <span>
                   <i class="fa fa-eye"></i>
-                  0
+                  {% if article.hits %}
+                  {{ article.hits }}
+                  {% else %}
+                    0
+                  {% endif %}
                 </span>
               </div>
             </div>
