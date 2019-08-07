@@ -14,7 +14,6 @@ class NewVisitorTest(FunctionalTest):
         url = self.browser.find_elements_by_id('id_item_article')
         self.assertGreater(len(url), 1)
 
-
     # @skip("test skip")
     def test_display_every_article_item_with_preview_image(self):
         """тест: каждая статьая в списки отображается с картинкой 233x233"""
@@ -66,7 +65,7 @@ class NewVisitorTest(FunctionalTest):
         #     msg="Ожидаем увидеть дату в формате dd.mm.YYYY")
         self.assertRegex(content, REGEX_ANY_TEXT)
 
-    @skip("skip test have date and content")
+    # @skip("skip test have date and content")
     def test_article_have_hit_counter(self):
         """тест: каждая статья имеет счетчик просмотров"""
         #XPath: /html/body/div[1]/div[2]/div[1]/div[1]/div/div/div[1]/div/div[3]/span[2]
