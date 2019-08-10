@@ -42,9 +42,22 @@ class NewVisitorTest(FunctionalTest):
         content = self.get_item_by_id('item_event').text
         self.assertRegex(content, REGEX_ANY_TEXT)
 
-    @skip("skip test becose widget not exist")
+    # @skip("skip test becose widget not exist")
+    @ tag('new')
     def test_events_page_have_widget_arhive_events(self):
         """тест: на странице Мероприятия есть виджет 'Архив мероприятий'"""
         self.browser.get(self.live_server_url + '/events/')
+        arhive_widget = self.browser.find_element_by_class_name('about-sidebar-widget')
+        h4 = arhive_widget.find_element_by_tag_name('h4').text
+        self.assertEqual(h4, 'Архив мероприятий')
         # протестировать существование виджета
         # ссылки открывают нужные формации по годам, месяцам
+
+    def test_activation_link_page_in_pagination(self):
+        """тест: активация ссылки в пагинаторе изменяет список Мероприятий"""
+        self.browser.get(self.live_server_url + '/events/')
+        event_p1 = self.browser.find_element_by_id('id_item_events').find_element_by_tag_name('a').text
+        page_link = self.get_element_by_link('Следующая', page='/events/')
+        self.browser.get(page_link)
+        event_p2 = self.browser.find_element_by_id('id_item_events').find_element_by_tag_name('a').text
+        self.assertNotEqual(event_p1, event_p2)

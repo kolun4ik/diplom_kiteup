@@ -25,4 +25,37 @@
 <div class="mb-60"></div>
     {% endfor %}
 </div>
+
+{% if paginator.num_pages > 1 %}
+<div class="col-md12">
+<ul class="pagination justify-content-center">
+{% if page_obj.has_previous %}
+  <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}"> Предыдущая </a></li>
+{% else %}
+  <li class="page-item">Предыдущая </li>
+{% endif %}
+
+{% for num in paginator.page_range %}
+{% if num == page_obj.number %}
+  <li class="page-item">{{ num }}</li>
+{% else %}
+  <li class="page-item"><a href="?page={{ num }}"> {{ num }} </a></li>
+{% endif %}
+{% endfor %}
+{% if page_obj.has_next %}
+  <li class="page-item"><a href="?page={{ page_obj.next_page_number }}"> Следующая</a></li>
+{% else %}
+  <li class="page-item"> Следующая</li>
+{% endif %}
+</ul>
+</div>
+{% endif %}
 {% endblock content %}
+
+{% block widget_top %}
+<div class="blog-block about-sidebar-widget">
+    <h4>Архив мероприятий</h4>
+
+</div>
+<div class="mb-60"></div>
+{% endblock widget_top %}

@@ -43,7 +43,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertEqual(self.browser.current_url, link)
 
     # @skip("skip test only one news")
-    def test_display_only_one_news_by_link_on_news_page(self):
+    def test_display_only_one_news_by_link_on_club_news_page(self):
         """тест: отображаем новость по ссылке 'Читать' со страницы 'Новости'"""
         link = self.get_element_by_link('Читать','/club-news/')
         self.browser.get(link)

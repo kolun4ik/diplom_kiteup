@@ -120,6 +120,7 @@
 
         <!-- Blog sidebar area -->
         <div class="col-lg-3 col-md-12 col-xs-12">
+          {% block widget_top %}
           <div class="blog-block about-sidebar-widget">
             <img src="/static/bootstrap/img/about/avatarka1.jpg">
             <h4>О авторе</h4>
@@ -129,8 +130,8 @@
             <p>Мечты сбываются, т.к. я прохожу обучение на разработчика Python в Учебном Центре <a href="http://otus.ru">OTUS</a>,
             и переделка сайта на питонячий фреймворк Django является моей дипломной работой!</p>
           </div>
-
           <div class="mb-60"></div>
+          {% endblock widget_top %}
           <div class="blog-block blog-posts-widget">
             <div class="widget-title">
               <h4>Recent Posts</h4>
