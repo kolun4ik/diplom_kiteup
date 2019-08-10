@@ -4,7 +4,7 @@ from unittest import skip
 
 class LayoutAndStylingTest(FunctionalTest):
     """тест макета и стилевого оформления"""
-    fixtures = ['pages.json']
+    fixtures = ['pages.yaml']
 
     def test_page_club_news_has_paginator(self):
         """тест: на странице в в разделе 'НОВОСТИ' есть Paginator"""

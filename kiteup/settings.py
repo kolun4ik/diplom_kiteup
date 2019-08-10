@@ -24,7 +24,7 @@ SECRET_KEY = 'a2e2h-r(7i16t9ns6ez()0=t6x=$117!k(x___bz3*)-)w0l$y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,14 +35,14 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'filebrowser',
     'sorl.thumbnail',
+    'tinymce',
+    'hitcount',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tinymce',
-    'hitcount',
 ]
 
 # AUTH_USER_MODEL = 'accounts.User'
@@ -84,10 +84,16 @@ WSGI_APPLICATION = 'kiteup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+from .secret  import DB_PASSWORD, DB_HOST, DB_NAME, DB_USER
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '../database/db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': '5432',
     }
 }
 

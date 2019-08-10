@@ -12,12 +12,11 @@ class ArticlesListView(ListView):
     def get_queryset(self):
         # К каждой статье выдернуть автора и счетчик просмотров
         # return Article.objects.all().order_by('-published').filter(status='published').select_related('author')
-        return Article.objects.raw('''
+        return Article.objects.raw("""
             SELECT articles.*, hits FROM articles 
-            LEFT JOIN hitcount_hit_count as hc ON hc.object_pk = articles.id 
+            LEFT JOIN hitcount_hit_count as hc ON hc.object_pk = CAST(articles.id as text)
             WHERE articles.status = 'published' 
-            ORDER BY articles.published DESC
-        ''')
+            ORDER BY articles.published DESC;""")
 
 class ArticleDetailView(HitCountDetailView):
     template_name = 'articles/article.html'

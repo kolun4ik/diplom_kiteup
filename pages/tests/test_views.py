@@ -27,6 +27,7 @@ class PageIndexViewTest(TestCase):
         """тест: на Главной странице отображать 5 последних новостей"""
         for i in range(6):
             New.objects.create(
+                slug = f'slug-{i}',
                 title=f'{i}',
                 content='Текст'
             )
