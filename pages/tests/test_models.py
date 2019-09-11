@@ -1,6 +1,7 @@
 from django.test import TestCase
 from pages.models import Page
 
+
 class PagesModelTest(TestCase):
     """тест модели страниц"""
 
@@ -15,4 +16,3 @@ class PagesModelTest(TestCase):
         response = self.client.get('/obuchenie-kitesurfing')
         self.assertIn('Страница 1', response.content.decode('utf8'))
         self.assertIn('Текст страницы 1', response.content.decode('utf8'))
-

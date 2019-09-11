@@ -16,14 +16,14 @@ from filebrowser.sites import site
 urlpatterns = [
     path('', NewsListView.as_view(), name='index'),
     path('obuchenie-kitesurfing', pages_views.obuchenie, name='obuchenie'),
-    path('faq', pages_views.faq ,name='faq'),
-    path('contacts', pages_views.contacts ,name='contacts'),
+    path('faq', pages_views.faq, name='faq'),
+    path('contacts', pages_views.contacts, name='contacts'),
     re_path(r'^club-news/', include(news_urls)),
     re_path(r'^articles/', include(articles_urls)),
     re_path(r'^events/', include(events_urls)),
     path('accounts/', include(accounts_urls)),
     path('admin/filebrowser/', site.urls),
     re_path(r'^tinymce/', include('tinymce.urls')),
-    re_path(r'^favicon\.ico$',RedirectView.as_view(url='/static/img/favicon.ico')),
+    re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/img/favicon.ico')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

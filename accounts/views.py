@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 
-# Create your views here.
 
 def login(request):
     """Зарегестрировать вход в систему"""
@@ -58,6 +57,7 @@ def register(request):
             return redirect('register')
     else:
         return render(request, 'accounts/register.html')
+
 
 def dashboard(request):
     """Личный кабинет пользователя"""

@@ -62,4 +62,3 @@ class ContactFormTest(FunctionalTest):
                 NoSuchElementException,
                 '[id="success"]'):
             self.browser.find_element_by_id('success')
-

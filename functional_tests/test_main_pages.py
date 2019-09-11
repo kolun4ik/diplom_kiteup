@@ -3,9 +3,10 @@ from selenium.webdriver.common.keys import Keys
 from unittest import skip
 from news.models import New
 
+
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
-    fixtures = ['news.yaml','pages.yaml','articles.yaml','users.yaml']
+    fixtures = ['news.yaml', 'pages.yaml', 'articles.yaml', 'users.yaml']
 
     # @skip("test skip")
     def test_can_start_a_index_page(self):
@@ -65,7 +66,7 @@ class NewVisitorTest(FunctionalTest):
     def test_can_start_a_login_page(self):
         """тест: отобразить раздел для авторизации"""
         self.browser.get(self.live_server_url)
-        link_login =  self.get_element_by_link('Войти')
+        link_login = self.get_element_by_link('Войти')
         self.browser.get(link_login)
         form = self.browser.find_element_by_tag_name('form')
         self.assertTrue(form)

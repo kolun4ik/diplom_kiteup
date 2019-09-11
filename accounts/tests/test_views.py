@@ -4,6 +4,7 @@ from django.urls import reverse
 USER_NAME = 'test'
 PASSWORD = '123'
 
+
 class LoginVewsTest(TestCase):
     """Тест представления login()"""
     fixtures = ['users.yaml']
@@ -32,5 +33,3 @@ class DashboardViewsTest(TestCase):
         """тест: раздел 'Личный кабинет' использует шаблон dashboard.html"""
         response = self.client.get(reverse('dashboard'))
         self.assertTemplateUsed(response, 'accounts/dashboard.html')
-
-

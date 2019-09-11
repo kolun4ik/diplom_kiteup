@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from .secret import DB_PASSWORD, DB_HOST, DB_NAME, DB_USER
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -84,7 +85,6 @@ WSGI_APPLICATION = 'kiteup.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-from .secret  import DB_PASSWORD, DB_HOST, DB_NAME, DB_USER
 
 DATABASES = {
     'default': {

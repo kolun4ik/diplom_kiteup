@@ -7,12 +7,14 @@ from pages.forms import ContactForm
 from time import sleep
 
 POST_DATA = {
-            'name': 'Joe',
-            'email': 'nick@name.ru',
-            'subject': 'Тест',
-            'message': 'Сообщение',}
+    'name': 'Joe',
+    'email': 'nick@name.ru',
+    'subject': 'Тест',
+    'message': 'Сообщение',
+}
 
 # Не забывать, что это "модульные" (интеграционные) тесты
+
 
 class PageIndexViewTest(TestCase):
     """тест домашней страницы kiteup.ru"""
@@ -27,7 +29,7 @@ class PageIndexViewTest(TestCase):
         """тест: на Главной странице отображать 5 последних новостей"""
         for i in range(6):
             New.objects.create(
-                slug = f'slug-{i}',
+                slug=f'slug-{i}',
                 title=f'{i}',
                 content='Текст'
             )
@@ -56,7 +58,6 @@ class PageObuchenieViewTest(TestCase):
         response = self.client.get('/obuchenie-kitesurfing')
         self.assertTemplateUsed(response, 'obuchenie.html')
         self.assertEqual(response.status_code, 200)
-
 
 
 class PageFaqViewTest(TestCase):
@@ -89,13 +90,11 @@ class PageContactsViewTest(TestCase):
         # по link подумать, как сделать uniq и, чтобы он, был в urls.py
         return Page.objects.create(title=title, link=link, body=body)
 
-
     def test_display_page_content(self):
         """тест: страница отображает некий текст"""
         self.create_page(link='contacts')
         response = self.client.get('/contacts')
         self.assertContains(response, 'Заголовок')
-
 
     def test_uses_contacts_template(self):
         """для раздела 'Контакты' используется шаблон contacts.html"""
@@ -103,7 +102,6 @@ class PageContactsViewTest(TestCase):
         response = self.client.get('/contacts')
         self.assertTemplateUsed(response, 'contacts.html')
         self.assertEqual(response.status_code, 200)
-
 
     # @skip('Skip this test')
     def test_display_success_mgs(self):
@@ -136,11 +134,14 @@ class SendContactViewTest(TestCase):
         self.assertEqual(to_list, ['kiteup@rambler.ru'])
 
 
-
 # 1)Использовать тестовый клиент Django,
 # 2) Проверить используемый шаблон и каждый элемент в контексте шаблона.
-# 3) Проверить, чтобы все обьекты били правильными либо наборы queryset имели правильные элементы.
+# 3) Проверить, чтобы все обьекты били правильными либо наборы queryset имели
+# правильные элементы.
 # 4) Проверить, чтобы все формы имели правильный класс.
-# 5) ПОдумать о тестировании логики шаблона: любой оператор for или if может заслужить минимального теста.
-# 6) В отношении представлений, которые обрабатывают POST-запросы, удостовериться, что тестируються оба случая: допустимый и недопустимый.
-# 7) Факультативно проверить на исправность, что форма выведена в качестве HTMLи ее ошибки визуально отображаются
+# 5) ПОдумать о тестировании логики шаблона: любой оператор for или if может
+# заслужить минимального теста.
+# 6) В отношении представлений, которые обрабатывают POST-запросы,
+# удостовериться, что тестируються оба случая: допустимый и недопустимый.
+# 7) Факультативно проверить на исправность, что форма выведена в качестве HTML
+# и ее ошибки визуально отображаются

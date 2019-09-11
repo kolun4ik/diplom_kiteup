@@ -25,8 +25,7 @@ class NewModelTest(myTestCase):
     def test_news_have_image_preview(self):
         """тест: каждая новость с картинкой"""
         self.assertEqual(self.news_obj().image, 'news\\test_news.jpg')
-        
+
     def test_news_have_description(self):
         """тест: каждая новость с коротким описанием"""
         self.assertEqual(self.news_obj().description, 'Desc news 1')
-

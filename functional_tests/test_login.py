@@ -6,14 +6,13 @@ USER_NAME = 'test'
 PASSWORD = '123'
 USER_EMAIL = '1@r.ru'
 
+
 class LoginTest(FunctionalTest):
     """Тест регистрации в системе"""
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         User.objects.create_user(username=USER_NAME, password=PASSWORD)
-
-
 
     def test_can_get_a_log_in(self):
         """тест: заходим на страницу авторизации

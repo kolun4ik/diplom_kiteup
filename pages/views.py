@@ -1,18 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect, render_to_response
+from django.shortcuts import render, get_object_or_404, render_to_response
 from django.views.generic.dates import ArchiveIndexView
 from django.views.generic.list import ListView
 from django.core.mail import send_mail
 from news.models import New
 from .models import Page
 from .forms import ContactForm
-# Create your views here.
 
-# class NewsIndexView(ArchiveIndexView):
-#     model = New
-#     date_field = 'created'
-#     template_name = 'index.html'
-#     allow_future = True
-#     paginate_by = 5
 
 class NewsListView(ListView):
     template_name = 'index.html'

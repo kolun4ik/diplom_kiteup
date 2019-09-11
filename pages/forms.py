@@ -1,14 +1,15 @@
 from django import forms
 
+
 class ContactForm(forms.Form):
     """форма для разела 'КОНТАКТЫ'."""
 
     name = forms.CharField(
         widget=forms.fields.TextInput(attrs={
-        'id': 'name',
-        'placeholder': 'Имя:',
-        'class': 'form-control',
-        'data-error': 'Введите ваше имя',
+            'id': 'name',
+            'placeholder': 'Имя:',
+            'class': 'form-control',
+            'data-error': 'Введите ваше имя',
         })
     )
     email = forms.CharField(

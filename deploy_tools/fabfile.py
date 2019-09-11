@@ -2,7 +2,9 @@ from fabric.contrib.files import append, exists, sed
 from fabric.api import env, local, run
 import random
 
+
 REPO_URL = 'https://github.com/kolun4ik/diplom_kiteup'
+
 
 def deploy():
     """развернуть"""
@@ -14,6 +16,7 @@ def deploy():
     _updatevirtualenv(source_folder)
     _update_static_file(source_folder)
     _update_database(source_folder)
+
 
 def _create_directory_structure_if_necessery(site_folder):
     """создаем, если нужно, структуру каталогов"""
@@ -29,6 +32,7 @@ def _get_latest_source(source_folder):
         run(f'git clone {REPO_URL} {source_folder}')
         current_commit = local("git log -n 1 --format=%H", capture=True)
         run(f'cd {source_folder} && git reset --hard {current_commit}')
+
 
 def _update_settings(source_folder, site_name):
     """обновляем настройки в settings.py"""
@@ -49,6 +53,7 @@ def _update_settings(source_folder, site_name):
         "FIXTURE_DIRS = ['../fixtures/']",
         "FIXTURE_DIRS = []")
 
+
 def _updatevirtualenv(source_folder):
     """обновление виртуальной среды"""
     virtualenv_folder = source_folder + '/../virtualenv'
@@ -56,12 +61,13 @@ def _updatevirtualenv(source_folder):
         run(f'python3.7 -m venv {virtualenv_folder}')
     run(f'{virtualenv_folder}/bin/pip install -r {source_folder}/requirement.txt')
 
+
 def _update_static_file(source_folder):
     """обновление статических файлов"""
     run(f'cd {source_folder} && ../virtualenv/bin/python manage.py collectstatic --noinput')
+
 
 def _update_database(source_folder):
     """миграция базы данных"""
     # --noinput в помощь, чтобы fabric не запнулся на подверждениях ввода
     run(f'cd {source_folder} && ../virtualenv/bin/python manage.py migrate --noinput')
-

@@ -14,15 +14,15 @@ class Article(models.Model, HitCountMixin):
         ('draft', 'Черновик'),
         ('published', 'Опубликовано'),
     )
-    slug = models.SlugField(default='',unique=True)
+    slug = models.SlugField(default='', unique=True)
     title = models.CharField(default='', max_length=70)
     description = models.TextField('Описание', default='')
     content = HTMLField('Content')
     created = models.DateTimeField(auto_now_add=True)
-    published = models.DateField('опубликовано',null=True, blank=True,default=timezone.now)
+    published = models.DateField('опубликовано', null=True, blank=True, default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     image = ImageField(upload_to='articles/', blank=True)
-    author = models.ForeignKey(User, verbose_name='Автор',null=True,blank=True,on_delete=CASCADE)
+    author = models.ForeignKey(User, verbose_name='Автор', null=True, blank=True, on_delete=CASCADE)
     status = models.CharField(max_length=12, choices=STATUS_CHOICES, default='published')
 
     def __str__(self):

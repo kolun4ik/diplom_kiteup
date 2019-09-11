@@ -7,6 +7,7 @@ from unittest import skip
 TEST_MAIL = 'test@domen.ru'
 SUBJECT = 'Тест на отправку почты'
 
+
 @skip('Tests skip because mail not send')
 class TestEmailSend(FunctionalTest):
     """Тест отправки сообщений на почту (Контакты, регистрация и т.д.)"""

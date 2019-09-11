@@ -15,13 +15,12 @@ class NewsIndexView(ArchiveIndexView):
         context[''] = ''
 
 
-
 def news_view(request, id_item):
     """представление  'Новости'"""
     if id_item == '':
         context = dict()
         items = New.objects.all().order_by('-created')
-        paginator = Paginator(items,3)
+        paginator = Paginator(items, 3)
         page = request.GET.get('page')
         try:
             # Если страница существует, то выбираем ее
@@ -44,4 +43,4 @@ def news_view(request, id_item):
             'item': item,
             'date': created,
         }
-        return  render(request, 'news/news.html', context)
+        return render(request, 'news/news.html', context)

@@ -5,6 +5,7 @@ from django.conf import settings
 from .base import myTestCase
 from events.models import Event
 
+
 class EventModelTest(myTestCase):
     """тест модели Статья"""
 

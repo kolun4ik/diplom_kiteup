@@ -5,7 +5,7 @@ from unittest import skip
 
 class NewVisitorTest(FunctionalTest):
     """тест новый посетитель"""
-    fixtures = ['articles.yaml','users.yaml']
+    fixtures = ['articles.yaml', 'users.yaml']
 
     # @skip("test skip")
     def test_display_all_articles_on_articles_page(self):
@@ -68,7 +68,7 @@ class NewVisitorTest(FunctionalTest):
     # @skip("skip test have date and content")
     def test_article_have_hit_counter(self):
         """тест: каждая статья имеет счетчик просмотров"""
-        #XPath: /html/body/div[1]/div[2]/div[1]/div[1]/div/div/div[1]/div/div[3]/span[2]
+        # XPath: /html/body/div[1]/div[2]/div[1]/div[1]/div/div/div[1]/div/div[3]/span[2]
         self.browser.get(self.live_server_url + '/articles/')
         hit_count_1 = self.browser.find_element_by_xpath('//div[@class="card-2"]/div[@class="extra"]/span[2]').text
         slug = self.browser.find_element_by_link_text('Читать').get_attribute('href')
@@ -76,7 +76,3 @@ class NewVisitorTest(FunctionalTest):
         self.browser.get(self.live_server_url + '/articles/')
         hit_count_2 = self.browser.find_element_by_xpath('//div[@class="card-2"]/div[@class="extra"]/span[2]').text
         self.assertGreater(hit_count_2, hit_count_1)
-
-        
-
-

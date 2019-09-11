@@ -3,6 +3,7 @@ from events.views import EventsListView, EventDetailView
 from events.models import Event
 from unittest import skip
 
+
 # @skip('Skip Class')
 class EventsViewTest(myTestCase):
     """тест представления мероприятий, раздел сайта 'Мероприятия'
@@ -35,10 +36,11 @@ class EventsViewTest(myTestCase):
     def test_not_display_article_is_visible_false(self):
         """тест: Мероприятие с признаком visible=False не отображать в списке"""
         count_context = len(self.response.context['list_events'])
-        Event.objects.create(visible = True)
+        Event.objects.create(visible=True)
         count_all = Event.objects.count()
         self.assertGreater(count_all, count_context)
         self.assertEqual(count_context, 5)
+
 
 # @skip('Skip Class')
 class EventViewTest(myTestCase):
@@ -70,5 +72,4 @@ class EventViewTest(myTestCase):
 
     def test_dysplay_event_content(self):
         """тест: собвстенно текст статьи"""
-        self.assertContains(self.response,'Текст мероприятия 1')
-
+        self.assertContains(self.response, 'Текст мероприятия 1')

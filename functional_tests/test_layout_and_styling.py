@@ -45,6 +45,3 @@ class LayoutAndStylingTest(FunctionalTest):
         self.assertEquals(
             button.text,
             'Отправить сообщение')
-
-
-

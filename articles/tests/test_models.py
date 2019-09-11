@@ -39,8 +39,8 @@ class ArticleModelTest(myTestCase):
 
     def test_article_have_image(self):
         """тест: каждая статья с картинкой"""
-        self.assertIn( 'test_article.jpg', os.path.join(settings.STATIC_ROOT, str(self.first().image)))
-        
+        self.assertIn('test_article.jpg', os.path.join(settings.STATIC_ROOT, str(self.first().image)))
+
     def test_article_have_unique_slug_url(self):
         """тест: статья имет уникадьный Url"""
         article1 = Article.objects.all()[0]
@@ -56,4 +56,3 @@ class ArticleModelTest(myTestCase):
         """тест: у статьи есть автор"""
         article = Article.objects.first()
         self.assertIsInstance(article.author, User)
-
