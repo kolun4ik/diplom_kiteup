@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3 class="title-head text-center">{{ event.longtitle }}</h3>
-<p>Опубликовано: &nbsp;{{ event.published }}</p>
+<h3 class="title-head text-center">Архив мероприятий {{ month|date:'E' }}  {{ month|date:'Y'}}</h3>
 <div class="row">
     <div class="col-md-12" id="item_event">
-        {% autoescape off %}
-        {{ event.content }}
-        {% endautoescape %}
+        <ul>
+       {% for event in object_list %}
+            <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a> <br> Дата: {{ event.published }} <hr></li>
+        {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock content %}

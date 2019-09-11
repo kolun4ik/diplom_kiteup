@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
+{% load event_arhives %}
 {% block content %}
 <div class="row">
     <h2>Мероприятия</h2>
@@ -55,7 +56,20 @@
 {% block widget_top %}
 <div class="blog-block about-sidebar-widget">
     <h4>Архив мероприятий</h4>
-
+    <ul>
+    <li><a href="/events/2019/03">Март 2019</a> (1)</li>
+    <li><a href="/events/2018/10">Октябрь 2018</a> (1)</li>
+    <li><a href="/events/2018/03">Март 2018</a> (1)</li>
+    <li><a href="/events/2017/08">Август 2017</a> (1)</li>
+    <li><a href="/events/2017/03">Март 2017</a> (1)</li>
+    <li><a href="/events/2017/01">Январь 2017</a> (1)</li>
+    <li><a href="/events/2016/12">Декабрь 2016</a> (1)</li>
+    <li><a href="/events/2016/04">Апрель 2016</a> (1)</li>
+    <li><a href="/events/2016/03">Март 2016</a> (2)</li>
+    <li><a href="/events/2016/01">Январь 2016</a> (1)</li>
+    <li><a href="/events/2015/09">Сентябрь 2015</a> (1)</li>
+    <li><a href="/events/2015/04">Апрель 2015</a> (1)</li>
+    </ul>
 </div>
 <div class="mb-60"></div>
 {% endblock widget_top %}
