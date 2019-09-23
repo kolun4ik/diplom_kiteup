@@ -2,7 +2,7 @@
 
 {% block content %}
 <h3 class="title-head text-center">Зарегестрироваться</h3>
-<form class="contact-form" data-toggle="validator" method="post" action="{% url 'register' %}">
+<form class="contact-form" data-toggle="validator" method="post" action="{% url 'signup' %}">
       {% csrf_token %}
               <div class="row">
                   <div class="col-sm-4"></div>
